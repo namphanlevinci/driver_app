@@ -20,6 +20,11 @@ const images = {
     logo_name: require('../assets/icons/logo_name.png'),
     logo_image: require('../assets/icons/logo_delivery.png'),
     down_icon: require('../assets/icons/down_icon.png'),
+    ring: require('../assets/icons/ring.png'),
+    ring_new: require('../assets/icons/ring-new.png'),
+    arrow_left: require('../assets/icons/arrow-left.png'),
+    start: require('../assets/icons/start.png'),
+    start_active: require('../assets/icons/start-active.png'),
   },
 };
 

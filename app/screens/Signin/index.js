@@ -25,10 +25,10 @@ const Signin = () => {
       behavior={Platform.OS == "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS == "ios" ? scaleHeight(-22) : 0}
     >
-      <ScrollView 
-      style={styles.padding} 
-      keyboardDismissMode={'on-drag'}
-      showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.padding}
+        keyboardDismissMode={'on-drag'}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.top}>
           <Image
             style={styles.logo}
@@ -45,7 +45,8 @@ const Signin = () => {
 
         <View style={styles.bottom}>
           <Image style={styles.logo} source={images.icons.down_icon} />
-          <Button.Large title={'Đăng nhập'}
+          <Button.Large
+            title={'Đăng nhập'}
             backgroundColor={AppStyles.colors.red}
             textColor={AppStyles.colors.white}
             onPress={isLogin}
@@ -65,15 +66,15 @@ const Signin = () => {
 const styles = StyleSheet.create({
   container: {},
   top: {
-    width: scaleWidth(100),
+    width: '100%',
     height: scaleHeight(65),
     backgroundColor: AppStyles.colors.red,
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottom: {
-    width: scaleWidth(100),
-    height: scaleHeight(31.5),
+    width: '100%',
+    height: scaleHeight(35),
     backgroundColor: AppStyles.colors.yellow,
     alignItems: 'center',
   },
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
   },
   padding: {
     // flex: 1,
+    backgroundColor: AppStyles.colors.red,
   },
   title: {
     color: AppStyles.colors.white,

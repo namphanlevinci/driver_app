@@ -51,9 +51,47 @@ export const Large = (props) => {
     );
 };
 
+export const SmallRadius = (props) => {
+    const {
+        onPress,
+        title,
+        backgroundColor,
+        textColor
+    } = props;
+    return (
+        <TouchableOpacity style={styles.container_top} onPress={onPress}>
+            <View style={[styles.smallRadius, { backgroundColor: backgroundColor }]}>
+                <Text style={[styles.title, { color: textColor }]}>{title}</Text>
+            </View>
+        </TouchableOpacity>
+    );
+};
+
+export const LargeRadius = (props) => {
+    const {
+        onPress,
+        title,
+        backgroundColor,
+        textColor
+    } = props;
+    return (
+        <TouchableOpacity style={styles.container_bottom} onPress={onPress}>
+            <View style={[styles.largeRadius, { backgroundColor: backgroundColor }]}>
+                <Text style={[styles.title, { color: textColor }]}>{title}</Text>
+            </View>
+        </TouchableOpacity>
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {},
+    container_top: {
+        margin: '1%',
+        width: '28.5%'
+    },
+    container_bottom: {
+        margin: '1%',
+        width: '90%'
+    },
     small: {
         width: scaleWidth(35),
         height: scaleWidth(13),
@@ -112,5 +150,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: AppStyles.colors.text
+    },
+
+    smallRadius: {
+        // width: '25%',
+        height: 50,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    largeRadius: {
+        // width: '90%',
+        height: 50,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })

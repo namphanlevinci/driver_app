@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppStyles.colors.background,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   space: {
     height: scaleHeight(1.5)

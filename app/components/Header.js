@@ -4,7 +4,7 @@ import * as TopBar from './TopBar';
 import { images, AppStyles } from '@theme';
 
 export const Main = (props) => {
-    const { notification, account} = props;
+    const { notification, account } = props;
     return (
         <TopBar.Bar
             style={AppStyles.styles.topBar}
@@ -40,6 +40,28 @@ export const Back = (props) => {
             }>
 
             <Text style={styles.title}>{title}</Text>
+        </TopBar.Bar>
+    );
+};
+
+export const BackOrder = (props) => {
+    const { goback, title } = props;
+    return (
+        <TopBar.Bar
+            style={AppStyles.styles.topBar}
+            leftComponents={
+                <TouchableOpacity onPress={goback}>
+                    <TopBar.Action source={images.icons.nav_back} />
+                </TouchableOpacity>
+            }
+            rightComponents={
+                <TopBar.Space />
+            }>
+            <View>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>{title}</Text>
+            </View>
+
         </TopBar.Bar>
     );
 };

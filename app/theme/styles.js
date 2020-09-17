@@ -32,7 +32,7 @@ const AppStyles = {
   },
   fonts: {},
   styles: {
-    container: { flex: 1 },
+    container: { flex: 1},
 
     topBar: {
       backgroundColor: secondaryColor,
