@@ -25,7 +25,7 @@ const OldOrder = () => {
   }
   return (
     <View style={AppStyles.styles.container}>
-      <Header.Back title={'Đơn hàng #0000015'} goback={back} />
+      <Header.BackOrder title={'Đơn hàng #0000015'} time={'10:30, 30-08-2020'} goback={back} />
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={{

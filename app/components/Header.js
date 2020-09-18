@@ -45,7 +45,7 @@ export const Back = (props) => {
 };
 
 export const BackOrder = (props) => {
-    const { goback, title } = props;
+    const { goback, title, time } = props;
     return (
         <TopBar.Bar
             style={AppStyles.styles.topBar}
@@ -55,11 +55,13 @@ export const BackOrder = (props) => {
                 </TouchableOpacity>
             }
             rightComponents={
-                <TopBar.Space />
+                <View style={styles.status}>
+                    <Text style={styles.colors}>Completed</Text>
+                </View>
             }>
-            <View>
+            <View style={styles.content}>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.time}>{time}</Text>
             </View>
 
         </TopBar.Bar>
@@ -73,5 +75,26 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: AppStyles.colors.white,
     },
+    time: {
+        fontSize: 14,
+        color: AppStyles.colors.white,
+    },
+    content: {
+        marginRight: -45,
+        alignItems: 'center'
+    },
+    status:{
+        
+        height: 25,
+        borderRadius: 20,
+        backgroundColor: AppStyles.colors.silver,
+        alignItems:'center',
+        justifyContent: 'center'
+    },
+    colors: {
+        padding: 3,
+        color: AppStyles.colors.white,
+        fontSize: 12,
+    }
 
 })

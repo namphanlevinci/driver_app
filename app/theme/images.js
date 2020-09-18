@@ -25,6 +25,9 @@ const images = {
     arrow_left: require('../assets/icons/arrow-left.png'),
     start: require('../assets/icons/start.png'),
     start_active: require('../assets/icons/start-active.png'),
+    phone: require('../assets/icons/phone.png'),
+    message: require('../assets/icons/message.png'),
+    send: require('../assets/icons/send.png'),
   },
 };
 

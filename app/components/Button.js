@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
-import { AppStyles } from '@theme';
+import { images, AppStyles } from '@theme';
 
 export const Small = (props) => {
     const {
@@ -56,11 +56,16 @@ export const SmallRadius = (props) => {
         onPress,
         title,
         backgroundColor,
-        textColor
+        textColor,
+        icon
     } = props;
     return (
         <TouchableOpacity style={styles.container_top} onPress={onPress}>
             <View style={[styles.smallRadius, { backgroundColor: backgroundColor }]}>
+                <Image
+                    style={styles.logo}
+                    source={icon}
+                />
                 <Text style={[styles.title, { color: textColor }]}>{title}</Text>
             </View>
         </TouchableOpacity>
@@ -157,7 +162,11 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    logo: {
+        marginRight: 5
     },
     largeRadius: {
         // width: '90%',

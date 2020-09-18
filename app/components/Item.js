@@ -5,7 +5,8 @@ import ScreenName from '@screen/ScreenName';
 import * as NavigationService from '@navigate/NavigationService';
 
 export const Order = (props) => {
-    const { order_name, status, time, name, address, total_money, payment, onPress } = props.item;
+    
+    const { order_name, status, time, name, address, total_money, payment } = props.item;
 
     const check_status = (status) => {
         switch (status) {
@@ -41,12 +42,8 @@ export const Order = (props) => {
         }
     }
 
-    const gotoDetail = () => {
-        NavigationService.navigate(ScreenName.NewOrder)
-    }
-
     return (
-        <TouchableOpacity style={styles.body} onPress={gotoDetail}>
+        <TouchableOpacity style={styles.body} onPress={props.status ? props.newOrder : props.oldOrder}>
             <View style={styles.content}>
                 <View style={styles.row}>
                     <Text style={styles.order_name}>{order_name}</Text>
@@ -66,7 +63,7 @@ export const Order = (props) => {
                         <Text style={styles.name}>Tổng thanh toán:</Text>
                         <Text style={styles.money}>{total_money} đ</Text>
                         <View style={[styles.status_pay, { backgroundColor: check_payment(payment).color }]}>
-                            <Text style={styles.status_color}>{payment}</Text>
+                            <Text style={styles.status_color}>Thu tiền mặt</Text>
                         </View>
                     </View>
                 </View>

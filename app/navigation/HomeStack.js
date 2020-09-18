@@ -9,6 +9,7 @@ import {
   OldOrder,
   ScreenName,
 } from '@screen';
+import AccountDrawer from './DrawerTab';
 
 const Stack = createStackNavigator();
 
@@ -17,8 +18,8 @@ function HomeStack(props) {
     <Stack.Navigator headerMode={'none'}>
       <>
         <Stack.Screen
-          name={ScreenName.Home}
-          component={HomeScreen}
+          name={'AccountDrawer'}
+          component={AccountDrawer}
         />
         <Stack.Screen
           name={ScreenName.Notification}

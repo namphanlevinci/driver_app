@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 import { Header, Modal, Item } from '@components';
 import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
 import ScreenName from '../ScreenName';
 import { useDispatch, useSelector } from 'react-redux';
-import { showModal } from '@slices/app';
 import { logout } from '@slices/account';
+import { animated } from '@slices/app';
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
+  const { navigation } = props;
   const dispatch = useDispatch();
 
   const data = [
@@ -61,19 +62,36 @@ const HomeScreen = () => {
     NavigationService.navigate(ScreenName.Notification)
   }
 
-  const isLogout = () => {
-    dispatch(logout());
+  const opened = () => {
+    navigation.openDrawer()
   }
+
+  const gotoDetailNewOrder = () => {
+    NavigationService.navigate(ScreenName.NewOrder)
+  }
+
+  const gotoDetailOldOrder = () => {
+    NavigationService.navigate(ScreenName.OldOrder)
+  }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('drawerOpen', (e) => {
+      setInterval(()=>{
+        // dispatch(animated())
+      }, 100)
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={AppStyles.styles.container}>
       <Header.Main
         notification={navigateNotification}
-        account={isLogout}
+        account={opened}
       />
       <View style={styles.container}>
         <FlatList
-           contentContainerStyle={{
+          contentContainerStyle={{
             width: '100%',
             margin: 5,
             marginTop: 15
@@ -87,13 +105,13 @@ const HomeScreen = () => {
               style={styles.list}
               data={data}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item, index }) => <Item.Order item={item} />}
+              renderItem={({ item, index }) => <Item.Order item={item} newOrder={gotoDetailNewOrder} status={true} />}
             />
             <Text style={styles.title}>Đã Giao Gần Đây</Text>
             <View style={styles.list} />
           </View>
           }
-          renderItem={({ item, index }) => <Item.Order item={item} />}
+          renderItem={({ item, index }) => <Item.Order item={item} oldOrder={gotoDetailOldOrder} status={false} />}
           ListFooterComponent={() => <View style={styles.list} />}
         />
       </View>

@@ -8,6 +8,7 @@ const ScreenName = {
   Notification: 'Notification',
   NewOrder: 'NewOrder',
   OldOrder: 'OldOrder',
+  AccountDrawer: 'Drawer'
 };
 
 export default ScreenName;
