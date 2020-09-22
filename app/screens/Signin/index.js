@@ -1,45 +1,52 @@
-import React from 'react';
-import { View, KeyboardAvoidingView, StyleSheet, Text, Image, ScrollView, Keyboard } from 'react-native';
-import { Header, Button, TextInput } from '@components';
-import { images, AppStyles } from '@theme';
-import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
+import { Button, TextInput } from '@components';
+import { scaleHeight } from '@lib/isIphoneX';
 import * as NavigationService from '@navigate/NavigationService';
+import { signIn } from '@slices/account';
+import { AppStyles, images } from '@theme';
+import React from 'react';
+import {
+  Image,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+} from 'react-native';
+import { useDispatch } from 'react-redux';
 import ScreenName from '../ScreenName';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '@slices/account';
 
 const Signin = () => {
   const dispatch = useDispatch();
 
   const isLogin = () => {
-    dispatch(login());
-  }
+    dispatch(signIn({ username: 'nhath', password: 'admin123456' }));
+  };
 
   const goSignup = () => {
-    NavigationService.navigate(ScreenName.Signup)
-  }
+    NavigationService.navigate(ScreenName.Signup);
+  };
 
   return (
     <KeyboardAvoidingView
       style={AppStyles.styles.container}
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS == "ios" ? scaleHeight(-22) : 0}
-    >
+      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS == 'ios' ? scaleHeight(-22) : 0}>
       <ScrollView
         style={styles.padding}
         keyboardDismissMode={'on-drag'}
         showsVerticalScrollIndicator={false}>
         <View style={styles.top}>
-          <Image
-            style={styles.logo}
-            source={images.icons.logo}
-          />
+          <Image style={styles.logo} source={images.icons.logo} />
           <View style={styles.space} />
           <Text style={styles.title}>VUI LÒNG ĐĂNG NHẬP</Text>
           <View>
             <TextInput.Signin placeholder={'Mã nhân viên *'} />
             <View style={styles.space} />
-            <TextInput.Signin placeholder={'Mật khẩu *'} secureTextEntry={true} />
+            <TextInput.Signin
+              placeholder={'Mật khẩu *'}
+              secureTextEntry={true}
+            />
           </View>
         </View>
 
@@ -52,7 +59,8 @@ const Signin = () => {
             onPress={isLogin}
           />
           <View style={styles.space} />
-          <Button.Large title={'Đăng kí'}
+          <Button.Large
+            title={'Đăng kí'}
             backgroundColor={AppStyles.colors.white}
             textColor={AppStyles.colors.red}
             onPress={goSignup}
@@ -61,7 +69,7 @@ const Signin = () => {
       </ScrollView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {},
@@ -79,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   space: {
-    height: scaleHeight(1.5)
+    height: scaleHeight(1.5),
   },
   padding: {
     // flex: 1,
@@ -89,11 +97,11 @@ const styles = StyleSheet.create({
     color: AppStyles.colors.white,
     fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: scaleHeight(3)
+    marginBottom: scaleHeight(3),
   },
   logo: {
-    marginBottom: scaleHeight(3)
-  }
+    marginBottom: scaleHeight(3),
+  },
 });
 
 export default Signin;

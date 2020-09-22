@@ -6,13 +6,13 @@ import { onError } from 'apollo-link-error';
 import { createHttpLink } from 'apollo-link-http';
 import Config from 'react-native-config';
 import _ from 'lodash';
+import { getJwtToken } from '@services/AsyncStoreExt';
 
 const httpLink = createHttpLink({ uri: Config.GRAPHQL_ENDPOINT });
 
 const authLink = setContext(async (req, { headers }) => {
   // get auth token
-  // const jwt = await localStorage.getJwtToken();
-  const jwt = '';
+  const jwt = await getJwtToken();
   let myHeaders = headers;
   if (!headers) {
     myHeaders = {
@@ -24,8 +24,8 @@ const authLink = setContext(async (req, { headers }) => {
   return {
     headers: {
       ...myHeaders,
-      // authorization: jwt ? `Bearer ${jwt.token}` : '',
-      Authorization: 'Basic bGV2aW5jaToxcWF6QFdTWA==',
+      authorization: jwt ? `Bearer ${jwt.token}` : '',
+      // Authorization: 'Basic bGV2aW5jaToxcWF6QFdTWA==',
     },
   };
 });
@@ -33,7 +33,7 @@ const authLink = setContext(async (req, { headers }) => {
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, response, forward }) => {
     if (graphQLErrors?.length > 0) {
-      Logger.debug(graphQLErrors, '*************graphQLErrors*************');
+      // Logger.debug(graphQLErrors, '*************graphQLErrors*************');
 
       let queryErrors = [];
       let arrErrors = {};
@@ -51,7 +51,7 @@ const errorLink = onError(
       });
 
       if (queryErrors.length > 0) {
-        Logger.error(queryErrors, 'Graphql query wrong');
+        // Logger.error(queryErrors, 'Graphql query wrong');
       }
 
       if (!_.isEmpty(arrErrors)) {
@@ -60,7 +60,7 @@ const errorLink = onError(
     }
 
     if (networkError) {
-      Logger.debug('[Network error]:', networkError);
+      // Logger.debug('[Network error]:', networkError);
     }
   },
 );
