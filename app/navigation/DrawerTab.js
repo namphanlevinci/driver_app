@@ -1,7 +1,7 @@
 import { Button } from '@components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HomeScreen, ScreenName } from '@screen';
-import { signOut } from '@slices/account';
+import { signOut, orderList } from '@slices/account';
 import { AppStyles, images } from '@theme';
 import React, { useState } from 'react';
 import {
@@ -28,7 +28,8 @@ function DrawerContent(props) {
   };
 
   const isLogout = () => {
-    dispatch(signOut());
+    // dispatch(signOut());
+    dispatch(orderList());
   };
 
   return (

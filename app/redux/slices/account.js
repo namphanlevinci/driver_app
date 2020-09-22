@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { mutation, graphQlClient } from '@graphql';
+import { mutation, graphQlClient, query } from '@graphql';
 import { saveJwtToken } from '@services/AsyncStoreExt';
 // import { showLoading, hideLoading } from './app';
 
@@ -37,6 +37,22 @@ export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`, async () => {
   // dispatch(hideLoading());
   return { error, data };
 });
+
+export const orderList = createAsyncThunk(
+  `${KEY_CONSTANT}/orderList`,
+  async () => {
+    // dispatch(showLoading());
+    const { error, data } = await graphQlClient.query({
+      query: query.ORDER_LIST,
+    });
+
+    console.log('data orderList', data);
+    console.log('error orderList', error);
+
+    // dispatch(hideLoading());
+    return { error, data };
+  },
+);
 
 const accountSlice = createSlice({
   name: 'account',
