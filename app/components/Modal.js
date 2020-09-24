@@ -3,8 +3,25 @@ import { View, StyleSheet, Text, Modal, Image, TouchableOpacity, FlatList, TextI
 import { useSelector, useDispatch } from 'react-redux';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import * as Button from "./Button";
-import { hideModal, hideBom, hideMessage } from '../redux/slices/app';
+import { hideModal, hideBom } from '../redux/slices/app';
 import { images, AppStyles } from '@theme';
+import Spinner from 'react-native-spinkit';
+
+export const Loading = () => {
+    const isLoading = useSelector((state) => state.app.isLoading);
+    return (
+        <Modal visible={isLoading} transparent>
+            <View style={styles.container}>
+                <Spinner
+                    isVisible={true}
+                    size={75}
+                    type={'ThreeBounce'}
+                    color={'white'}
+                />
+            </View>
+        </Modal>
+    );
+};
 
 export const Success = () => {
     const dispatch = useDispatch();
@@ -311,6 +328,10 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
 
         elevation: 5,
+    },
+    loading: {
+        width: 100,
+        height: 100
     }
 
 })

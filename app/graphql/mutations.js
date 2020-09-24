@@ -12,6 +12,11 @@ export const SIGN_OUT = gql`
 export const SIGN_IN = gql`
   mutation($username: String!, $password: String!) {
     generateStaffToken(username: $username, password: $password) {
+      address
+      firstname
+      id
+      lastname
+      restaurant
       token
     }
   }

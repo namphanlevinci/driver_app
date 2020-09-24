@@ -19,6 +19,7 @@ import makeApolloClient from './apolloClient';
 
 import Navigator from 'app/navigation';
 import configureAppStore from 'app/redux/store';
+import { Modal } from '@components';
 
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -67,6 +68,7 @@ export default function App() {
           </PaperProvider>
         </ApolloProvider>
       </PersistGate>
+      <Modal.Loading />
     </Provider>
   );
 }

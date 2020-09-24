@@ -28,6 +28,7 @@ const images = {
     phone: require('../assets/icons/phone.png'),
     message: require('../assets/icons/message.png'),
     send: require('../assets/icons/send.png'),
+    loading: require('../assets/icons/loading.gif'),
   },
 };
 

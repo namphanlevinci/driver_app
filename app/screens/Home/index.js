@@ -6,7 +6,7 @@ import * as NavigationService from '@navigate/NavigationService';
 import ScreenName from '../ScreenName';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@slices/account';
-import { animated } from '@slices/app';
+import { orderList } from '@slices/order';
 
 const HomeScreen = (props) => {
   const { navigation } = props;
@@ -75,13 +75,8 @@ const HomeScreen = (props) => {
   }
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('drawerOpen', (e) => {
-      setInterval(()=>{
-        // dispatch(animated())
-      }, 100)
-    });
-    return unsubscribe;
-  }, [navigation]);
+    dispatch(orderList())
+  }, []);
 
   return (
     <View style={AppStyles.styles.container}>

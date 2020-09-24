@@ -3,7 +3,7 @@ import { scaleHeight } from '@lib/isIphoneX';
 import * as NavigationService from '@navigate/NavigationService';
 import { signIn } from '@slices/account';
 import { AppStyles, images } from '@theme';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -17,10 +17,12 @@ import { useDispatch } from 'react-redux';
 import ScreenName from '../ScreenName';
 
 const Signin = () => {
+  const [username, onChangeUser] = useState('');
+  const [password, onChangePass] = useState('');
   const dispatch = useDispatch();
 
   const isLogin = () => {
-    dispatch(signIn({ username: 'nhath', password: 'admin123456' }));
+    dispatch(signIn({ username: username, password: password }));
   };
 
   const goSignup = () => {
@@ -41,11 +43,17 @@ const Signin = () => {
           <View style={styles.space} />
           <Text style={styles.title}>VUI LÒNG ĐĂNG NHẬP</Text>
           <View>
-            <TextInput.Signin placeholder={'Mã nhân viên *'} />
+            <TextInput.Signin
+              placeholder={'Mã nhân viên *'}
+              value={username}
+              onChangeText={onChangeUser}
+            />
             <View style={styles.space} />
             <TextInput.Signin
               placeholder={'Mật khẩu *'}
               secureTextEntry={true}
+              value={password}
+              onChangeText={onChangePass}
             />
           </View>
         </View>

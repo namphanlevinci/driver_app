@@ -1,7 +1,7 @@
 import { Button } from '@components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HomeScreen, ScreenName } from '@screen';
-import { signOut, orderList } from '@slices/account';
+import { signOut } from '@slices/account';
 import { AppStyles, images } from '@theme';
 import React, { useState } from 'react';
 import {
@@ -19,17 +19,18 @@ const Drawer = createDrawerNavigator();
 function DrawerContent(props) {
   const { navigation } = props;
   const [isEnabled, setIsEnabled] = useState(false);
+  const info = useSelector((state) => state.account.info);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const dispatch = useDispatch();
-  const bottom = useSelector((state) => state.app.bottom);
 
   const closed = () => {
     navigation.closeDrawer();
   };
 
   const isLogout = () => {
-    // dispatch(signOut());
-    dispatch(orderList());
+
+    dispatch(signOut());
+    // dispatch(orderList());
   };
 
   return (
@@ -45,8 +46,8 @@ function DrawerContent(props) {
           source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
         />
       </View>
-      <Text style={styles.name}>Nguyen Thanh Van</Text>
-      <Text style={styles.id}>ID: 123456</Text>
+      <Text style={styles.name}>{info.firstname} {info.lastname}</Text>
+      <Text style={styles.id}>ID: {info.id}</Text>
       <View style={styles.row}>
         <Text style={styles.text}>Tắt/Bật trạng thái nhận đơn hàng</Text>
         <Switch
@@ -85,7 +86,7 @@ function AccountDrawer(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: AppStyles.colors.background,
+    backgroundColor: AppStyles.colors.white,
     alignItems: 'center',
   },
   header: {
@@ -115,13 +116,14 @@ const styles = StyleSheet.create({
     borderRadius: 150,
   },
   name: {
-    fontSize: 21,
+    fontSize: 22,
     fontWeight: 'bold',
     borderColor: AppStyles.colors.text,
     marginTop: 10,
   },
   id: {
-    fontSize: 14,
+    fontSize: 15,
+    fontFamily: 'Roboto-Medium',
     borderColor: AppStyles.colors.silver,
     marginTop: 10,
   },

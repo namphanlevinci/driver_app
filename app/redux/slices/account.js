@@ -1,42 +1,44 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { mutation, graphQlClient, query } from '@graphql';
 import { saveJwtToken } from '@services/AsyncStoreExt';
-// import { showLoading, hideLoading } from './app';
+import { showLoading, hideLoading } from './app';
 
 const KEY_CONSTANT = 'account';
 
 export const signIn = createAsyncThunk(
   `${KEY_CONSTANT}/signIn`,
   async (input, { dispatch }) => {
-    // dispatch(showLoading());
+    dispatch(showLoading());
     const { error, data } = await graphQlClient.mutate({
       mutation: mutation.SIGN_IN,
       variables: input,
     });
 
     const token = data?.generateStaffToken?.token;
-    console.log('data signIn', token);
+    console.log('data signIn', data);
     await saveJwtToken(token);
-    // dispatch(hideLoading());
+    dispatch(hideLoading());
     return { error, data };
   },
 );
 
-export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`, async () => {
-  // dispatch(showLoading());
-  const { error, data } = await graphQlClient.mutate({
-    mutation: mutation.SIGN_OUT,
-  });
+export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`,
+  async (value, { dispatch }) => {
+    dispatch(showLoading());
+    const { error, data } = await graphQlClient.mutate({
+      mutation: mutation.SIGN_OUT,
+    });
 
-  console.log('data signOut', data);
-  console.log('error signOut', error);
+    console.log('data signOut', data);
+    console.log('error signOut', error);
 
-  if (data?.result) {
-    await saveJwtToken(null);
+    if (data?.result) {
+      await saveJwtToken(null);
+    }
+    dispatch(hideLoading());
+    return { error, data };
   }
-  // dispatch(hideLoading());
-  return { error, data };
-});
+);
 
 export const orderList = createAsyncThunk(
   `${KEY_CONSTANT}/orderList`,
@@ -56,17 +58,18 @@ export const orderList = createAsyncThunk(
 
 const accountSlice = createSlice({
   name: 'account',
-  initialState: { isLogin: false, username: null, password: null },
+  initialState: {
+    isLogin: false,
+    signInError: '',
+    token: '',
+    info: {}
+  },
   reducers: {
-    login(state, action) {
-      state.isLogin = false;
-      // state.username = action.payload.username;
-      // state.password = action.payload.password;
-    },
-    loginSuccess(state, action) {},
-    loginFail(state, action) {},
+    login(state, action) { state.isLogin = true },
+    loginSuccess(state, action) { },
+    loginFail(state, action) { },
     logout(state, action) {
-      state.isLogin = true;
+      state.isLogin = false;
     },
   },
   extraReducers: {
@@ -81,6 +84,8 @@ const accountSlice = createSlice({
       if (token) {
         state.signInError = null;
         state.isLogin = true;
+        state.token = token;
+        state.info = data?.generateStaffToken
       } else {
         state.signInError = error;
         state.isLogin = false;

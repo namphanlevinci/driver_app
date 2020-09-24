@@ -103,11 +103,8 @@ const ModalMessage = () => {
         dispatch(hideMessage());
     }
     return (
-        // <View >
         <Modal
             isVisible={message}
-            // swipeDirection='down'
-            // onSwipeComplete={hide}
             style={{  margin: 0 }}
             avoidKeyboard={true}
         >
@@ -164,7 +161,6 @@ const ModalMessage = () => {
                 </View>
             </View>
         </Modal>
-        // </View>
     );
 };
 
