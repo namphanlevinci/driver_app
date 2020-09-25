@@ -33,7 +33,7 @@ export const Loader = (props) => (
 
 export const Order = (props) => {
 
-    const { order_name, status, time, name, address, total_money, payment } = props.item;
+    const { order_number, status, time, firstname, lastname, address, grand_total, payment, payment_method } = props.item;
 
     const check_status = (status) => {
         switch (status) {
@@ -73,7 +73,7 @@ export const Order = (props) => {
         <TouchableOpacity style={styles.body} onPress={props.status ? props.newOrder : props.oldOrder}>
             <View style={styles.content}>
                 <View style={styles.row}>
-                    <Text style={styles.order_name}>{order_name}</Text>
+                    <Text style={styles.order_name}>#{order_number}</Text>
                     <View style={[styles.status_order, { backgroundColor: check_status(status).color }]}>
                         <Text style={styles.status_color}>{status}</Text>
                     </View>
@@ -82,15 +82,15 @@ export const Order = (props) => {
                 <View style={styles.row}>
                     <View style={styles.col}>
                         <Text style={styles.name}>Giao đến:</Text>
-                        <Text style={styles.money}>{name}</Text>
+                        <Text style={styles.money}>{firstname} {lastname}</Text>
                         <Text style={styles.address}>{address}</Text>
                     </View>
                     <View style={styles.line} />
                     <View style={styles.col}>
                         <Text style={styles.name}>Tổng thanh toán:</Text>
-                        <Text style={styles.money}>{total_money} đ</Text>
+                        <Text style={styles.money}>{grand_total} đ</Text>
                         <View style={[styles.status_pay, { backgroundColor: check_payment(payment).color }]}>
-                            <Text style={styles.status_color}>Thu tiền mặt</Text>
+                            <Text style={styles.status_color}>{payment_method}</Text>
                         </View>
                     </View>
                 </View>

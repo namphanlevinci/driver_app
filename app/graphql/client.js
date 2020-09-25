@@ -24,7 +24,7 @@ const authLink = setContext(async (req, { headers }) => {
   return {
     headers: {
       ...myHeaders,
-      Authorization: jwt ? `Bearer ${jwt.token}` : '',
+      authorization: jwt ? `Bearer ${jwt}` : '',
       // Authorization: 'Basic bGV2aW5jaToxcWF6QFdTWA==',
     },
   };
@@ -34,6 +34,7 @@ const errorLink = onError(
   ({ graphQLErrors, networkError, operation, response, forward }) => {
     if (graphQLErrors?.length > 0) {
       // Logger.debug(graphQLErrors, '*************graphQLErrors*************');
+      // console.log(graphQLErrors, '*************graphQLErrors*************');
 
       let queryErrors = [];
       let arrErrors = {};

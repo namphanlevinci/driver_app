@@ -76,7 +76,7 @@ const HomeScreen = (props) => {
             margin: 5,
             marginTop: 15
           }}
-          data={data1}
+          data={recentlyOrder}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
           ListHeaderComponent={() => <View>
@@ -88,7 +88,7 @@ const HomeScreen = (props) => {
             }
             <FlatList
               style={styles.list}
-              data={data}
+              data={newOrder}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => <Item.Order item={item} newOrder={gotoDetailNewOrder} status={true} />}
             />
