@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
 import { Header, TextInput, Button, Modal } from '@components';
 import { images, AppStyles } from '@theme';
@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showModal } from '@slices/app';
 
 const Signup = () => {
+  const [name, onChangeName] = useState('');
+  const [phone, onChangePhone] = useState('');
+  const [email, onChangeEmail] = useState('');
+
   const dispatch = useDispatch();
   const back = () => {
     NavigationService.goBack()
@@ -23,11 +27,23 @@ const Signup = () => {
           <View style={styles.container}>
             <View style={styles.space2x} />
             <View style={styles.textInput}>
-              <TextInput.Signin placeholder={'Họ & Tên *'} />
+              <TextInput.Signin
+                placeholder={'Họ & Tên *'}
+                value={name}
+                onChangeText={onChangeName}
+              />
               <View style={styles.space} />
-              <TextInput.Signin placeholder={'Số điện thoại *'} />
+              <TextInput.Signin
+                placeholder={'Số điện thoại *'}
+                value={phone}
+                onChangeText={onChangePhone}
+              />
               <View style={styles.space} />
-              <TextInput.Signin placeholder={'Email *'} />
+              <TextInput.Signin
+                placeholder={'Email *'}
+                value={email}
+                onChangeText={onChangeEmail}
+              />
             </View>
             <Button.Large title={'Đăng kí'}
               backgroundColor={AppStyles.colors.red}

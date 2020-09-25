@@ -23,6 +23,7 @@ const Signin = () => {
 
   const isLogin = () => {
     dispatch(signIn({ username: username, password: password }));
+    
   };
 
   const goSignup = () => {

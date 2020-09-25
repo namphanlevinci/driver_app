@@ -1,10 +1,14 @@
-import React from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { images, AppStyles } from '@theme';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 
 export const Signin = (props) => {
+    const [hide, setHide] = useState(true)
     const { placeholder = 'Form: ', value, onChangeText, secureTextEntry } = props;
+    const setStatus = () => {
+        setHide(!hide)
+    }
     return (
         <View style={styles.textInput}>
             <TextInput
@@ -12,11 +16,18 @@ export const Signin = (props) => {
                 autoCapitalize="none"
                 placeholderTextColor={AppStyles.colors.silver}
                 placeholder={placeholder}
-                secureTextEntry={secureTextEntry}
+                secureTextEntry={secureTextEntry ? hide : false}
                 value={value}
                 onChangeText={onChangeText}
             />
-
+            {secureTextEntry ?
+                <TouchableOpacity onPress={setStatus} style={styles.icon}>
+                    <Image
+                        style={styles.eye}
+                        source={hide ? images.icons.eye_off : images.icons.eye_on}
+                    />
+                </TouchableOpacity> : null
+            }
         </View>
     );
 };
@@ -55,7 +66,9 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
 
         elevation: 5,
+
     },
+
     padding: {
         marginLeft: 12,
         fontSize: 15,
@@ -65,5 +78,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: AppStyles.colors.white,
     },
+    eye: {
+        width: 20,
+        height: 20,
+        marginRight: 10
+    },
+    icon: {
+        position: 'absolute',
+        top: '25%',
+        right: 0
+    }
 
 })
