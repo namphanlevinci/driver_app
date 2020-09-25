@@ -74,9 +74,8 @@ const NewOrder = () => {
           data={data}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
-
           renderItem={({ item, index }) => <Item.OrderInfo item={item} />}
-
+          ListFooterComponent={()=><View style={styles.space} />}
         />
       </View>
       <View style={styles.footer}>

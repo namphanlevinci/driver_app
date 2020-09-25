@@ -7,8 +7,8 @@ const KEY_CONSTANT = 'order';
 
 export const orderList = createAsyncThunk(
     `${KEY_CONSTANT}/orderList`,
-    async () => {
-        // dispatch(showLoading());
+    async (value, {dispatch}) => {
+        dispatch(showLoadingItem());
         const { error, data } = await graphQlClient.query({
             query: query.ORDER_LIST,
         });
@@ -16,7 +16,7 @@ export const orderList = createAsyncThunk(
         console.log('data orderList', data);
         console.log('error orderList', error);
 
-        // dispatch(hideLoading());
+        dispatch(hideLoadingItem());
         return { error, data };
     },
 );

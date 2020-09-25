@@ -71,6 +71,9 @@ const accountSlice = createSlice({
     logout(state, action) {
       state.isLogin = false;
     },
+    clearError(state, action){
+      state.signInError = '';
+    }
   },
   extraReducers: {
     [signIn.pending]: (state, action) => {
@@ -109,5 +112,5 @@ const accountSlice = createSlice({
 });
 
 const { actions, reducer } = accountSlice;
-export const { login, loginSuccess, loginFail, logout } = actions;
+export const { login, loginSuccess, loginFail, logout, clearError } = actions;
 export default reducer;

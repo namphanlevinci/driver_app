@@ -1,7 +1,7 @@
 import { Button, TextInput } from '@components';
 import { scaleHeight } from '@lib/isIphoneX';
 import * as NavigationService from '@navigate/NavigationService';
-import { signIn } from '@slices/account';
+import { signIn, clearError } from '@slices/account';
 import { AppStyles, images } from '@theme';
 import React, { useState } from 'react';
 import {
@@ -13,13 +13,14 @@ import {
   View,
   Platform,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
 
 const Signin = () => {
   const [username, onChangeUser] = useState('');
   const [password, onChangePass] = useState('');
   const dispatch = useDispatch();
+  const error = useSelector((state) => state.account.signInError);
 
   const isLogin = () => {
     dispatch(signIn({ username: username, password: password }));
@@ -29,6 +30,10 @@ const Signin = () => {
   const goSignup = () => {
     NavigationService.navigate(ScreenName.Signup);
   };
+
+  const removeText =()=> {
+    dispatch(clearError())
+  }
 
   return (
     <KeyboardAvoidingView
@@ -48,6 +53,7 @@ const Signin = () => {
               placeholder={'Mã nhân viên *'}
               value={username}
               onChangeText={onChangeUser}
+              onChange={removeText}
             />
             <View style={styles.space} />
             <TextInput.Signin
@@ -55,7 +61,9 @@ const Signin = () => {
               secureTextEntry={true}
               value={password}
               onChangeText={onChangePass}
+              onChange={removeText}
             />
+            <Text style={styles.error}>{error ? 'Mã nhân viên hoặc mật khẩu không đúng!' : ''} </Text>
           </View>
         </View>
 
@@ -111,6 +119,12 @@ const styles = StyleSheet.create({
   logo: {
     marginBottom: scaleHeight(3),
   },
+  error: {
+    marginLeft: 5,
+    marginTop: 7,
+    color: AppStyles.colors.white,
+    fontSize: 12
+  }
 });
 
 export default Signin;

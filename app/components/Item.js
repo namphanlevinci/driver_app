@@ -1,11 +1,38 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { images, AppStyles } from '@theme';
 import ScreenName from '@screen/ScreenName';
 import * as NavigationService from '@navigate/NavigationService';
+import ContentLoader, { Rect } from "react-content-loader/native"
+
+const deviceWidth = Dimensions.get("window").width;
+
+export const Loader = (props) => (
+    <View style={styles.body}>
+        <ContentLoader
+            speed={1}
+            width={deviceWidth * 0.9}
+            height={140}
+            viewBox="0 0 400 160"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#e3e2e2"
+            {...props}
+        >
+            <Rect x="15" y="8" rx="3" ry="3" width="300" height="10" />
+            <Rect x="15" y="26" rx="3" ry="3" width="52" height="10" />
+            <Rect x="15" y="56" rx="3" ry="3" width="60" height="10" />
+            <Rect x="15" y="72" rx="3" ry="3" width="370" height="10" />
+            <Rect x="15" y="100" rx="3" ry="3" width="178" height="10" />
+            <Rect x="15" y="120" rx="3" ry="3" width="278" height="10" />
+            <Rect x="15" y="140" rx="3" ry="3" width="78" height="10" />
+
+        </ContentLoader>
+    </View>
+
+)
 
 export const Order = (props) => {
-    
+
     const { order_name, status, time, name, address, total_money, payment } = props.item;
 
     const check_status = (status) => {
@@ -194,9 +221,6 @@ export const Reviews = () => {
         </View>
     );
 };
-
-
-
 
 
 
