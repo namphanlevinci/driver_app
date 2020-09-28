@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, SafeAreaView, StyleSheet, Text, FlatList } from 'react-native';
 import { Header, Item } from '@components';
 import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
 
-const OldOrder = () => {
+const OldOrder = (props) => {
   const data = [
     {
       "id": 1,
@@ -23,6 +23,12 @@ const OldOrder = () => {
   const back = () => {
     NavigationService.goBack()
   }
+
+  useEffect(() => {
+    const id = props.route.params.id
+    console.log(id)
+  }, []);
+
   return (
     <View style={AppStyles.styles.container}>
       <Header.BackOrder title={'Đơn hàng #0000015'} time={'10:30, 30-08-2020'} goback={back} />

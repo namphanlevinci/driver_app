@@ -30,6 +30,7 @@
     "graphql-tag": "^2.11.0",
     "i18n-js": "^3.7.1",
     "lodash": "^4.17.20",
+    "moment": "^2.29.0",
     "react": "16.13.1",
     "react-apollo": "^3.1.5",
     "react-content-loader": "^5.1.2",

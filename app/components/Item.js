@@ -3,7 +3,8 @@ import { View, TextInput, StyleSheet, Text, TouchableOpacity, Image, Dimensions 
 import { images, AppStyles } from '@theme';
 import ScreenName from '@screen/ScreenName';
 import * as NavigationService from '@navigate/NavigationService';
-import ContentLoader, { Rect } from "react-content-loader/native"
+import ContentLoader, { Rect } from "react-content-loader/native";
+import moment from 'moment';
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -32,12 +33,11 @@ export const Loader = (props) => (
 )
 
 export const Order = (props) => {
-
-    const { order_number, status, time, firstname, lastname, address, grand_total, payment, payment_method } = props.item;
+    const { id, order_number, status, time, firstname, lastname, address, grand_total, created_at, payment_method } = props.item;
 
     const check_status = (status) => {
         switch (status) {
-            case 'ready':
+            case 'processing':
                 return { color: AppStyles.colors.blue }
                 break;
             case 'bom':
@@ -50,14 +50,14 @@ export const Order = (props) => {
                 return { color: AppStyles.colors.silver }
                 break;
             default:
-                return { color: AppStyles.colors.blue }
+                return { color: AppStyles.colors.silver }
                 break;
         }
     }
 
-    const check_payment = (payment) => {
-        switch (payment) {
-            case 'cash':
+    const check_payment = (payment_method) => {
+        switch (payment_method) {
+            case 'Thanh toán tiền mặt':
                 return { color: AppStyles.colors.orange }
                 break;
             case 'card':
@@ -69,8 +69,17 @@ export const Order = (props) => {
         }
     }
 
+    const gotoDetail = (id) => {
+        if (props.status) {
+            NavigationService.navigate(ScreenName.NewOrder, {id: id})
+        } else {
+            NavigationService.navigate(ScreenName.OldOrder, {id: id})
+        }
+
+    }
+
     return (
-        <TouchableOpacity style={styles.body} onPress={props.status ? props.newOrder : props.oldOrder}>
+        <TouchableOpacity style={styles.body} onPress={() => gotoDetail(id)}>
             <View style={styles.content}>
                 <View style={styles.row}>
                     <Text style={styles.order_name}>#{order_number}</Text>
@@ -78,7 +87,7 @@ export const Order = (props) => {
                         <Text style={styles.status_color}>{status}</Text>
                     </View>
                 </View>
-                <Text style={styles.time}>{time}</Text>
+                <Text style={styles.time}>{created_at}</Text>
                 <View style={styles.row}>
                     <View style={styles.col}>
                         <Text style={styles.name}>Giao đến:</Text>
@@ -89,7 +98,7 @@ export const Order = (props) => {
                     <View style={styles.col}>
                         <Text style={styles.name}>Tổng thanh toán:</Text>
                         <Text style={styles.money}>{grand_total} đ</Text>
-                        <View style={[styles.status_pay, { backgroundColor: check_payment(payment).color }]}>
+                        <View style={[styles.status_pay, { backgroundColor: check_payment(payment_method).color }]}>
                             <Text style={styles.status_color}>{payment_method}</Text>
                         </View>
                     </View>
@@ -135,7 +144,7 @@ export const Payment = () => {
     const payment = 'card'
     const check_payment = (payment) => {
         switch (payment) {
-            case 'cash':
+            case 'Thanh toán tiền mặt':
                 return { color: AppStyles.colors.orange }
                 break;
             case 'card':
@@ -243,7 +252,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        // alignItems: 'center'
     },
     row_center: {
         flexDirection: 'row',
@@ -265,7 +274,7 @@ const styles = StyleSheet.create({
         padding: 2
     },
     status_pay: {
-        width: 110,
+        // width: 110,
         backgroundColor: AppStyles.colors.green,
         alignItems: 'center',
         borderRadius: 3,
@@ -336,6 +345,8 @@ const styles = StyleSheet.create({
     },
 
     border: {
+        width: 25,
+        height: 25,
         borderColor: AppStyles.colors.red,
         borderWidth: 1,
         borderRadius: 5,

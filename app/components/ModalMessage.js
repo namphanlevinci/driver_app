@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList, TextInput, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList, TextInput, Dimensions, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Button from "./Button";
 import { hideModal, hideBom, hideMessage } from '../redux/slices/app';
@@ -44,57 +44,7 @@ const ModalMessage = () => {
         {
             id: 1
         },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
+        
     ]
     const dispatch = useDispatch();
     const message = useSelector((state) => state.app.message);
@@ -133,16 +83,19 @@ const ModalMessage = () => {
                         inverted={true}
 
                         keyExtractor={(item, index) => index.toString()}
-                        renderItem={() => <View style={{width: deviceWidth, height: 20,marginBottom: 20}}><Text>fdfd</Text></View>}
+                        renderItem={() => <View style={{width: deviceWidth, height: 20,marginBottom: 20}}><Text>Hi</Text></View>}
 
                     />
 
                 </View>
-                <View style={styles.footer_message}>
+                <View style={styles.footer_message} >
                     <View style={styles.suggest}>
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                         <Text style={styles.text}>Tôi đã đến nơi</Text>
                         <Text style={styles.text}>Tôi đồng ý</Text>
                         <Text style={styles.text}>Đơn hàng sắp đến nơi</Text>
+                        </ScrollView>
+                        
 
                     </View>
                     <View style={[styles.row, styles.send]}>
@@ -244,7 +197,7 @@ const styles = StyleSheet.create({
     text: {
         color: AppStyles.colors.blue,
         
-        marginRight: 20,
+        marginLeft: 20,
         borderWidth: 1,
         borderColor: AppStyles.colors.blue,
         borderRadius: 5,

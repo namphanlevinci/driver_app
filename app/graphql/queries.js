@@ -28,3 +28,29 @@ export const ORDER_LIST = gql`
     }
   }
 `;
+
+export const ORDER_DETAILS = gql`
+  query ($id: Int!){
+    orderDetail(id: $id) {
+        address
+        created_at
+        firstname
+        grand_total
+        id
+        lastname
+        order_number
+        payment_method
+        status
+        items {
+          name
+          qty
+          price
+          options {
+            name
+            qty
+            price
+          }
+        }
+    }
+  }
+`;

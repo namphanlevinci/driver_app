@@ -1,15 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
 import { View, SafeAreaView, StyleSheet, Text, FlatList, Dimensions } from 'react-native';
 import { Header, Item, Button, Modal, ModalMessage } from '@components';
 import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
 import { useDispatch, useSelector } from 'react-redux';
 import { showModal, showBom, showMessage } from '@slices/app';
+import { orderDetail } from '@slices/order';
 
-
-
-const NewOrder = () => {
-  const modalizeRef = useRef(null);
+const NewOrder = (props) => {
+  
   const dispatch = useDispatch();
   const data = [
     {
@@ -47,9 +46,12 @@ const NewOrder = () => {
     dispatch(showMessage());
   }
 
-  const onOpen = () => {
-    modalizeRef.current?.open();
-  };
+  useEffect(() => {
+    const id = props.route.params.id
+    // console.log(id)
+    dispatch(orderDetail({id:id}))
+  }, []);
+
 
   return (
     <View style={AppStyles.styles.container}>

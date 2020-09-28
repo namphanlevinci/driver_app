@@ -51,14 +51,6 @@ const HomeScreen = (props) => {
     navigation.openDrawer()
   }
 
-  const gotoDetailNewOrder = () => {
-    NavigationService.navigate(ScreenName.NewOrder)
-  }
-
-  const gotoDetailOldOrder = () => {
-    NavigationService.navigate(ScreenName.OldOrder)
-  }
-
   useEffect(() => {
     dispatch(orderList())
   }, []);
@@ -90,7 +82,7 @@ const HomeScreen = (props) => {
               style={styles.list}
               data={newOrder}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item, index }) => <Item.Order item={item} newOrder={gotoDetailNewOrder} status={true} />}
+              renderItem={({ item, index }) => <Item.Order item={item}  status={true} />}
             />
             <Text style={styles.title}>Đã Giao Gần Đây</Text>
             {loading && recentlyOrder.length < 1 ?
@@ -101,7 +93,7 @@ const HomeScreen = (props) => {
             <View style={styles.list} />
           </View>
           }
-          renderItem={({ item, index }) => <Item.Order item={item} oldOrder={gotoDetailOldOrder} status={false} />}
+          renderItem={({ item, index }) => <Item.Order item={item}  status={false} />}
           ListFooterComponent={() => <View style={styles.list} />}
         />
       </View>
