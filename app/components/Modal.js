@@ -14,7 +14,7 @@ export const Loading = () => {
             <View style={styles.container}>
                 <Spinner
                     isVisible={true}
-                    size={75}
+                    size={60}
                     type={'ThreeBounce'}
                     color={'white'}
                 />

@@ -45,7 +45,8 @@ const orderSlice = createSlice({
     initialState: {
         getListError: '',
         new: [],
-        recently: []
+        recently: [],
+        orderDetail: {}
     },
     reducers: {
         
@@ -70,13 +71,15 @@ const orderSlice = createSlice({
 
         [orderDetail.pending]: (state, action) => {
             console.log('orderDetail pending', action);
-            // state.getListError = null;
+            state.getListError = null;
         },
         [orderDetail.fulfilled]: (state, action) => {
 
             const { error, data } = action.payload;
-            // console.log(data)
-  
+            const orderInfo = data?.orderDetail
+            if (orderInfo) {
+                state.orderDetail = orderInfo;
+            }
         },
     },
 });

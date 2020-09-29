@@ -8,30 +8,9 @@ import { showModal, showBom, showMessage } from '@slices/app';
 import { orderDetail } from '@slices/order';
 
 const NewOrder = (props) => {
-  
   const dispatch = useDispatch();
-  const data = [
-    {
-      "id": 1,
-      "title": "Đơn hàng mới",
-      "content": "Bạn vừa nhận được đơn hàng mới",
-      "isNew": true
-    },
-    {
-      "id": 2,
-      "title": "Bạn nhận được đánh giá 5 sao",
-      "content": "Khách hàng Nguyen van D đánh giá bạn 5 sao",
-      "isNew": true
-    },
-    {
-      "id": 2,
-      "title": "Bạn nhận được đánh giá 5 sao",
-      "content": "Khách hàng Nguyen van D đánh giá bạn 5 sao",
-      "isNew": true
-    },
-
-
-  ]
+  const orderInfo = useSelector((state) => state.order.orderDetail);
+  
   const back = () => {
     NavigationService.goBack()
   }
@@ -48,36 +27,34 @@ const NewOrder = (props) => {
 
   useEffect(() => {
     const id = props.route.params.id
-    // console.log(id)
-    dispatch(orderDetail({id:id}))
+    dispatch(orderDetail({ id: id }))
   }, []);
 
 
   return (
     <View style={AppStyles.styles.container}>
-      <Header.BackOrder title={'Đơn hàng #0000015'} time={'10:30, 30-08-2020'} goback={back} />
+      <Header.BackOrder title={orderInfo?.order_number} time={orderInfo?.created_at} status={orderInfo?.status} goback={back} />
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={{
-            width: '100%',
+            width: '95%',
             margin: 5,
-            marginTop: 15
+            marginTop: 15,
           }}
           ListHeaderComponent={() => <View >
             <Text style={styles.title}>Giao đến</Text>
-            <Item.Info />
+            <Item.Info firstname={orderInfo?.firstname} lastname={orderInfo?.lastname} address={orderInfo?.address} />
             <Item.Reviews />
             <Text style={styles.title}>Tổng thanh toán</Text>
-            <Item.Payment />
+            <Item.Payment grand_total={orderInfo?.grand_total} payment_method={orderInfo?.payment_method} />
             <Text style={styles.title}>Chi tiết đơn hàng</Text>
           </View>
           }
-
-          data={data}
+          data={orderInfo?.items}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => <Item.OrderInfo item={item} />}
-          ListFooterComponent={()=><View style={styles.space} />}
+          ListFooterComponent={() => <View style={styles.space} />}
         />
       </View>
       <View style={styles.footer}>

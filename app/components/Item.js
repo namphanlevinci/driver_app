@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { images, AppStyles } from '@theme';
 import ScreenName from '@screen/ScreenName';
 import * as NavigationService from '@navigate/NavigationService';
@@ -71,9 +71,9 @@ export const Order = (props) => {
 
     const gotoDetail = (id) => {
         if (props.status) {
-            NavigationService.navigate(ScreenName.NewOrder, {id: id})
+            NavigationService.navigate(ScreenName.NewOrder, { id: id })
         } else {
-            NavigationService.navigate(ScreenName.OldOrder, {id: id})
+            NavigationService.navigate(ScreenName.OldOrder, { id: id })
         }
 
     }
@@ -113,7 +113,7 @@ export const Notify = ({ item, index, lastIndex }) => {
     const { title, content, isNew } = item;
     return (
         <TouchableOpacity style={[styles.noti_boby, index === 0 ? styles.border_top : (index === lastIndex ? styles.border_bottom : styles.none_border)]}>
-            <View style={[styles.row, styles.padding]}>
+            <View style={[styles.row, styles.padding, {alignItems: 'center'}]}>
                 <Image
                     source={isNew ? images.icons.ring_new : images.icons.ring}
                 />
@@ -129,18 +129,20 @@ export const Notify = ({ item, index, lastIndex }) => {
     );
 };
 
-export const Info = () => {
+export const Info = (props) => {
+    const { firstname, lastname, address } = props;
     return (
         <View style={[styles.body, { marginTop: 10 }]}>
             <View style={styles.padding}>
-                <Text style={styles.money}>Nguyen Van A</Text>
-                <Text >20 Lý Thường Kiệt, P.15, Q.Tân Bình, Tp.HCM</Text>
+                <Text style={styles.money}>{firstname} {lastname} </Text>
+                <Text >{address}</Text>
             </View>
         </View>
     );
 };
 
-export const Payment = () => {
+export const Payment = (props) => {
+    const { payment_method, grand_total } = props;
     const payment = 'card'
     const check_payment = (payment) => {
         switch (payment) {
@@ -157,31 +159,33 @@ export const Payment = () => {
     }
     return (
         <View style={[styles.body, { marginTop: 10 }]}>
-            <View style={[styles.row, styles.padding]}>
-                <Text style={styles.money}>150.000 đ</Text>
-                <View style={[styles.status_pay, { backgroundColor: check_payment(payment).color }]}>
-                    <Text style={styles.status_color}>Thẻ / Ví điện tử</Text>
+            <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
+                <Text style={styles.money}>{grand_total} đ</Text>
+                <View style={[styles.status_pay, { backgroundColor: check_payment(payment_method).color }]}>
+                    <Text style={styles.status_color}>{payment_method}</Text>
                 </View>
             </View>
         </View>
     );
 };
 
-export const OrderInfo = () => {
-
+export const OrderInfo = (props) => {
+    const { name, qty, price, options } = props.item;
     return (
         <View style={[styles.body, { marginTop: 10 }]}>
             <View style={[styles.row, styles.padding]}>
                 <View style={styles.left}>
-                    <Text style={styles.money}>01 MIẾNG GÀ GIÒN VUI VẺ + 01 MỲ Ý SỐT BÒ BẰM</Text>
-                    <Text>Súp bí đỏ (+25.000đ)</Text>
-                    <Text>Súp bí đỏ (+25.000đ)</Text>
+                    <Text style={styles.money}>{name}</Text>
+                    <FlatList
+                        data={options}
+                        renderItem={({ item }) => <Text>{item.name} x{item.qty} (+{item.price}đ)</Text>}
+                    />
                 </View>
                 <View style={[styles.right, styles.row]}>
                     <View style={styles.border}>
-                        <Text style={styles.count}>x2</Text>
+                        <Text style={styles.count}>x{qty}</Text>
                     </View>
-                    <Text style={styles.money}>150.000 đ</Text>
+                    <Text style={styles.money}>{price}đ</Text>
                 </View>
 
 
@@ -247,7 +251,8 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
 
         elevation: 5,
-        marginBottom: 15
+        marginBottom: 15,
+
     },
     row: {
         flexDirection: 'row',
@@ -353,9 +358,11 @@ const styles = StyleSheet.create({
         marginRight: 5
     },
     count: {
+        fontSize: 13,
         padding: 3,
         color: AppStyles.colors.red,
-        fontWeight: 'bold'
+        fontWeight: '500',
+        textAlign: 'center'
     },
     size: {
         width: 50,

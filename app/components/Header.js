@@ -45,7 +45,7 @@ export const Back = (props) => {
 };
 
 export const BackOrder = (props) => {
-    const { goback, title, time } = props;
+    const { goback, title, time, status } = props;
     return (
         <TopBar.Bar
             style={AppStyles.styles.topBar}
@@ -56,11 +56,11 @@ export const BackOrder = (props) => {
             }
             rightComponents={
                 <View style={styles.status}>
-                    <Text style={styles.colors}>Completed</Text>
+                    <Text style={styles.colors}>{status}</Text>
                 </View>
             }>
             <View style={styles.content}>
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>Đơn hàng #{title}</Text>
                 <Text style={styles.time}>{time}</Text>
             </View>
 
@@ -71,7 +71,7 @@ export const BackOrder = (props) => {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 18,
+        fontSize: 16.5,
         fontWeight: 'bold',
         color: AppStyles.colors.white,
     },
@@ -84,15 +84,14 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     status:{
-        
         height: 25,
         borderRadius: 20,
-        backgroundColor: AppStyles.colors.silver,
+        backgroundColor: AppStyles.colors.blue,
         alignItems:'center',
         justifyContent: 'center'
     },
     colors: {
-        padding: 3,
+        padding: 5,
         color: AppStyles.colors.white,
         fontSize: 12,
     }
