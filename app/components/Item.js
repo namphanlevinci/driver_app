@@ -178,6 +178,7 @@ export const OrderInfo = (props) => {
                     <Text style={styles.money}>{name}</Text>
                     <FlatList
                         data={options}
+                        keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) => <Text>{item.name} x{item.qty} (+{item.price}đ)</Text>}
                     />
                 </View>
@@ -187,8 +188,6 @@ export const OrderInfo = (props) => {
                     </View>
                     <Text style={styles.money}>{price}đ</Text>
                 </View>
-
-
             </View>
         </View>
     );

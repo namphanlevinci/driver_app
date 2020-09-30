@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList, RefreshControl } from 'react-native';
 import { Header, Modal, Item } from '@components';
 import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
@@ -8,40 +8,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { orderList } from '@slices/order';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 
+const wait = (timeout) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
+
 const HomeScreen = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
   const loading = useSelector((state) => state.app.loadingItem);
   const newOrder = useSelector((state) => state.order.new);
   const recentlyOrder = useSelector((state) => state.order.recently);
-
-  const data = [
-    {
-      "id": 1,
-      "order_name": "Đơn hàng #0000067",
-      "status": "ready",
-      "time": "1 phut",
-      "name": "Nguyen Van A",
-      "address": "61 Cao Thang, Phuong Quan 3",
-      "total_money": "100000",
-      "payment": "card"
-    },
-
-  ]
-
-  const data1 = [
-    {
-      "id": 3,
-      "order_name": "Đơn hàng #0000065",
-      "status": "completed",
-      "time": "1 phut",
-      "name": "Nguyen Van B",
-      "address": "Quan 1",
-      "total_money": "100000",
-      "payment": "card"
-    },
-
-  ]
 
   const navigateNotification = () => {
     NavigationService.navigate(ScreenName.Notification)
@@ -53,6 +32,13 @@ const HomeScreen = (props) => {
 
   useEffect(() => {
     dispatch(orderList())
+  }, []);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    dispatch(orderList())
+
+    wait(2000).then(() => setRefreshing(false));
   }, []);
 
   return (
@@ -68,6 +54,9 @@ const HomeScreen = (props) => {
             margin: 5,
             marginTop: 15
           }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           data={recentlyOrder}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}

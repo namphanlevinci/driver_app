@@ -21,3 +21,35 @@ export const SIGN_IN = gql`
     }
   }
 `;
+
+export const SHIPPING = gql`
+  mutation($id: Int!) {
+    shipping(id: $id) {
+      result
+    }
+  }
+`;
+
+export const ARRIVED = gql`
+  mutation($id: Int!) {
+    arrived(id: $id) {
+      result
+    }
+  }
+`;
+
+export const BOM = gql`
+  mutation($id: Int!) {
+    bom(id: $id) {
+      result
+    }
+  }
+`;
+
+export const COMPLETE = gql`
+  mutation($id: Int!) {
+    complete(id: $id) {
+      result
+    }
+  }
+`;

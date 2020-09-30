@@ -6,10 +6,13 @@ import * as NavigationService from '@navigate/NavigationService';
 import { useDispatch, useSelector } from 'react-redux';
 import { showModal, showBom, showMessage } from '@slices/app';
 import { orderDetail } from '@slices/order';
+import { Shipping, Arrived, Bom, Complete } from '@slices/statusOrder';
 
 const NewOrder = (props) => {
   const dispatch = useDispatch();
+  const id = props.route.params.id
   const orderInfo = useSelector((state) => state.order.orderDetail);
+  const status = useSelector((state) => state.statusOrder.status);
   
   const back = () => {
     NavigationService.goBack()
@@ -26,9 +29,24 @@ const NewOrder = (props) => {
   }
 
   useEffect(() => {
-    const id = props.route.params.id
     dispatch(orderDetail({ id: id }))
   }, []);
+
+  const setShipping = () => {
+    dispatch(Shipping({ id: id }));
+  }
+
+  const setArrived = () => {
+    dispatch(Arrived({ id: id }));
+  }
+
+  const setBom = () => {
+    dispatch(Bom({ id: id }));
+  }
+
+  const setComplete = () => {
+    dispatch(Complete({ id: id }));
+  }
 
 
   return (
@@ -64,7 +82,6 @@ const NewOrder = (props) => {
             backgroundColor={AppStyles.colors.blue}
             textColor={AppStyles.colors.white}
             icon={images.icons.phone}
-          //  onPress={isLogin}
           />
           <Button.SmallRadius
             title={'Nhắn tin'}
