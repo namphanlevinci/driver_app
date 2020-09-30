@@ -12,6 +12,7 @@ import {
   Text,
   View,
   Platform,
+  StatusBar
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
@@ -40,6 +41,7 @@ const Signin = () => {
       style={AppStyles.styles.container}
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS == 'ios' ? scaleHeight(-22) : 0}>
+      <StatusBar barStyle={'light-content'} />
       <ScrollView
         style={styles.padding}
         keyboardDismissMode={'on-drag'}

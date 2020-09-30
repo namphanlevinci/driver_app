@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList, RefreshControl } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList, RefreshControl, StatusBar } from 'react-native';
 import { Header, Modal, Item } from '@components';
 import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
@@ -43,6 +43,7 @@ const HomeScreen = (props) => {
 
   return (
     <View style={AppStyles.styles.container}>
+      <StatusBar barStyle={'light-content'} />
       <Header.Main
         notification={navigateNotification}
         account={opened}
@@ -61,7 +62,7 @@ const HomeScreen = (props) => {
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
           ListHeaderComponent={() => <View>
-            <Text style={styles.title}>Đơn Hàng Mới</Text>
+            <Text style={styles.title}>ĐƠN HÀNG MỚI</Text>
             {loading && newOrder.length < 1 ?
               <View style={styles.loading}>
                 <Item.Loader />
@@ -73,7 +74,7 @@ const HomeScreen = (props) => {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => <Item.Order item={item}  status={true} />}
             />
-            <Text style={styles.title}>Đã Giao Gần Đây</Text>
+            <Text style={styles.title}>ĐÃ GIAO GẦN ĐÂY</Text>
             {loading && recentlyOrder.length < 1 ?
               <View style={styles.loading}>
                 <Item.Loader />
