@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "320365913986",
+    "firebase_url": "https://delivery-jollibee.firebaseio.com",
+    "project_id": "delivery-jollibee",
+    "storage_bucket": "delivery-jollibee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320365913986:android:e37c6ada885fbf3f62919b",
+        "android_client_info": {
+          "package_name": "com.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320365913986-gmrivdio0g8lb9lnskrbleft9942c642.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHG3miMZIvOJB2ccp03b1JpHrNLXW1zn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320365913986-gmrivdio0g8lb9lnskrbleft9942c642.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "320365913986-nl7ql4klekei7c9mpgoa3a1m3jr1vehm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jollibee.delivery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

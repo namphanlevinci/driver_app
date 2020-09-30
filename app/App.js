@@ -21,6 +21,8 @@ import Navigator from 'app/navigation';
 import configureAppStore from 'app/redux/store';
 import { Modal } from '@components';
 
+import { useFirebaseCloudMessing } from '@firebase';
+
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
 
@@ -65,6 +67,7 @@ export default function App() {
         <ApolloProvider client={apolloClient}>
           <PaperProvider theme={theme}>
             <Navigator />
+            <NotificationProvider />
           </PaperProvider>
         </ApolloProvider>
       </PersistGate>
@@ -72,3 +75,45 @@ export default function App() {
     </Provider>
   );
 }
+
+
+const NotificationProvider = () => {
+  // const dispatch = useDispatch();
+  const onForegroundMessage = (data) => {
+    console.log('==> notification onForegroundMessage', JSON.stringify(data));
+
+    // const {notification} = data;
+    // TODO: process message on foreground state
+  };
+
+  const onBackgroundMessage = (data) => {
+    console.log('===> notification onBackgroundMessage', JSON.stringify(data));
+    
+    // const {notification} = data;
+    // TODO: process message on background state
+  };
+
+  const onOpenedApp = ({ data }) => {
+    console.log('=====> notification onOpenedApp', JSON.stringify(data));
+
+    // const {notification} = data;
+    // TODO: process message on onOpenedApp
+  };
+
+  const onMessageError = () => {
+    console.log('=====> notification Error');
+  };
+
+  const firebaseToken = useFirebaseCloudMessing({
+    onForegroundMessage,
+    onBackgroundMessage,
+    onOpenedApp,
+    onMessageError,
+  });
+
+  console.log(firebaseToken)
+  // TODO : save redux app local
+  // dispatch(app.saveTokenDevice(firebaseToken));
+
+  return null;
+};
