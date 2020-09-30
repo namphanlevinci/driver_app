@@ -9,21 +9,7 @@ import { orderDetail } from '@slices/order';
 const OldOrder = (props) => {
   const dispatch = useDispatch();
   const orderInfo = useSelector((state) => state.order.orderDetail);
-  const data = [
-    {
-      "id": 1,
-      "title": "Đơn hàng mới",
-      "content": "Bạn vừa nhận được đơn hàng mới",
-      "isNew": true
-    },
-    {
-      "id": 2,
-      "title": "Bạn nhận được đánh giá 5 sao",
-      "content": "Khách hàng Nguyen van D đánh giá bạn 5 sao",
-      "isNew": true
-    },
-
-  ]
+ 
   const back = () => {
     NavigationService.goBack()
   }

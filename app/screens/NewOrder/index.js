@@ -94,6 +94,7 @@ const NewOrder = (props) => {
             title={'Bom'}
             backgroundColor={AppStyles.colors.red}
             textColor={AppStyles.colors.white}
+            icon={images.icons.closed}
             onPress={showBomModal}
           />
         </View>
@@ -102,7 +103,7 @@ const NewOrder = (props) => {
           title={'SHIPPING'}
           backgroundColor={AppStyles.colors.yellow}
           textColor={AppStyles.colors.text}
-          onPress={show}
+          onPress={setShipping}
         />
       </View>
 

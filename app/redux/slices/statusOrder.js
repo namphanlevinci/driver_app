@@ -66,7 +66,11 @@ export const Arrived = createAsyncThunk(
 const statusSlice = createSlice({
   name: 'statusOrder',
   initialState: {
-    status: ''
+    status: '',
+    shipping: false,
+    arrived: false,
+    bom: false,
+    complete: false
   },
   reducers: {
     
@@ -79,6 +83,10 @@ const statusSlice = createSlice({
     [Shipping.fulfilled]: (state, action) => {
       
       const { error, data } = action.payload;
+      const status = data?.result
+      if(status){
+        state.shipping = status;
+      }
     },
 
     [Arrived.pending]: (state, action) => {
@@ -87,7 +95,10 @@ const statusSlice = createSlice({
 
     [Arrived.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      
+      const status = data?.result
+      if(status){
+        state.arrived = status;
+      }
     },
 
     [Bom.pending]: (state, action) => {
@@ -96,7 +107,10 @@ const statusSlice = createSlice({
 
     [Bom.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      
+      const status = data?.result
+      if(status){
+        state.bom = status;
+      }
     },
 
     [Complete.pending]: (state, action) => {
@@ -105,7 +119,10 @@ const statusSlice = createSlice({
 
     [Complete.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      
+      const status = data?.result
+      if(status){
+        state.complete = status;
+      }
     },
 
   },
