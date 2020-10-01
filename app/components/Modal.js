@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Modal, Image, TouchableOpacity, FlatList, TextI
 import { useSelector, useDispatch } from 'react-redux';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import * as Button from "./Button";
-import { hideModal, hideBom } from '../redux/slices/app';
+import { hideModal, hideBom, hideRatingOrder, hideNewOrder } from '../redux/slices/app';
 import { images, AppStyles } from '@theme';
 import Spinner from 'react-native-spinkit';
 
@@ -31,7 +31,7 @@ export const Success = () => {
         dispatch(hideModal());
     }
     return (
-        <Modal visible={isVisible} transparent>
+        <Modal visible={isVisible} transparent animationType={'fade'}>
             <View style={styles.container}>
                 <View style={styles.success}>
                     <Image
@@ -52,15 +52,21 @@ export const Success = () => {
     );
 };
 
-export const Completed = () => {
+export const Completed = (props) => {
     const dispatch = useDispatch();
     const isVisible = useSelector((state) => state.app.isVisible);
 
     const hide = () => {
         dispatch(hideModal());
     }
+
+    const isComplete = () => {
+        props.onPress();
+        dispatch(hideModal());
+    }
+
     return (
-        <Modal visible={isVisible} transparent>
+        <Modal visible={isVisible} transparent animationType={'fade'}>
             <View style={styles.container}>
                 <View style={styles.confirm}>
                     <View style={styles.header}>
@@ -88,7 +94,7 @@ export const Completed = () => {
                                 title={'Đồng ý'}
                                 backgroundColor={AppStyles.colors.red}
                                 textColor={AppStyles.colors.white}
-                                onPress={hide}
+                                onPress={isComplete}
                             />
                         </View>
                     </View>
@@ -98,15 +104,81 @@ export const Completed = () => {
     );
 };
 
-export const Bom = () => {
+export const NewOrder = () => {
+    const dispatch = useDispatch();
+    const isVisible = useSelector((state) => state.app.newOrder);
+
+    const hide = () => {
+        dispatch(hideNewOrder());
+    }
+    return (
+        <Modal visible={isVisible} transparent animationType={'fade'}>
+            <View style={styles.container}>
+                <View style={styles.success}>
+                    <Image
+                        style={styles.image}
+                        source={images.icons.success}
+                    />
+                    <Text style={styles.title}>BẠN NHẬN ĐƯỢC ĐƠN HÀNG MỚI</Text>
+                    {/* <Text style={styles.content}>Cám ơn đã đăng kí, chúng tôi sẽ gửi thông tin đăng nhập qua email cho bạn sau khi kiểm tra thông tin của bạn là xác thực</Text> */}
+                    <Button.Medium
+                        title={'ĐỒNG Ý'}
+                        onPress={hide}
+                        backgroundColor={AppStyles.colors.yellow}
+                        textColor={AppStyles.colors.text}
+                    />
+                </View>
+            </View>
+        </Modal>
+    );
+};
+
+export const RatingOrder = () => {
+    const dispatch = useDispatch();
+    const isVisible = useSelector((state) => state.app.ratingOrder);
+
+    const hide = () => {
+        dispatch(hideRatingOrder());
+    }
+    return (
+        <Modal visible={isVisible} transparent animationType={'fade'}>
+            <View style={styles.container}>
+                <View style={styles.success}>
+                    <Image
+                        style={styles.image}
+                        source={images.icons.success}
+                    />
+                    <Text style={styles.title}>BẠN NHẬN ĐƯỢC ĐÁNH GIÁ 5 SAO</Text>
+                    {/* <Text style={styles.content}>Cám ơn đã đăng kí, chúng tôi sẽ gửi thông tin đăng nhập qua email cho bạn sau khi kiểm tra thông tin của bạn là xác thực</Text> */}
+                    <Button.Medium
+                        title={'ĐỒNG Ý'}
+                        onPress={hide}
+                        backgroundColor={AppStyles.colors.yellow}
+                        textColor={AppStyles.colors.text}
+                    />
+                </View>
+            </View>
+        </Modal>
+    );
+};
+
+
+
+export const Bom = (props) => {
     const dispatch = useDispatch();
     const bom = useSelector((state) => state.app.bom);
 
     const hide = () => {
         dispatch(hideBom());
     }
+
+    const isBom = () => {
+        props.onPress();
+        dispatch(hideBom());
+    }
+
     return (
-        <Modal visible={bom} transparent>
+        <Modal visible={bom} transparent animationType={'fade'}>
             <View style={styles.container}>
                 <View style={styles.confirm}>
                     <View style={styles.header}>
@@ -134,7 +206,7 @@ export const Bom = () => {
                                 title={'Đồng ý'}
                                 backgroundColor={AppStyles.colors.red}
                                 textColor={AppStyles.colors.white}
-                                onPress={hide}
+                                onPress={isBom}
                             />
                         </View>
                     </View>
@@ -143,77 +215,6 @@ export const Bom = () => {
         </Modal>
     );
 };
-
-export const Message = () => {
-    const data = [
-        {
-            id: 1
-        },
-        {
-            id: 2
-        }
-    ]
-    const dispatch = useDispatch();
-    const bom = useSelector((state) => state.app.bom);
-
-    const hide = () => {
-        dispatch(hideBom());
-    }
-    return (
-        <View style={styles.body}>
-            <View style={styles.header_message}>
-                <TouchableOpacity
-                    style={styles.close}
-                    onPress={hide}>
-                    <Image
-                        source={images.icons.nav_close}
-                    />
-                </TouchableOpacity>
-                <Text style={[styles.title, { color: AppStyles.colors.text, marginBottom: 0 }]}>Tin nhắn</Text>
-                <View style={[styles.close, { backgroundColor: AppStyles.colors.yellow }]} />
-            </View>
-            {/* ------------------------------ */}
-            <View >
-                <FlatList
-                    contentContainerStyle={{
-                        width: '100%',
-                        // height: '100%',
-                    }}
-                    data={data}
-                    showsVerticalScrollIndicator={false}
-                    inverted={true}
-
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={() => <View><Text>fdfd</Text></View>}
-
-                />
-
-            </View>
-            {/* ------------------------------ */}
-            <View style={styles.footer_message}>
-                <View style={styles.send}>
-
-                </View>
-                <View style={[styles.row, styles.send]}>
-                    <TextInput
-                        style={styles.text_input}
-                    />
-                    <TouchableOpacity
-                        style={[styles.close, { backgroundColor: AppStyles.colors.yellow }]}
-                        onPress={hide}>
-                        <Image
-                            source={images.icons.send}
-                        />
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
-    );
-};
-
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -252,7 +253,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: AppStyles.colors.red,
-        marginBottom: 15
+        marginBottom: 15,
+        textAlign: 'center'
     },
     content: {
         fontSize: 16,
@@ -264,7 +266,7 @@ const styles = StyleSheet.create({
     },
     confirm: {
         width: scaleWidth(80),
-        height: scaleHeight(25),
+        height: scaleHeight(22),
         borderRadius: 10,
         backgroundColor: AppStyles.colors.white,
         justifyContent: 'center',

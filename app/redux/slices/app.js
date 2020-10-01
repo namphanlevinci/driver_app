@@ -6,9 +6,11 @@ const appSlice = createSlice({
         isVisible: false,
         message: false,
         bom: false,
-        isLoadingApp: false,
+        isLoadingApp: true,
         isLoading: false,
-        loadingItem: false
+        loadingItem: false,
+        newOrder: false,
+        ratingOrder: false
     },
     reducers: {
         showModal(state) {
@@ -43,6 +45,18 @@ const appSlice = createSlice({
         },
         hideLoadingItem(state) {
             state.loadingItem = false;
+        },
+        showNewOrder(state) {
+            state.newOrder = true;
+        },
+        hideNewOrder(state) {
+            state.newOrder = false;
+        },
+        showRatingOrder(state) {
+            state.ratingOrder = true;
+        },
+        hideRatingOrder(state) {
+            state.ratingOrder = false;
         }
     },
 });
@@ -59,6 +73,10 @@ export const {
     showLoading,
     hideLoading,
     showLoadingItem,
-    hideLoadingItem
+    hideLoadingItem,
+    showNewOrder,
+    hideNewOrder,
+    showRatingOrder,
+    hideRatingOrder
 } = actions;
 export default reducer;

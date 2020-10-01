@@ -72,6 +72,8 @@ export default function App() {
         </ApolloProvider>
       </PersistGate>
       <Modal.Loading />
+      <Modal.NewOrder />
+      <Modal.RatingOrder />
     </Provider>
   );
 }

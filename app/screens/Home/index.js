@@ -7,6 +7,7 @@ import ScreenName from '../ScreenName';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderList } from '@slices/order';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
+import { showRatingOrder, showNewOrder } from '@slices/app';
 
 const wait = (timeout) => {
   return new Promise(resolve => {
@@ -24,6 +25,7 @@ const HomeScreen = (props) => {
 
   const navigateNotification = () => {
     NavigationService.navigate(ScreenName.Notification)
+    // dispatch(showRatingOrder());
   }
 
   const opened = () => {

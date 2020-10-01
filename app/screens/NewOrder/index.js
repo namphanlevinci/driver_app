@@ -5,15 +5,20 @@ import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
 import { useDispatch, useSelector } from 'react-redux';
 import { showModal, showBom, showMessage } from '@slices/app';
-import { orderDetail } from '@slices/order';
+import { orderDetail, orderList } from '@slices/order';
 import { Shipping, Arrived, Bom, Complete } from '@slices/statusOrder';
+
+const wait = (timeout) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
 
 const NewOrder = (props) => {
   const dispatch = useDispatch();
   const id = props.route.params.id
   const orderInfo = useSelector((state) => state.order.orderDetail);
-  const status = useSelector((state) => state.statusOrder.status);
-  
+
   const back = () => {
     NavigationService.goBack()
   }
@@ -32,22 +37,52 @@ const NewOrder = (props) => {
     dispatch(orderDetail({ id: id }))
   }, []);
 
-  const setShipping = () => {
-    dispatch(Shipping({ id: id }));
-  }
-
-  const setArrived = () => {
-    dispatch(Arrived({ id: id }));
-  }
-
   const setBom = () => {
     dispatch(Bom({ id: id }));
+    wait(1000).then(() => dispatch(orderDetail({ id: id })));
+    wait(2000).then(() => dispatch(orderList()));
+    wait(1000).then(() => back());
   }
 
   const setComplete = () => {
     dispatch(Complete({ id: id }));
+    wait(1000).then(() => dispatch(orderDetail({ id: id })));
+    wait(2000).then(() => dispatch(orderList()));
+    wait(1000).then(() => back());
   }
 
+  const setStatus = () => {
+    switch (orderInfo?.status) {
+      case 'ready_to_ship':
+        dispatch(Shipping({ id: id }));
+        wait(1000).then(() => dispatch(orderDetail({ id: id })));
+        wait(2000).then(() => dispatch(orderList()));
+        break;
+      case 'shipping':
+        dispatch(Arrived({ id: id }));
+        wait(1000).then(() => dispatch(orderDetail({ id: id })));
+        wait(2000).then(() => dispatch(orderList()));
+        break;
+      case 'arrived':
+        show()
+        break;
+      default:
+        break;
+    }
+  }
+
+  const checkStatus = (status) => {
+    switch (status) {
+      case 'ready_to_ship':
+        return { title: 'SHIPPING', color: AppStyles.colors.yellow }
+      case 'shipping':
+        return { title: 'ARRIVED', color: AppStyles.colors.orange }
+      case 'arrived':
+        return { title: 'COMPLETE', color: AppStyles.colors.silver }
+      default:
+        return { title: 'SHIPPING', color: AppStyles.colors.yellow }
+    }
+  }
 
   return (
     <View style={AppStyles.styles.container}>
@@ -55,9 +90,7 @@ const NewOrder = (props) => {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={{
-            width: '95%',
-            margin: 5,
-            marginTop: 15,
+            padding: 20,
           }}
           ListHeaderComponent={() => <View >
             <Text style={styles.title}>Giao đến</Text>
@@ -92,23 +125,23 @@ const NewOrder = (props) => {
           />
           <Button.SmallRadius
             title={'Bom'}
-            backgroundColor={AppStyles.colors.red}
+            backgroundColor={(orderInfo?.status === 'ready_to_ship' || orderInfo?.status === 'shipping') ? AppStyles.colors.silver : AppStyles.colors.red}
             textColor={AppStyles.colors.white}
             icon={images.icons.closed}
-            onPress={showBomModal}
+            onPress={(orderInfo?.status === 'ready_to_ship' || orderInfo?.status === 'shipping') ? null : showBomModal}
           />
         </View>
 
         <Button.LargeRadius
-          title={'SHIPPING'}
-          backgroundColor={AppStyles.colors.yellow}
+          title={checkStatus(orderInfo?.status).title}
+          backgroundColor={checkStatus(orderInfo?.status).color}
           textColor={AppStyles.colors.text}
-          onPress={setShipping}
+          onPress={setStatus}
         />
       </View>
 
-      <Modal.Completed />
-      <Modal.Bom />
+      <Modal.Completed onPress={setComplete} />
+      <Modal.Bom onPress={setBom} />
       <ModalMessage />
     </View>
   )
@@ -118,7 +151,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AppStyles.colors.background,
-    alignItems: 'center'
+    
   },
   title: {
     fontSize: 21,
@@ -145,7 +178,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   row: {
-
     flexDirection: 'row',
     alignItems: 'center'
   }

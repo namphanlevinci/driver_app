@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
-import { images, AppStyles } from '@theme';
+import { images, AppStyles, toCommas } from '@theme';
 import ScreenName from '@screen/ScreenName';
 import * as NavigationService from '@navigate/NavigationService';
 import ContentLoader, { Rect } from "react-content-loader/native";
@@ -37,35 +37,31 @@ export const Order = (props) => {
 
     const check_status = (status) => {
         switch (status) {
-            case 'processing':
-                return { color: AppStyles.colors.blue }
-                break;
+            case 'ready_to_ship':
+                return { title: 'Ready To Ship', color: AppStyles.colors.blue }
+            case 'arrived':
+                return { title: 'Arrived', color: AppStyles.colors.orange }
             case 'bom':
-                return { color: AppStyles.colors.red }
-                break;
+                return { title: 'Bom', color: AppStyles.colors.red }
             case 'shipping':
-                return { color: AppStyles.colors.yellow }
-                break;
-            case 'completed':
-                return { color: AppStyles.colors.silver }
-                break;
+                return { title: 'Shipping', color: AppStyles.colors.yellow }
+            case 'complete':
+                return { title: 'Complete', color: AppStyles.colors.silver }
             default:
-                return { color: AppStyles.colors.silver }
-                break;
+                return { title: '', color: AppStyles.colors.silver }
         }
     }
 
     const check_payment = (payment_method) => {
-        switch (payment_method) {
-            case 'Thanh toán tiền mặt':
+        switch (payment_method, status) {
+            case 'Thanh toán tiền mặt' && 'ready_to_ship':
                 return { color: AppStyles.colors.orange }
-                break;
-            case 'card':
-                return { color: AppStyles.colors.green }
-                break;
+            case 'Thanh toán tiền mặt' && 'shipping':
+                return { color: AppStyles.colors.orange }
+            case 'Thanh toán tiền mặt' && 'arrived':
+                return { color: AppStyles.colors.orange }
             default:
                 return { color: AppStyles.colors.silver }
-                break;
         }
     }
 
@@ -84,7 +80,7 @@ export const Order = (props) => {
                 <View style={styles.row}>
                     <Text style={styles.order_name}>#{order_number}</Text>
                     <View style={[styles.status_order, { backgroundColor: check_status(status).color }]}>
-                        <Text style={styles.status_color}>{status}</Text>
+                        <Text style={styles.status_color}>{check_status(status).title}</Text>
                     </View>
                 </View>
                 <Text style={styles.time}>{created_at}</Text>
@@ -97,7 +93,7 @@ export const Order = (props) => {
                     <View style={styles.line} />
                     <View style={styles.col}>
                         <Text style={styles.name}>Tổng thanh toán:</Text>
-                        <Text style={styles.money}>{grand_total} đ</Text>
+                        <Text style={styles.money}>{toCommas(grand_total)}đ</Text>
                         <View style={[styles.status_pay, { backgroundColor: check_payment(payment_method).color }]}>
                             <Text style={styles.status_color}>{payment_method}</Text>
                         </View>
@@ -113,7 +109,7 @@ export const Notify = ({ item, index, lastIndex }) => {
     const { title, content, isNew } = item;
     return (
         <TouchableOpacity style={[styles.noti_boby, index === 0 ? styles.border_top : (index === lastIndex ? styles.border_bottom : styles.none_border)]}>
-            <View style={[styles.row, styles.padding, {alignItems: 'center'}]}>
+            <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
                 <Image
                     source={isNew ? images.icons.ring_new : images.icons.ring}
                 />
@@ -160,7 +156,7 @@ export const Payment = (props) => {
     return (
         <View style={[styles.body, { marginTop: 10 }]}>
             <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
-                <Text style={styles.money}>{grand_total} đ</Text>
+                <Text style={styles.money}>{toCommas(grand_total)}đ</Text>
                 <View style={[styles.status_pay, { backgroundColor: check_payment(payment_method).color }]}>
                     <Text style={styles.status_color}>{payment_method}</Text>
                 </View>
@@ -172,21 +168,21 @@ export const Payment = (props) => {
 export const OrderInfo = (props) => {
     const { name, qty, price, options } = props.item;
     return (
-        <View style={[styles.body, { marginTop: 10 }]}>
+        <View style={[styles.item]}>
             <View style={[styles.row, styles.padding]}>
                 <View style={styles.left}>
                     <Text style={styles.money}>{name}</Text>
                     <FlatList
                         data={options}
                         keyExtractor={(item, index) => index.toString()}
-                        renderItem={({ item }) => <Text>{item.name} x{item.qty} (+{item.price}đ)</Text>}
+                        renderItem={({ item }) => <Text>{item.name} x{item.qty} (+{toCommas(item.price)}đ)</Text>}
                     />
                 </View>
                 <View style={[styles.right, styles.row]}>
                     <View style={styles.border}>
                         <Text style={styles.count}>x{qty}</Text>
                     </View>
-                    <Text style={styles.money}>{price}đ</Text>
+                    <Text style={styles.money}>{toCommas(price)}đ</Text>
                 </View>
             </View>
         </View>
@@ -251,8 +247,25 @@ const styles = StyleSheet.create({
 
         elevation: 5,
         marginBottom: 15,
-
     },
+
+    item: {
+        width: '100%',
+        borderRadius: 5,
+        backgroundColor: AppStyles.colors.white,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+        // marginBottom: 30,
+        marginTop: 15,
+    },
+
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',

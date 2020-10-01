@@ -46,6 +46,24 @@ export const Back = (props) => {
 
 export const BackOrder = (props) => {
     const { goback, title, time, status } = props;
+
+    const checkStatus = () => {
+        switch (status) {
+            case 'ready_to_ship':
+                return { title: 'Ready To Ship', color: AppStyles.colors.blue }
+            case 'shipping':
+                return { title: 'Shipping', color: AppStyles.colors.yellow }
+            case 'arrived':
+                return { title: 'Arrived', color: AppStyles.colors.orange }
+            case 'bom':
+                return { title: 'Bom', color: AppStyles.colors.silver }
+            case 'complete':
+                return { title: 'Completed', color: AppStyles.colors.silver }
+            default:
+                return { title: 'Shipping', color: AppStyles.colors.yellow }
+        }
+    }
+
     return (
         <TopBar.Bar
             style={AppStyles.styles.topBar}
@@ -55,8 +73,8 @@ export const BackOrder = (props) => {
                 </TouchableOpacity>
             }
             rightComponents={
-                <View style={styles.status}>
-                    <Text style={styles.colors}>{status}</Text>
+                <View style={[styles.status, { backgroundColor: checkStatus(status).color }]}>
+                    <Text style={styles.colors}>{checkStatus(status).title}</Text>
                 </View>
             }>
             <View style={styles.content}>
@@ -83,17 +101,20 @@ const styles = StyleSheet.create({
         marginRight: -45,
         alignItems: 'center'
     },
-    status:{
+    status: {
         height: 25,
         borderRadius: 20,
         backgroundColor: AppStyles.colors.blue,
-        alignItems:'center',
-        justifyContent: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: -12
     },
     colors: {
-        padding: 5,
+        paddingLeft: 5,
+        paddingRight: 5,
         color: AppStyles.colors.white,
-        fontSize: 12,
+        fontSize: 11,
+        fontWeight: 'bold'
     }
 
 })

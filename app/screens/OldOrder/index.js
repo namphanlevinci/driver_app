@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { View, SafeAreaView, StyleSheet, Text, FlatList } from 'react-native';
 import { Header, Item } from '@components';
 import { images, AppStyles } from '@theme';
@@ -9,7 +9,7 @@ import { orderDetail } from '@slices/order';
 const OldOrder = (props) => {
   const dispatch = useDispatch();
   const orderInfo = useSelector((state) => state.order.orderDetail);
- 
+
   const back = () => {
     NavigationService.goBack()
   }
@@ -25,9 +25,7 @@ const OldOrder = (props) => {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={{
-            width: '100%',
-            margin: 5,
-            marginTop: 15
+            padding: 20,
           }}
           ListHeaderComponent={() => <View >
             <Text style={styles.title}>Giao đến</Text>
@@ -44,7 +42,7 @@ const OldOrder = (props) => {
 
           renderItem={({ item, index }) => <Item.OrderInfo item={item} />}
 
-          ListFooterComponent={() => <View style={{marginTop: 30}}>
+          ListFooterComponent={() => <View style={{ marginTop: 30 }}>
             <Text style={styles.title}>Đánh giá của khách hàng</Text>
             <Item.Rating />
             <Item.Reviews />
@@ -60,9 +58,10 @@ const OldOrder = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: AppStyles.colors.background,
-    alignItems: 'center'
+    // alignItems: 'center'
+    justifyContent: 'center'
   },
   title: {
     fontSize: 21,
