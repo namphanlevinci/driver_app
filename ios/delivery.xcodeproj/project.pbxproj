@@ -790,7 +790,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.delivery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
 				PRODUCT_NAME = delivery;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -812,7 +812,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.delivery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
 				PRODUCT_NAME = delivery;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

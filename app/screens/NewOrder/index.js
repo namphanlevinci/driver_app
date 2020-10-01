@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, SafeAreaView, StyleSheet, Text, FlatList, Dimensions } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Text, FlatList, Dimensions, Linking } from 'react-native';
 import { Header, Item, Button, Modal, ModalMessage } from '@components';
 import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
@@ -21,6 +21,12 @@ const NewOrder = (props) => {
 
   const back = () => {
     NavigationService.goBack()
+  }
+
+  const callNow = () => {
+    const phoneNumber = orderInfo?.phone
+    // console.log(phoneNumber)
+    Linking.openURL(`tel:${phoneNumber}`)
   }
 
   const show = () => {
@@ -115,6 +121,7 @@ const NewOrder = (props) => {
             backgroundColor={AppStyles.colors.blue}
             textColor={AppStyles.colors.white}
             icon={images.icons.phone}
+            onPress={callNow}
           />
           <Button.SmallRadius
             title={'Nhắn tin'}

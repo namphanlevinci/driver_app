@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     color: AppStyles.colors.text,
   },
   space: {
-    height: 30
+    height: 100
   }
 });
 

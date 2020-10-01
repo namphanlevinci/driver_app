@@ -36,6 +36,7 @@ export const ORDER_DETAILS = gql`
         created_at
         firstname
         grand_total
+        phone
         id
         lastname
         order_number
