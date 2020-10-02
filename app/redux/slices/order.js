@@ -5,12 +5,10 @@ import { showLoadingItem, hideLoadingItem, showLoading, hideLoading } from './ap
 
 const KEY_CONSTANT = 'order';
 
-
-
 export const orderList = createAsyncThunk(
     `${KEY_CONSTANT}/orderList`,
     async (value, {dispatch}) => {
-        dispatch(showLoadingItem());
+        // dispatch(showLoadingItem());
         const { error, data } = await graphQlClient.query({
             query: query.ORDER_LIST,
         });
@@ -18,7 +16,7 @@ export const orderList = createAsyncThunk(
         console.log('data orderList', data);
         console.log('error orderList', error);
 
-        dispatch(hideLoadingItem());
+        // dispatch(hideLoadingItem());
         return { error, data };
     },
 );
@@ -68,6 +66,7 @@ const orderSlice = createSlice({
                 state.getListError = error;
             }
         },
+
 
         [orderDetail.pending]: (state, action) => {
             console.log('orderDetail pending', action);

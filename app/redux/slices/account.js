@@ -9,11 +9,12 @@ export const signIn = createAsyncThunk(
   `${KEY_CONSTANT}/signIn`,
   async (input, { dispatch }) => {
     dispatch(showLoading());
+
     const { error, data } = await graphQlClient.mutate({
       mutation: mutation.SIGN_IN,
       variables: input,
     });
-
+    
     const token = data?.generateStaffToken?.token;
     console.log('data signIn', data);
     await saveJwtToken(token);
@@ -84,30 +85,32 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
       const token = data?.generateStaffToken?.token;
-      if (token) {
-        state.signInError = null;
-        state.isLogin = true;
-        state.token = token;
-        state.info = data?.generateStaffToken
-      } else {
-        state.signInError = error;
-        state.isLogin = false;
-      }
+      state.isLogin = true;
+      // if (token) {
+      //   state.signInError = null;
+      //   state.isLogin = true;
+      //   state.token = token;
+      //   state.info = data?.generateStaffToken
+      // } else {
+      //   state.signInError = error;
+      //   state.isLogin = false;
+      // }
     },
-    // [signIn.rejected]: (state, action) => {
-    //   Logger.info(action, 'accountSlice rejected');
-    // },
+    [signIn.rejected]: (state, action) => {
+      state.isLogin = true;
+    },
     [signOut.pending]: (state, action) => {
       // Logger.info(action, 'signIn pending');
     },
     [signOut.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
-      state.isLogin = data?.result;
+      // state.isLogin = data?.result;
+      state.isLogin = false;
     },
-    // [signOut.rejected]: (state, action) => {
-    //   Logger.info(action, 'accountSlice rejected');
-    // },
+    [signOut.rejected]: (state, action) => {
+      state.isLogin = false;
+    },
   },
 });
 

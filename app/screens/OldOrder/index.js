@@ -8,7 +8,46 @@ import { orderDetail } from '@slices/order';
 
 const OldOrder = (props) => {
   const dispatch = useDispatch();
-  const orderInfo = useSelector((state) => state.order.orderDetail);
+  // const orderInfo = useSelector((state) => state.order.orderDetail);
+
+  const orderInfo = {
+    "address": "61 Cao Thang Ho Chi Minh",
+    "created_at": "2020-09-23 09:37:25",
+    "firstname": "Luc",
+    "grand_total": 382000,
+    "phone": "0935265561",
+    "id": 10,
+    "lastname": "Nguyen",
+    "order_number": "000000050",
+    "payment_method": "Thanh toán tiền mặt",
+    "status": "complete",
+    "items": [
+      {
+        "name": "1 miếng gà sốt cay + Khoai Tây + Nước",
+        "qty": 2,
+        "price": 73000,
+        "options": [
+          {
+            "name": "Large Fries",
+            "qty": 1,
+            "price": 9000,
+          }
+        ]
+      },
+      {
+        "name": "1 miếng gà sốt cay + Khoai Tây + Nước",
+        "qty": 2,
+        "price": 73000,
+        "options": [
+          {
+            "name": "Large Fries",
+            "qty": 1,
+            "price": 9000,
+          }
+        ]
+      }
+    ]
+  }
 
   const back = () => {
     NavigationService.goBack()

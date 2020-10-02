@@ -46,8 +46,9 @@ function DrawerContent(props) {
           source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
         />
       </View>
-      <Text style={styles.name}>{info.firstname} {info.lastname}</Text>
-      <Text style={styles.id}>ID: {info.id}</Text>
+      {/* <Text style={styles.name}>{info?.firstname} {info?.lastname}</Text> */}
+      <Text style={styles.name}>LEVINCI</Text>
+      <Text style={styles.id}>ID: 007</Text>
       <View style={styles.row}>
         <Text style={styles.text}>Tắt/Bật trạng thái nhận đơn hàng</Text>
         <Switch

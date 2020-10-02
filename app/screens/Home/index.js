@@ -7,7 +7,7 @@ import ScreenName from '../ScreenName';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderList } from '@slices/order';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
-import { showRatingOrder, showNewOrder } from '@slices/app';
+import { showRatingOrder, showNewOrder, hideLoadingItem } from '@slices/app';
 
 const wait = (timeout) => {
   return new Promise(resolve => {
@@ -28,17 +28,60 @@ const HomeScreen = (props) => {
     // dispatch(showRatingOrder());
   }
 
+  const datanew = [
+    {
+      "address": "18 Huynh Lan Khanh Ho Chi Minh",
+      "created_at": "2020-10-01 08:23:33",
+      "firstname": "Lan",
+      "grand_total": 75000,
+      "id": 26,
+      "lastname": "Pham",
+      "order_number": "000000025",
+      "payment_method": "Thanh toán tiền mặt",
+      "status": "ready_to_ship",
+    }
+  ]
+
+  const dataold = [
+    {
+      "address": "61 Cao Thang Ho Chi Minh",
+      "created_at": "2020-10-01 08:23:33",
+      "firstname": "Luc",
+      "grand_total": 100000,
+      "id": 20,
+      "lastname": "Nguyen",
+      "order_number": "000000050",
+      "payment_method": "Thanh toán tiền mặt",
+      "status": "complete",
+    },
+    // {
+    //   "address": "84 Cong Hoa Ho Chi Minh",
+    //   "created_at": "2020-10-01 08:23:33",
+    //   "firstname": "Minh",
+    //   "grand_total": 75000,
+    //   "id": 13,
+    //   "lastname": "Vo",
+    //   "order_number": "000000030",
+    //   "payment_method": "Thanh toán tiền mặt",
+    //   "status": "bom",
+    // }
+  ]
+
   const opened = () => {
     navigation.openDrawer()
   }
 
   useEffect(() => {
-    dispatch(orderList())
+    dispatch(orderList());
+    setTimeout(() => {
+      dispatch(hideLoadingItem());
+    }, 1000)
+
   }, []);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    dispatch(orderList())
+    // dispatch(orderList())
 
     wait(2000).then(() => setRefreshing(false));
   }, []);
@@ -53,14 +96,15 @@ const HomeScreen = (props) => {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={{
-            width: scaleWidth(90),
-            margin: 5,
-            marginTop: 15
+            // width: scaleWidth(90),
+            // margin: 5,
+            // marginTop: 15
+            padding: 5
           }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          data={recentlyOrder}
+          data={dataold}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
           ListHeaderComponent={() => <View>
@@ -72,9 +116,9 @@ const HomeScreen = (props) => {
             }
             <FlatList
               style={styles.list}
-              data={newOrder}
+              data={datanew}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item, index }) => <Item.Order item={item}  status={true} />}
+              renderItem={({ item, index }) => <Item.Order item={item} status={true} />}
             />
             <Text style={styles.title}>ĐÃ GIAO GẦN ĐÂY</Text>
             {loading && recentlyOrder.length < 1 ?
@@ -85,7 +129,7 @@ const HomeScreen = (props) => {
             <View style={styles.list} />
           </View>
           }
-          renderItem={({ item, index }) => <Item.Order item={item}  status={false} />}
+          renderItem={({ item, index }) => <Item.Order item={item} status={false} />}
           ListFooterComponent={() => <View style={styles.list} />}
         />
       </View>

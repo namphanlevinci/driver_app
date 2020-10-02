@@ -17,12 +17,51 @@ const wait = (timeout) => {
 const NewOrder = (props) => {
   const dispatch = useDispatch();
   const id = props.route.params.id
-  const orderInfo = useSelector((state) => state.order.orderDetail);
+  // const orderInfo = useSelector((state) => state.order.orderDetail);
+
+  const orderInfo = {
+    "address": "18 Huynh Lan Khanh Ho Chi Minh",
+    "created_at": "2020-09-23 09:37:25",
+    "firstname": "Lan",
+    "grand_total": 382000,
+    "phone": "0935265561",
+    "id": 10,
+    "lastname": "Pham",
+    "order_number": "000000025",
+    "payment_method": "Thanh toán tiền mặt",
+    "status": "ready_to_ship",
+    "items": [
+      {
+        "name": "1 miếng gà sốt cay + Khoai Tây + Nước",
+        "qty": 2,
+        "price": 73000,
+        "options": [
+          {
+            "name": "Large Fries",
+            "qty": 1,
+            "price": 9000,
+          }
+        ]
+      },
+      {
+        "name": "1 miếng gà sốt cay + Khoai Tây + Nước",
+        "qty": 2,
+        "price": 73000,
+        "options": [
+          {
+            "name": "Large Fries",
+            "qty": 1,
+            "price": 9000,
+          }
+        ]
+      }
+    ]
+  }
 
   const back = () => {
     NavigationService.goBack()
   }
-
+  console.log(orderInfo)
   const callNow = () => {
     const phoneNumber = orderInfo?.phone
     // console.log(phoneNumber)
@@ -158,7 +197,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AppStyles.colors.background,
-    
+
   },
   title: {
     fontSize: 21,

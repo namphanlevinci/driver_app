@@ -3,11 +3,15 @@ import { View, StyleSheet, Text, Modal, Image, TouchableOpacity, FlatList, TextI
 import { useSelector, useDispatch } from 'react-redux';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import * as Button from "./Button";
-import { hideModal, hideBom, hideRatingOrder, hideNewOrder } from '../redux/slices/app';
+import { hideModal, hideBom, hideRatingOrder, hideNewOrder, hideLoading } from '../redux/slices/app';
 import { images, AppStyles } from '@theme';
 import Spinner from 'react-native-spinkit';
 
 export const Loading = () => {
+    const dispatch = useDispatch();
+    setTimeout(() => {
+        dispatch(hideLoading());
+    }, 500)
     const isLoading = useSelector((state) => state.app.isLoading);
     return (
         <Modal visible={isLoading} transparent>
