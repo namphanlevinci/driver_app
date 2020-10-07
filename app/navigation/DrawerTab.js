@@ -28,9 +28,7 @@ function DrawerContent(props) {
   };
 
   const isLogout = () => {
-
     dispatch(signOut());
-    // dispatch(orderList());
   };
 
   return (

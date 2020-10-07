@@ -17,17 +17,15 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
 
-
-
 const Signin = () => {
   const [username, onChangeUser] = useState('');
   const [password, onChangePass] = useState('');
   const dispatch = useDispatch();
   const error = useSelector((state) => state.account.signInError);
-
+  const device_token = useSelector((state) => state.account.fcm_token);
+  
   const isLogin = () => {
     dispatch(signIn({ username: username, password: password }));
-    
   };
 
   const goSignup = () => {

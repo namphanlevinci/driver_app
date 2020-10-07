@@ -41,21 +41,6 @@ export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`,
   }
 );
 
-export const orderList = createAsyncThunk(
-  `${KEY_CONSTANT}/orderList`,
-  async () => {
-    // dispatch(showLoading());
-    const { error, data } = await graphQlClient.query({
-      query: query.ORDER_LIST,
-    });
-
-    console.log('data orderList', data);
-    console.log('error orderList', error);
-
-    // dispatch(hideLoading());
-    return { error, data };
-  },
-);
 
 const accountSlice = createSlice({
   name: 'account',
@@ -63,7 +48,8 @@ const accountSlice = createSlice({
     isLogin: false,
     signInError: '',
     token: '',
-    info: {}
+    info: {},
+    fcm_token: ''
   },
   reducers: {
     login(state, action) { state.isLogin = true },
@@ -74,6 +60,9 @@ const accountSlice = createSlice({
     },
     clearError(state, action){
       state.signInError = '';
+    },
+    saveTokenDevice(state, action){
+      state.fcm_token = action.payload;
     }
   },
   extraReducers: {
@@ -85,19 +74,18 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
       const token = data?.generateStaffToken?.token;
-      state.isLogin = true;
-      // if (token) {
-      //   state.signInError = null;
-      //   state.isLogin = true;
-      //   state.token = token;
-      //   state.info = data?.generateStaffToken
-      // } else {
-      //   state.signInError = error;
-      //   state.isLogin = false;
-      // }
+      if (token) {
+        state.signInError = null;
+        state.isLogin = true;
+        state.token = token;
+        state.info = data?.generateStaffToken
+      } else {
+        state.signInError = error;
+        state.isLogin = false;
+      }
     },
     [signIn.rejected]: (state, action) => {
-      state.isLogin = true;
+      // state.isLogin = true;
     },
     [signOut.pending]: (state, action) => {
       // Logger.info(action, 'signIn pending');
@@ -105,15 +93,15 @@ const accountSlice = createSlice({
     [signOut.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
-      // state.isLogin = data?.result;
-      state.isLogin = false;
+      state.isLogin = data?.result;
+      
     },
     [signOut.rejected]: (state, action) => {
-      state.isLogin = false;
+      // state.isLogin = false;
     },
   },
 });
 
 const { actions, reducer } = accountSlice;
-export const { login, loginSuccess, loginFail, logout, clearError } = actions;
+export const { login, loginSuccess, loginFail, logout, clearError, saveTokenDevice } = actions;
 export default reducer;

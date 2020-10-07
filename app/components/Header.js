@@ -56,7 +56,7 @@ export const BackOrder = (props) => {
             case 'arrived':
                 return { title: 'Arrived', color: AppStyles.colors.orange }
             case 'bom':
-                return { title: 'Bom', color: AppStyles.colors.silver }
+                return { title: '   Bom   ', color: AppStyles.colors.silver }
             case 'complete':
                 return { title: 'Completed', color: AppStyles.colors.silver }
             default:

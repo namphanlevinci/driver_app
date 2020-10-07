@@ -7,7 +7,7 @@ const KEY_CONSTANT = 'order';
 
 export const orderList = createAsyncThunk(
     `${KEY_CONSTANT}/orderList`,
-    async (value, {dispatch}) => {
+    async (value, { dispatch }) => {
         // dispatch(showLoadingItem());
         const { error, data } = await graphQlClient.query({
             query: query.ORDER_LIST,
@@ -23,7 +23,7 @@ export const orderList = createAsyncThunk(
 
 export const orderDetail = createAsyncThunk(
     `${KEY_CONSTANT}/orderDetail`,
-    async (id, {dispatch}) => {
+    async (id, { dispatch }) => {
         dispatch(showLoading());
         const { error, data } = await graphQlClient.query({
             query: query.ORDER_DETAILS,
@@ -47,7 +47,6 @@ const orderSlice = createSlice({
         orderDetail: {}
     },
     reducers: {
-        
     },
     extraReducers: {
         [orderList.pending]: (state, action) => {
@@ -69,6 +68,7 @@ const orderSlice = createSlice({
 
 
         [orderDetail.pending]: (state, action) => {
+            state.orderDetail = {}
             console.log('orderDetail pending', action);
             state.getListError = null;
         },
@@ -84,5 +84,5 @@ const orderSlice = createSlice({
 });
 
 const { actions, reducer } = orderSlice;
-export const {  } = actions;
+export const { } = actions;
 export default reducer;

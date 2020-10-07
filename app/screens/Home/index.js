@@ -25,7 +25,7 @@ const HomeScreen = (props) => {
 
   const navigateNotification = () => {
     NavigationService.navigate(ScreenName.Notification)
-    // dispatch(showRatingOrder());
+    // dispatch(showNewOrder());
   }
 
   const datanew = [
@@ -54,17 +54,7 @@ const HomeScreen = (props) => {
       "payment_method": "Thanh toán tiền mặt",
       "status": "complete",
     },
-    // {
-    //   "address": "84 Cong Hoa Ho Chi Minh",
-    //   "created_at": "2020-10-01 08:23:33",
-    //   "firstname": "Minh",
-    //   "grand_total": 75000,
-    //   "id": 13,
-    //   "lastname": "Vo",
-    //   "order_number": "000000030",
-    //   "payment_method": "Thanh toán tiền mặt",
-    //   "status": "bom",
-    // }
+
   ]
 
   const opened = () => {
@@ -75,15 +65,16 @@ const HomeScreen = (props) => {
     dispatch(orderList());
     setTimeout(() => {
       dispatch(hideLoadingItem());
-    }, 1000)
+    }, 5000)
 
   }, []);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    // dispatch(orderList())
+    dispatch(orderList())
 
     wait(2000).then(() => setRefreshing(false));
+    wait(3000).then(() => dispatch(hideLoadingItem())); // Timeout hide loading
   }, []);
 
   return (
@@ -96,18 +87,16 @@ const HomeScreen = (props) => {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={{
-            // width: scaleWidth(90),
-            // margin: 5,
-            // marginTop: 15
             padding: 5
           }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          data={dataold}
+          data={recentlyOrder}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
           ListHeaderComponent={() => <View>
+            <View style={styles.space} />
             <Text style={styles.title}>ĐƠN HÀNG MỚI</Text>
             {loading && newOrder.length < 1 ?
               <View style={styles.loading}>
@@ -116,7 +105,7 @@ const HomeScreen = (props) => {
             }
             <FlatList
               style={styles.list}
-              data={datanew}
+              data={newOrder}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => <Item.Order item={item} status={true} />}
             />
@@ -158,6 +147,9 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginTop: 10
+  },
+  space: {
+    height: 10
   }
 });
 

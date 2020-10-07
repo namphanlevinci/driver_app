@@ -189,10 +189,9 @@ export const OrderInfo = (props) => {
     );
 };
 
-export const Rating = () => {
-
+export const Rating = (props) => {
     return (
-        <View style={[styles.body, { marginTop: 10 }]}>
+        <View style={[styles.body, { marginTop: 10 }, props.styles]}>
             <View style={[styles.row_center, styles.padding]}>
                 <Image
                     style={styles.size}

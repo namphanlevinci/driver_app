@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jollibee Driver</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">xSMYf9EpS5gHFFl3jUlMuFNA8xhd3HIXAS_gP</string>
 </resources>

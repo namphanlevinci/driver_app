@@ -20,6 +20,9 @@ import makeApolloClient from './apolloClient';
 import Navigator from 'app/navigation';
 import configureAppStore from 'app/redux/store';
 import { Modal } from '@components';
+import { saveTokenDevice } from '@slices/account';
+import { useDispatch, useSelector } from 'react-redux';
+import { showRatingOrder, showNewOrder, hideLoadingItem } from '@slices/app';
 
 import { useFirebaseCloudMessing } from '@firebase';
 
@@ -80,11 +83,17 @@ export default function App() {
 
 
 const NotificationProvider = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const onForegroundMessage = (data) => {
     console.log('==> notification onForegroundMessage', JSON.stringify(data));
 
     // const {notification} = data;
+    // if(data.newOrder) {
+    //   dispatch(showNewOrder())
+    // }
+    // if(data.newRating) {
+    //   dispatch(showRatingOrder())
+    // }
     // TODO: process message on foreground state
   };
 
@@ -113,9 +122,9 @@ const NotificationProvider = () => {
     onMessageError,
   });
 
-  console.log(firebaseToken)
+  // console.log(firebaseToken)
   // TODO : save redux app local
-  // dispatch(app.saveTokenDevice(firebaseToken));
+  dispatch(saveTokenDevice(firebaseToken));
 
   return null;
 };
