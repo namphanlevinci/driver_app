@@ -1,9 +1,9 @@
 import { Button } from '@components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HomeScreen, ScreenName } from '@screen';
-import { signOut } from '@slices/account';
+import { signOut, logout, acceptShipping } from '@slices/account';
 import { AppStyles, images } from '@theme';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   StyleSheet,
@@ -28,8 +28,27 @@ function DrawerContent(props) {
   };
 
   const isLogout = () => {
-    dispatch(signOut());
+    // dispatch(signOut());
+    // dispatch(logout());
+    dispatch(acceptShipping(0))
   };
+
+  const changeStatus = () =>{
+    if(info?.accept_shipping === 0){
+      dispatch(acceptShipping())
+    }else {
+      dispatch(acceptShipping())
+    }
+    
+  }
+
+  useEffect(() => {
+    if(info?.accept_shipping === 0){
+      setIsEnabled(false)
+    }else {
+      setIsEnabled(true)
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -106,8 +125,8 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 150,
-    borderColor: AppStyles.colors.silver,
-    borderWidth: 1,
+    // borderColor: AppStyles.colors.silver,
+    // borderWidth: 1,
   },
   image: {
     width: 150,

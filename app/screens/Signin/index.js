@@ -25,7 +25,7 @@ const Signin = () => {
   const device_token = useSelector((state) => state.account.fcm_token);
   
   const isLogin = () => {
-    dispatch(signIn({ username: username, password: password }));
+    dispatch(signIn({ username: username, password: password, fcmToken: device_token }));
   };
 
   const goSignup = () => {

@@ -41,6 +41,19 @@ export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`,
   }
 );
 
+export const acceptShipping = createAsyncThunk(`${KEY_CONSTANT}/acceptShipping`,
+  async (input, { dispatch }) => {
+    const { error, data } = await graphQlClient.mutate({
+      mutation: mutation.ACCEPT_SHPPING,
+      variables: input,
+    });
+
+    console.log('data acceptShipping', data);
+    console.log('error acceptShipping', error);
+
+    return { error, data };
+  }
+);
 
 const accountSlice = createSlice({
   name: 'account',
@@ -49,7 +62,8 @@ const accountSlice = createSlice({
     signInError: '',
     token: '',
     info: {},
-    fcm_token: ''
+    fcm_token: '',
+    acceptShipping: false
   },
   reducers: {
     login(state, action) { state.isLogin = true },
@@ -97,6 +111,19 @@ const accountSlice = createSlice({
       
     },
     [signOut.rejected]: (state, action) => {
+      // state.isLogin = false;
+    },
+
+    [acceptShipping.pending]: (state, action) => {
+      // Logger.info(action, 'signIn pending');
+    },
+    [acceptShipping.fulfilled]: (state, action) => {
+      // Logger.info(action, 'signIn fulfilled');
+      const { error, data } = action.payload;
+      // state.acceptShipping = data?.result;
+      
+    },
+    [acceptShipping.rejected]: (state, action) => {
       // state.isLogin = false;
     },
   },

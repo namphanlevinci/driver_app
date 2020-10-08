@@ -61,7 +61,7 @@ const NewOrder = (props) => {
   const back = () => {
     NavigationService.goBack()
   }
-  console.log(orderInfo)
+  
   const callNow = () => {
     const phoneNumber = orderInfo?.phone
     Linking.openURL(`tel:${phoneNumber}`)
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     width: '100%',
-    height: 150,
+    height: 135,
     backgroundColor: AppStyles.colors.white,
     shadowColor: "#000",
     shadowOffset: {

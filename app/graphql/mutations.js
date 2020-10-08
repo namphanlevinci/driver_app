@@ -10,14 +10,15 @@ export const SIGN_OUT = gql`
 `;
 
 export const SIGN_IN = gql`
-  mutation($username: String!, $password: String!) {
-    generateStaffToken(username: $username, password: $password) {
+  mutation($username: String!, $password: String!, $fcmToken: String!) {
+    generateStaffToken(username: $username, password: $password, fcmToken: $fcmToken) {
       address
       firstname
       id
       lastname
       restaurant
       token
+      accept_shipping
     }
   }
 `;
@@ -53,3 +54,12 @@ export const COMPLETE = gql`
     }
   }
 `;
+
+export const ACCEPT_SHPPING = gql`
+  mutation($type: Int!) {
+    acceptShipping(type: $type) {
+      result
+    }
+  }
+`;
+
