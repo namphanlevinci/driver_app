@@ -87,6 +87,7 @@ const NotificationProvider = () => {
   const onForegroundMessage = (data) => {
     console.log('==> notification onForegroundMessage', JSON.stringify(data));
 
+    alert('ok')
     // const {notification} = data;
     // if(data.newOrder) {
     //   dispatch(showNewOrder())
@@ -122,7 +123,7 @@ const NotificationProvider = () => {
     onMessageError,
   });
 
-  // console.log(firebaseToken)
+  console.log(firebaseToken)
   // TODO : save redux app local
   dispatch(saveTokenDevice(firebaseToken));
 

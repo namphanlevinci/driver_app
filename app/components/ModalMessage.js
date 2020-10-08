@@ -1,65 +1,156 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, FlatList, TextInput, Dimensions, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Button from "./Button";
 import { hideModal, hideBom, hideMessage } from '../redux/slices/app';
 import { images, AppStyles } from '@theme';
 import Modal from 'react-native-modal';
+import { GiftedChat, Send, Bubble, MessageText, Time } from 'react-native-gifted-chat'
 
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
 const ModalMessage = () => {
-    const data = [
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 1
-        },
-        
-    ]
+
     const dispatch = useDispatch();
     const message = useSelector((state) => state.app.message);
 
     const hide = () => {
         dispatch(hideMessage());
     }
+
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        setMessages([])
+    }, [])
+
+    const onSend = useCallback((messages = []) => {
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    }, [])
+
+    const sendSuggest = (key) => {
+        const id_item = messages.length < 1 ? 1 : messages.length + 1
+        switch (key) {
+            case 1:
+                const obj_1 = {
+                    _id: id_item,
+                    text: 'Tôi đã đến nơi',
+                    createdAt: new Date(),
+                    user: {
+                        _id: 1,
+                        name: '',
+                    },
+                }
+                setMessages(previousMessages => GiftedChat.append(previousMessages, obj_1))
+                break;
+            case 2:
+                const obj_2 = {
+                    _id: id_item,
+                    text: 'Tôi đồng ý',
+                    createdAt: new Date(),
+                    user: {
+                        _id: 1,
+                        name: '',
+                    },
+                }
+                setMessages(previousMessages => GiftedChat.append(previousMessages, obj_2))
+                break;
+            case 3:
+                const obj_3 = {
+                    _id: id_item,
+                    text: 'Đơn hàng sắp đến nơi',
+                    createdAt: new Date(),
+                    user: {
+                        _id: 1,
+                        name: '',
+                    },
+                }
+                setMessages(previousMessages => GiftedChat.append(previousMessages, obj_3))
+                break;
+            default:
+                break;
+        }
+    }
+
+    const renderFooter = () => {
+        return (
+            <View style={styles.suggest}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <TouchableOpacity onPress={() => sendSuggest(1)}>
+                        <Text style={styles.text}>Tôi đã đến nơi</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => sendSuggest(2)}>
+                        <Text style={styles.text}>Tôi đồng ý</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => sendSuggest(3)}>
+                        <Text style={styles.text}>Đơn hàng sắp đến nơi</Text>
+                    </TouchableOpacity>
+                </ScrollView>
+            </View>
+        )
+    }
+
+    const renderSendButton = (props) => {
+        return (
+            <Send {...props} containerStyle={[styles.close, styles.send_btn]}>
+                <Image
+                    source={images.icons.send}
+                />
+            </Send>
+        )
+    }
+
+    const renderBubble = (props) => {
+        return (
+            <Bubble {...props}
+                wrapperStyle={{
+                    right: { backgroundColor: '#FFF', borderRadius: 5 },
+                    left: { backgroundColor: '#FFF', borderRadius: 5 },
+                }}
+                bottomContainerStyle={{
+                    left: { backgroundColor: '#FFF' },
+                    right: { backgroundColor: '#FFF' },
+                }}
+
+            />
+        )
+    }
+
+    const renderMessageText = (props) => {
+        return (
+            <MessageText {...props}
+                containerStyle={{
+                    left: { backgroundColor: '#E6E6E6', borderRadius: 15 },
+                    right: { backgroundColor: '#A9F5F2', borderRadius: 15 },
+                }}
+                textStyle={{
+                    left: { color: '#1B1B1B', fontSize: 12 },
+                    right: { color: '#1B1B1B', fontSize: 12 },
+                }}
+
+            />
+        )
+    }
+
+    const renderTime = (props) => {
+        return (
+            <Time {...props}
+                timeTextStyle={{
+                    left: { color: AppStyles.colors.silver, fontSize: 10, fontWeight: 'bold', paddingTop: 2 },
+                    right: { color: AppStyles.colors.silver, fontSize: 10, fontWeight: 'bold', paddingTop: 2 },
+                }}
+            />
+        )
+    }
+
+
     return (
         <Modal
             isVisible={message}
-            style={{  margin: 0 }}
-            avoidKeyboard={true}
+            style={{ margin: 0 }}
         >
             <View style={styles.container}>
-
                 <View style={styles.header_message}>
                     <TouchableOpacity
                         style={styles.close}
@@ -73,44 +164,23 @@ const ModalMessage = () => {
                 </View>
 
                 <View style={{ flex: 1, backgroundColor: AppStyles.colors.white, }}>
-                    <FlatList
-                        contentContainerStyle={{
-                            alignItems: 'center',
-                            backgroundColor: AppStyles.colors.white,
+                    <GiftedChat
+                        messages={messages}
+                        placeholder='Nhập tin nhắn...'
+                        isKeyboardInternallyHandled={true}
+                        alwaysShowSend={true}
+                        renderAvatar={null}
+                        onSend={messages => onSend(messages)}
+                        user={{
+                            _id: 1,
                         }}
-                        data={data}
-                        showsVerticalScrollIndicator={false}
-                        inverted={true}
-
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={() => <View style={{width: deviceWidth, height: 20,marginBottom: 20}}><Text>Hi</Text></View>}
-
+                        renderChatFooter={renderFooter}
+                        renderSend={renderSendButton}
+                        renderBubble={renderBubble}
+                        renderMessageText={renderMessageText}
+                        renderTime={renderTime}
                     />
 
-                </View>
-                <View style={styles.footer_message} >
-                    <View style={styles.suggest}>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                        <Text style={styles.text}>Tôi đã đến nơi</Text>
-                        <Text style={styles.text}>Tôi đồng ý</Text>
-                        <Text style={styles.text}>Đơn hàng sắp đến nơi</Text>
-                        </ScrollView>
-                        
-
-                    </View>
-                    <View style={[styles.row, styles.send]}>
-                        <TextInput
-                        placeholder='Nhập tin nhắn'
-                            style={styles.text_input}
-                        />
-                        <TouchableOpacity
-                            style={[styles.close, { backgroundColor: AppStyles.colors.yellow }]}
-                            onPress={hide}>
-                            <Image
-                                source={images.icons.send}
-                            />
-                        </TouchableOpacity>
-                    </View>
                 </View>
             </View>
         </Modal>
@@ -189,19 +259,26 @@ const styles = StyleSheet.create({
     },
 
     suggest: {
-        height: '50%',
         justifyContent: 'center',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingVertical: 10
     },
     text: {
         color: AppStyles.colors.blue,
-        
-        marginLeft: 20,
+
+        marginLeft: 10,
+        marginRight: 10,
+
         borderWidth: 1,
         borderColor: AppStyles.colors.blue,
         borderRadius: 5,
         padding: 5
+    },
+    send_btn: {
+        backgroundColor: AppStyles.colors.yellow,
+        marginRight: 10,
+        marginBottom: 5
     }
 
 })
