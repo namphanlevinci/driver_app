@@ -8,7 +8,7 @@ import Config from 'react-native-config';
 import _ from 'lodash';
 import { getJwtToken } from '@services/AsyncStoreExt';
 
-const httpLink = createHttpLink({ uri: Config.GRAPHQL_ENDPOINT });
+const httpLink = createHttpLink({ uri: 'http://dev.jollibee.levincitest.com/graphql' });
 
 const authLink = setContext(async (req, { headers }) => {
   // get auth token

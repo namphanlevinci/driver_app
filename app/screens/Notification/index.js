@@ -30,18 +30,6 @@ const Notification = () => {
       "content": "Khách hàng Nguyen van D đánh giá bạn 5 sao",
       "isNew": false
     },
-    {
-      "id": 5,
-      "title": "Đơn hàng mới",
-      "content": "Bạn vừa nhận được đơn hàng mới",
-      "isNew": false
-    },
-    {
-      "id": 6,
-      "title": "Bạn nhận được đánh giá 5 sao",
-      "content": "Khách hàng Nguyen van D đánh giá bạn 5 sao",
-      "isNew": false
-    },
 
   ]
   const back = () => {

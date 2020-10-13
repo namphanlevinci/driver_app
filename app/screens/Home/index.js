@@ -87,7 +87,9 @@ const HomeScreen = (props) => {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={{
-            padding: 5
+            // padding: 5,
+            paddingLeft: 15,
+            paddingRight: 15
           }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AppStyles.colors.background,
-    alignItems: 'center'
+    // alignItems: 'center'
   },
 
   title: {
