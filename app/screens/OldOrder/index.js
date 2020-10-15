@@ -83,8 +83,8 @@ const OldOrder = (props) => {
 
           ListFooterComponent={() => <View style={{ marginTop: 30 }}>
             <Text style={styles.title}>Đánh giá của khách hàng</Text>
-            <Item.Rating />
-            <Item.Reviews />
+            <Item.Rating rating={orderInfo?.customer_rating} />
+            <Item.Reviews review={orderInfo?.customer_comment} />
             <View style={styles.space} />
           </View>
           }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { startUp } from '@slices/app';
+import { startUp, checkReview } from '@slices/app';
 import { images, AppStyles } from '@theme';
 import codePush from 'react-native-code-push';
 import Spinner from 'react-native-spinkit';
@@ -28,6 +28,7 @@ const WelcomeScreen = () => {
   // }, [loadingApp]);
 
   React.useEffect(() => {
+    dispatch(checkReview());
     checkUpdate()
   }, []);
 

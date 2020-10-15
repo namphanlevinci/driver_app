@@ -23,7 +23,8 @@ const Signin = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.account.signInError);
   const device_token = useSelector((state) => state.account.fcm_token);
-  
+  const isReview = useSelector((state) => state.app.checkReview);
+  console.log(isReview)
   const isLogin = () => {
     dispatch(signIn({ username: username, password: password, fcmToken: device_token }));
   };
@@ -32,7 +33,7 @@ const Signin = () => {
     NavigationService.navigate(ScreenName.Signup);
   };
 
-  const removeText =()=> {
+  const removeText = () => {
     dispatch(clearError())
   }
 
@@ -78,12 +79,15 @@ const Signin = () => {
             onPress={isLogin}
           />
           <View style={styles.space} />
-          <Button.Large
-            title={'Đăng kí'}
-            backgroundColor={AppStyles.colors.white}
-            textColor={AppStyles.colors.red}
-            onPress={goSignup}
-          />
+          {isReview ?
+            <Button.Large
+              title={'Đăng kí'}
+              backgroundColor={AppStyles.colors.white}
+              textColor={AppStyles.colors.red}
+              onPress={goSignup}
+            /> : null
+          }
+
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

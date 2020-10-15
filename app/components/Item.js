@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { images, AppStyles, toCommas } from '@theme';
 import ScreenName from '@screen/ScreenName';
 import * as NavigationService from '@navigate/NavigationService';
 import ContentLoader, { Rect } from "react-content-loader/native";
 import moment from 'moment';
+import { set } from 'react-native-reanimated';
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -190,40 +191,79 @@ export const OrderInfo = (props) => {
 };
 
 export const Rating = (props) => {
+    const [one, setOne] = useState(false);
+    const [two, setTwo] = useState(false);
+    const [three, setThree] = useState(false);
+    const [four, setFour] = useState(false);
+    const [five, setFive] = useState(false);
+    
+    useEffect(() => {
+        switch (props.rating) {
+            case 1:
+                setOne(true)
+                break;
+            case 2:
+                setOne(true)
+                setTwo(true)
+                break;
+            case 3:
+                setOne(true)
+                setTwo(true)
+                setThree(true)
+                break;
+            case 4:
+                setOne(true)
+                setTwo(true)
+                setThree(true)
+                setFour(true)
+                break;
+            case 5:
+                setOne(true)
+                setTwo(true)
+                setThree(true)
+                setFour(true)
+                setFive(true)
+                break;
+
+            default:
+                break;
+        }
+      }, []);
+
+  
     return (
         <View style={[styles.body, { marginTop: 10 }, props.styles]}>
             <View style={[styles.row_center, styles.padding]}>
                 <Image
                     style={styles.size}
-                    source={true ? images.icons.start_active : images.icons.start}
+                    source={one ? images.icons.start_active : images.icons.start}
                 />
                 <Image
                     style={styles.size}
-                    source={true ? images.icons.start_active : images.icons.start}
+                    source={two ? images.icons.start_active : images.icons.start}
                 />
                 <Image
                     style={styles.size}
-                    source={true ? images.icons.start_active : images.icons.start}
+                    source={three ? images.icons.start_active : images.icons.start}
                 />
                 <Image
                     style={styles.size}
-                    source={false ? images.icons.start_active : images.icons.start}
+                    source={four ? images.icons.start_active : images.icons.start}
                 />
                 <Image
                     style={styles.size}
-                    source={false ? images.icons.start_active : images.icons.start}
+                    source={five ? images.icons.start_active : images.icons.start}
                 />
             </View>
         </View>
     );
 };
 
-export const Reviews = () => {
-
+export const Reviews = (props) => {
     return (
         <View style={[styles.body]}>
             <View style={[styles.row, styles.padding]}>
-                <Text>Ghi chú của khách hàng</Text>
+                <Text>{props?.review}</Text>
             </View>
         </View>
     );
@@ -352,7 +392,7 @@ const styles = StyleSheet.create({
         width: '60%'
     },
     right: {
-        width: '30%',
+        width: '35%',
         // justifyContent: 'space-between'
     },
 

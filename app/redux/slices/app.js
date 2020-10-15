@@ -1,4 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { mutation, graphQlClient, query } from '@graphql';
+
+const KEY_CONSTANT = 'app';
+
+export const checkReview = createAsyncThunk(
+    `${KEY_CONSTANT}/checkReview`,
+    async (value, { dispatch }) => {
+        const { error, data } = await graphQlClient.query({
+            query: query.APP_STATUS,
+        });
+
+        console.log('data checkReview', data);
+        console.log('error checkReview', error);
+
+        return { error, data };
+    },
+);
 
 const appSlice = createSlice({
     name: 'app',
@@ -10,7 +27,8 @@ const appSlice = createSlice({
         isLoading: false,
         loadingItem: false,
         newOrder: false,
-        ratingOrder: false
+        ratingOrder: false,
+        checkReview: false
     },
     reducers: {
         showModal(state) {
@@ -58,6 +76,22 @@ const appSlice = createSlice({
         hideRatingOrder(state) {
             state.ratingOrder = false;
         }
+    },
+    extraReducers: {
+        [checkReview.pending]: (state, action) => {
+            console.log('checkReview pending', action);
+            state.getListError = null;
+        },
+        [checkReview.fulfilled]: (state, action) => {
+
+            const { error, data } = action.payload;
+            
+            const check = data?.appStatus?.result;
+
+            if (check != null) {
+                state.checkReview = true;
+            }
+        },
     },
 });
 

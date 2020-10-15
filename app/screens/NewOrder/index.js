@@ -5,7 +5,7 @@ import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
 import { useDispatch, useSelector } from 'react-redux';
 import { showModal, showBom, showMessage } from '@slices/app';
-import { orderDetail, orderList } from '@slices/order';
+import { orderDetail, deliveryOrderList, recentlyOrderList } from '@slices/order';
 import { Shipping, Arrived, Bom, Complete } from '@slices/statusOrder';
 
 const wait = (timeout) => {
@@ -84,15 +84,17 @@ const NewOrder = (props) => {
   const setBom = () => {
     dispatch(Bom({ id: id }));
     wait(1000).then(() => dispatch(orderDetail({ id: id })));
-    wait(2000).then(() => dispatch(orderList()));
-    wait(1000).then(() => back());
+    wait(2000).then(() => dispatch(deliveryOrderList()));
+    wait(2000).then(() => dispatch(recentlyOrderList({page: 1})));
+    wait(3000).then(() => back());
   }
 
   const setComplete = () => {
     dispatch(Complete({ id: id }));
     wait(1000).then(() => dispatch(orderDetail({ id: id })));
-    wait(2000).then(() => dispatch(orderList()));
-    wait(1000).then(() => back());
+    wait(2000).then(() => dispatch(deliveryOrderList()));
+    wait(2000).then(() => dispatch(recentlyOrderList({page: 1})));
+    wait(3000).then(() => back());
   }
 
   const setStatus = () => {
@@ -100,12 +102,14 @@ const NewOrder = (props) => {
       case 'ready_to_ship':
         dispatch(Shipping({ id: id }));
         wait(1000).then(() => dispatch(orderDetail({ id: id })));
-        wait(2000).then(() => dispatch(orderList()));
+        wait(2000).then(() => dispatch(deliveryOrderList()));
+        wait(2000).then(() => dispatch(recentlyOrderList({page: 1})));
         break;
       case 'shipping':
         dispatch(Arrived({ id: id }));
         wait(1000).then(() => dispatch(orderDetail({ id: id })));
-        wait(2000).then(() => dispatch(orderList()));
+        wait(2000).then(() => dispatch(deliveryOrderList()));
+        wait(2000).then(() => dispatch(recentlyOrderList({page: 1})));
         break;
       case 'arrived':
         show()

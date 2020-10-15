@@ -5,7 +5,7 @@ import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
 import ScreenName from '../ScreenName';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderList } from '@slices/order';
+import { deliveryOrderList, recentlyOrderList } from '@slices/order';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import { showRatingOrder, showNewOrder, hideLoadingItem } from '@slices/app';
 
@@ -18,6 +18,7 @@ const wait = (timeout) => {
 const HomeScreen = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
   const loading = useSelector((state) => state.app.loadingItem);
   const newOrder = useSelector((state) => state.order.new);
@@ -62,7 +63,8 @@ const HomeScreen = (props) => {
   }
 
   useEffect(() => {
-    dispatch(orderList());
+    dispatch(deliveryOrderList());
+    dispatch(recentlyOrderList({page: page}));
     setTimeout(() => {
       dispatch(hideLoadingItem());
     }, 5000)
@@ -71,7 +73,8 @@ const HomeScreen = (props) => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    dispatch(orderList())
+    dispatch(deliveryOrderList());
+    dispatch(recentlyOrderList({page: 1}));
 
     wait(2000).then(() => setRefreshing(false));
     wait(3000).then(() => dispatch(hideLoadingItem())); // Timeout hide loading
