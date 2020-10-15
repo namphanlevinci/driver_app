@@ -5,8 +5,10 @@ import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import * as Button from "./Button";
 import * as Item from "./Item";
 import { hideModal, hideBom, hideRatingOrder, hideNewOrder, hideLoading } from '../redux/slices/app';
+import { closeModal } from '@slices/account';
 import { images, AppStyles } from '@theme';
 import Spinner from 'react-native-spinkit';
+import * as NavigationService from '@navigate/NavigationService';
 
 export const Loading = () => {
     const dispatch = useDispatch();
@@ -33,10 +35,15 @@ export const Loading = () => {
 
 export const Success = () => {
     const dispatch = useDispatch();
-    const isVisible = useSelector((state) => state.app.isVisible);
+    const isVisible = useSelector((state) => state.account.popupSuccess);
 
     const hide = () => {
-        dispatch(hideModal());
+        dispatch(closeModal());
+    }
+
+    const back = () => {
+        hide();
+        NavigationService.goBack()
     }
     return (
         <Modal visible={isVisible} transparent animationType={'fade'}>
@@ -47,10 +54,10 @@ export const Success = () => {
                         source={images.icons.success}
                     />
                     <Text style={styles.title}>ĐĂNG KÝ THÀNH CÔNG</Text>
-                    <Text style={styles.content}>Cám ơn đã đăng kí, chúng tôi sẽ gửi thông tin đăng nhập qua email cho bạn sau khi kiểm tra thông tin của bạn là xác thực</Text>
+                    {/* <Text style={[styles.content, {fontWeight: '400', fontSize: 13}]}>Cám ơn đã đăng kí, chúng tôi sẽ gửi thông tin đăng nhập qua email cho bạn sau khi kiểm tra thông tin của bạn là xác thực</Text> */}
                     <Button.Medium
-                        title={'ĐỒNG Ý'}
-                        onPress={hide}
+                        title={'ĐĂNG NHẬP'}
+                        onPress={back}
                         backgroundColor={AppStyles.colors.yellow}
                         textColor={AppStyles.colors.text}
                     />
@@ -122,7 +129,7 @@ export const NewOrder = (props) => {
     return (
         <Modal visible={isVisible} transparent animationType={'fade'}>
             <View style={styles.container}>
-                <View style={[styles.confirm, { height: scaleHeight(35) }]}>
+                <View style={[styles.confirm, { height: 300 }]}>
                     <View style={[styles.header, { height: '20%', }]}>
                         <TouchableOpacity
                             style={styles.close}
@@ -272,7 +279,7 @@ const styles = StyleSheet.create({
     },
     success: {
         width: scaleWidth(85),
-        height: scaleHeight(50),
+        height: scaleHeight(40),
         borderRadius: 10,
         backgroundColor: AppStyles.colors.white,
         justifyContent: 'center',

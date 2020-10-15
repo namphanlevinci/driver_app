@@ -5,19 +5,21 @@ import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import { useDispatch, useSelector } from 'react-redux';
-import { showModal } from '@slices/app';
+import { signUp } from '@slices/account';
 
 const Signup = () => {
-  const [name, onChangeName] = useState('');
-  const [phone, onChangePhone] = useState('');
+  const [firstname, onChangeFirstname] = useState('');
+  const [lastname, onChangeLastname] = useState('');
   const [email, onChangeEmail] = useState('');
+  const [username, onChangeUsername] = useState('');
+  const [password, onChangePassword] = useState('');
 
   const dispatch = useDispatch();
   const back = () => {
     NavigationService.goBack()
   };
-  const show = () => {
-    dispatch(showModal());
+  const Signup = () => {
+    dispatch(signUp({firstname: firstname, lastname: lastname, email: email, username: username, password: password }));
   }
   return (
     <View style={AppStyles.styles.container}>
@@ -28,15 +30,15 @@ const Signup = () => {
             <View style={styles.space2x} />
             <View style={styles.textInput}>
               <TextInput.Signin
-                placeholder={'Họ & Tên *'}
-                value={name}
-                onChangeText={onChangeName}
+                placeholder={'Tên *'}
+                value={firstname}
+                onChangeText={onChangeFirstname}
               />
               <View style={styles.space} />
               <TextInput.Signin
-                placeholder={'Số điện thoại *'}
-                value={phone}
-                onChangeText={onChangePhone}
+                placeholder={'Họ *'}
+                value={lastname}
+                onChangeText={onChangeLastname}
               />
               <View style={styles.space} />
               <TextInput.Signin
@@ -44,11 +46,24 @@ const Signup = () => {
                 value={email}
                 onChangeText={onChangeEmail}
               />
+              <View style={styles.space} />
+              <TextInput.Signin
+                placeholder={'Tên đăng nhập *'}
+                value={username}
+                onChangeText={onChangeUsername}
+              />
+              <View style={styles.space} />
+              <TextInput.Signin
+                placeholder={'Mật khẩu *'}
+                secureTextEntry={true}
+                value={password}
+                onChangeText={onChangePassword}
+              />
             </View>
             <Button.Large title={'Đăng kí'}
               backgroundColor={AppStyles.colors.red}
               textColor={AppStyles.colors.white}
-              onPress={show}
+              onPress={Signup}
             />
           </View>
           <Modal.Success />

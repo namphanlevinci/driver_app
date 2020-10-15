@@ -23,6 +23,20 @@ export const SIGN_IN = gql`
   }
 `;
 
+export const SIGN_UP = gql`
+  mutation($firstname: String!, $lastname: String!, $email: String!, $username: String!, $password: String!) {
+    registerStaff(
+      firstname: $firstname, 
+      lastname: $lastname, 
+      email: $email,
+      username: $username, 
+      password: $password
+      ) {
+      result
+    }
+  }
+`;
+
 export const SHIPPING = gql`
   mutation($id: Int!) {
     shipping(id: $id) {

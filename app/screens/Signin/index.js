@@ -79,7 +79,7 @@ const Signin = () => {
             onPress={isLogin}
           />
           <View style={styles.space} />
-          {isReview ?
+          {!isReview ?
             <Button.Large
               title={'Đăng kí'}
               backgroundColor={AppStyles.colors.white}

@@ -87,10 +87,10 @@ const NotificationProvider = () => {
   const onForegroundMessage = (data) => {
     console.log('==> notification onForegroundMessage', JSON.stringify(data));
 
-    alert('ok')
+    // alert('ok')
     // const {notification} = data;
     // if(data.newOrder) {
-    //   dispatch(showNewOrder())
+      dispatch(showNewOrder())
     // }
     // if(data.newRating) {
     //   dispatch(showRatingOrder())

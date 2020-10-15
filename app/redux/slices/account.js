@@ -23,6 +23,24 @@ export const signIn = createAsyncThunk(
   },
 );
 
+export const signUp = createAsyncThunk(
+  `${KEY_CONSTANT}/signUp`,
+  async (input, { dispatch }) => {
+    dispatch(showLoading());
+
+    const { error, data } = await graphQlClient.mutate({
+      mutation: mutation.SIGN_UP,
+      variables: input,
+    });
+    
+    console.log('data signUp', data);
+    console.log('error signUp', error);
+
+    dispatch(hideLoading());
+    return { error, data };
+  },
+);
+
 export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`,
   async (value, { dispatch }) => {
     dispatch(showLoading());
@@ -63,7 +81,8 @@ const accountSlice = createSlice({
     token: '',
     info: {},
     fcm_token: '',
-    acceptShipping: false
+    acceptShipping: false,
+    popupSuccess: false
   },
   reducers: {
     login(state, action) { state.isLogin = true },
@@ -77,7 +96,10 @@ const accountSlice = createSlice({
     },
     saveTokenDevice(state, action){
       state.fcm_token = action.payload;
-    }
+    },
+    closeModal(state, action) {
+      state.popupSuccess = false;
+    },
   },
   extraReducers: {
     [signIn.pending]: (state, action) => {
@@ -101,6 +123,24 @@ const accountSlice = createSlice({
     [signIn.rejected]: (state, action) => {
       // state.isLogin = true;
     },
+
+    [signUp.pending]: (state, action) => {
+      console.log('signUp pending', action);
+      state.signInError = null;
+    },
+    [signUp.fulfilled]: (state, action) => {
+      // Logger.info(action, 'signIn fulfilled');
+      const { error, data } = action.payload;
+      const Success = data?.registerStaff?.result;
+      if(Success){
+        state.popupSuccess = Success;
+      }
+    },
+    [signUp.rejected]: (state, action) => {
+      // state.isLogin = true;
+    },
+
+
     [signOut.pending]: (state, action) => {
       // Logger.info(action, 'signIn pending');
     },
@@ -130,5 +170,5 @@ const accountSlice = createSlice({
 });
 
 const { actions, reducer } = accountSlice;
-export const { login, loginSuccess, loginFail, logout, clearError, saveTokenDevice } = actions;
+export const { login, loginSuccess, loginFail, logout, clearError, saveTokenDevice, closeModal } = actions;
 export default reducer;
