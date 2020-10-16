@@ -23,6 +23,7 @@ import { Modal } from '@components';
 import { saveTokenDevice } from '@slices/account';
 import { useDispatch, useSelector } from 'react-redux';
 import { showRatingOrder, showNewOrder, hideLoadingItem } from '@slices/app';
+import { deliveryOrderList, recentlyOrderList } from '@slices/order';
 
 import { useFirebaseCloudMessing } from '@firebase';
 
@@ -85,12 +86,13 @@ export default function App() {
 const NotificationProvider = () => {
   const dispatch = useDispatch();
   const onForegroundMessage = (data) => {
-    console.log('==> notification onForegroundMessage', JSON.stringify(data));
+    console.log('==> notification onForegroundMessage', data);
 
     // alert('ok')
     // const {notification} = data;
     // if(data.newOrder) {
       dispatch(showNewOrder())
+      dispatch(deliveryOrderList());
     // }
     // if(data.newRating) {
     //   dispatch(showRatingOrder())
@@ -100,7 +102,7 @@ const NotificationProvider = () => {
 
   const onBackgroundMessage = (data) => {
     console.log('===> notification onBackgroundMessage', JSON.stringify(data));
-    
+    dispatch(deliveryOrderList());
     // const {notification} = data;
     // TODO: process message on background state
   };

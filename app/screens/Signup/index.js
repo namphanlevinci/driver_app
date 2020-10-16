@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     marginBottom: scaleHeight(5)
   },
   err: {
-    height: 14,
+    height: 15,
     fontSize: 10,
     color: AppStyles.colors.red,
     fontWeight: '400',
