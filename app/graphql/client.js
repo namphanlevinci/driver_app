@@ -34,27 +34,16 @@ const errorLink = onError(
   ({ graphQLErrors, networkError, operation, response, forward }) => {
     if (graphQLErrors?.length > 0) {
       // Logger.debug(graphQLErrors, '*************graphQLErrors*************');
-      // console.log(graphQLErrors, '*************graphQLErrors*************');
 
       let queryErrors = [];
       let arrErrors = {};
-      graphQLErrors.map(({ message, locations, path, extensions }, index) => {
-        if (extensions.category === 'graphql') {
-          // error call graphql wrong
-          queryErrors.push(message);
-        } else {
-          switch (extensions.code) {
-            default:
-              arrErrors[index] = message;
-              break;
-          }
-        }
+      graphQLErrors.map(({ debugMessage, message, locations, path, extensions }, index) => {
+        queryErrors.push(debugMessage ?? message);
       });
 
       if (queryErrors.length > 0) {
-        // Logger.error(queryErrors, 'Graphql query wrong');
+        response.error = {message: queryErrors};
       }
-
       if (!_.isEmpty(arrErrors)) {
         response.error = arrErrors;
       }

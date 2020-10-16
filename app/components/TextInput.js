@@ -5,7 +5,7 @@ import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 
 export const Signin = (props) => {
     const [hide, setHide] = useState(true)
-    const { placeholder = 'Form: ', value, onChangeText, secureTextEntry, onChange } = props;
+    const { placeholder = 'Form: ', value, onChangeText, secureTextEntry, onChange, resetErr } = props;
     const setStatus = () => {
         setHide(!hide)
     }
@@ -20,6 +20,7 @@ export const Signin = (props) => {
                 value={value}
                 onChangeText={onChangeText}
                 onChange={onChange}
+                onTouchStart={resetErr}
             />
             {secureTextEntry ?
                 <TouchableOpacity onPress={setStatus} style={styles.icon}>

@@ -88,8 +88,10 @@ const appSlice = createSlice({
             
             const check = data?.appStatus?.result;
 
-            if (check != null) {
+            if (check === 1) {
                 state.checkReview = true;
+            } else {
+                state.checkReview = false;
             }
         },
     },

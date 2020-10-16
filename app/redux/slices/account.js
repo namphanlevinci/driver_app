@@ -78,6 +78,7 @@ const accountSlice = createSlice({
   initialState: {
     isLogin: false,
     signInError: '',
+    signUpError: '',
     token: '',
     info: {},
     fcm_token: '',
@@ -93,6 +94,7 @@ const accountSlice = createSlice({
     },
     clearError(state, action){
       state.signInError = '';
+      state.signUpError = '';
     },
     saveTokenDevice(state, action){
       state.fcm_token = action.payload;
@@ -132,6 +134,11 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
       const Success = data?.registerStaff?.result;
+
+      const err = error?.message.join('')
+      if(err === 'A user with the same user name or email already exists.'){
+        state.signUpError = 'Email hoặc tên đăng nhập đã tồn tại';
+      }
       if(Success){
         state.popupSuccess = Success;
       }
