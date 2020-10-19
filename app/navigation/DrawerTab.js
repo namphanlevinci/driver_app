@@ -20,7 +20,11 @@ function DrawerContent(props) {
   const { navigation } = props;
   const [isEnabled, setIsEnabled] = useState(false);
   const info = useSelector((state) => state.account.info);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const status = useSelector((state) => state.account.acceptShipping);
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+    changeStatus();
+  }
   const dispatch = useDispatch();
 
   const closed = () => {
@@ -31,22 +35,22 @@ function DrawerContent(props) {
     dispatch(signOut());
   };
 
-  const changeStatus = () =>{
-    if(info?.accept_shipping === 0){
-      dispatch(acceptShipping())
-    }else {
-      dispatch(acceptShipping())
+  const changeStatus = () => {
+    if (status) {
+      dispatch(acceptShipping({ type: 0 }))
+    } else {
+      dispatch(acceptShipping({ type: 1 }))
     }
-    
   }
 
   useEffect(() => {
-    if(info?.accept_shipping === 0){
-      setIsEnabled(false)
-    }else {
+    if (status) {
       setIsEnabled(true)
+    } else {
+      setIsEnabled(false)
     }
-  }, []);
+    console.log('updated')
+  }, [status]);
 
   return (
     <View style={styles.container}>

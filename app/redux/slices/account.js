@@ -14,7 +14,7 @@ export const signIn = createAsyncThunk(
       mutation: mutation.SIGN_IN,
       variables: input,
     });
-    
+
     const token = data?.generateStaffToken?.token;
     console.log('data signIn', data);
     await saveJwtToken(token);
@@ -32,7 +32,7 @@ export const signUp = createAsyncThunk(
       mutation: mutation.SIGN_UP,
       variables: input,
     });
-    
+
     console.log('data signUp', data);
     console.log('error signUp', error);
 
@@ -82,7 +82,7 @@ const accountSlice = createSlice({
     token: '',
     info: {},
     fcm_token: '',
-    acceptShipping: false,
+    acceptShipping: true,
     popupSuccess: false
   },
   reducers: {
@@ -92,11 +92,11 @@ const accountSlice = createSlice({
     logout(state, action) {
       state.isLogin = false;
     },
-    clearError(state, action){
+    clearError(state, action) {
       state.signInError = '';
       state.signUpError = '';
     },
-    saveTokenDevice(state, action){
+    saveTokenDevice(state, action) {
       state.fcm_token = action.payload;
     },
     closeModal(state, action) {
@@ -112,6 +112,12 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
       const token = data?.generateStaffToken?.token;
+      const accept_shipping = data?.generateStaffToken?.accept_shipping;
+      if (accept_shipping === 0) {
+        state.acceptShipping = false;
+      } else {
+        state.acceptShipping = true;
+      }
       if (token) {
         state.signInError = null;
         state.isLogin = true;
@@ -136,10 +142,10 @@ const accountSlice = createSlice({
       const Success = data?.registerStaff?.result;
 
       const err = error?.message.join('')
-      if(err === 'A user with the same user name or email already exists.'){
+      if (err === 'A user with the same user name or email already exists.') {
         state.signUpError = 'Email hoặc tên đăng nhập đã tồn tại';
       }
-      if(Success){
+      if (Success) {
         state.popupSuccess = Success;
       }
     },
@@ -155,7 +161,7 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
       state.isLogin = data?.result;
-      
+
     },
     [signOut.rejected]: (state, action) => {
       // state.isLogin = false;
@@ -167,8 +173,8 @@ const accountSlice = createSlice({
     [acceptShipping.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
-      // state.acceptShipping = data?.result;
-      
+      state.acceptShipping = data?.acceptShipping?.result === 0 ? false : true
+
     },
     [acceptShipping.rejected]: (state, action) => {
       // state.isLogin = false;
