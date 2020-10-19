@@ -6,8 +6,8 @@ import * as NavigationService from '@navigate/NavigationService';
 import ScreenName from '../ScreenName';
 import { useDispatch, useSelector } from 'react-redux';
 import { deliveryOrderList, recentlyOrderList } from '@slices/order';
-import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import { showRatingOrder, showNewOrder, hideLoadingItem } from '@slices/app';
+import { notification } from '@slices/notification';
 
 const wait = (timeout) => {
   return new Promise(resolve => {

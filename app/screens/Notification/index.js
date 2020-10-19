@@ -1,44 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, SafeAreaView, StyleSheet, Text, FlatList } from 'react-native';
 import { Header, Item } from '@components';
-import { images, AppStyles } from '@theme';
 import * as NavigationService from '@navigate/NavigationService';
+import { useDispatch, useSelector } from 'react-redux';
+import { notification } from '@slices/notification';
+import { images, AppStyles, toCommas } from '@theme';
+import ScreenName from '@screen/ScreenName';
 
 const Notification = () => {
-  const data = [
-    {
-      "id": 1,
-      "title": "Đơn hàng mới",
-      "content": "Bạn vừa nhận được đơn hàng mới",
-      "isNew": true
-    },
-    {
-      "id": 2,
-      "title": "Bạn nhận được đánh giá 5 sao",
-      "content": "Khách hàng Nguyen van D đánh giá bạn 5 sao",
-      "isNew": true
-    },
-    {
-      "id": 3,
-      "title": "Đơn hàng mới",
-      "content": "Bạn vừa nhận được đơn hàng mới",
-      "isNew": true
-    },
-    {
-      "id": 4,
-      "title": "Bạn nhận được đánh giá 5 sao",
-      "content": "Khách hàng Nguyen van D đánh giá bạn 5 sao",
-      "isNew": false
-    },
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.notification.notificationList);
+  const loading = useSelector((state) => state.app.loadingItem);
 
-  ]
+  useEffect(() => {
+    dispatch(notification({ type: 'delivery' }))
+  }, []);
+
   const back = () => {
     NavigationService.goBack()
   }
+
   return (
     <View style={AppStyles.styles.container}>
       <Header.Back title={'Thông báo'} goback={back} />
       <View style={styles.container}>
+        {loading && data.length < 1 ?
+          <View style={styles.loading}>
+            <Item.LoaderSmall />
+          </View> : null
+        }
         <FlatList
           contentContainerStyle={{
             width: '100%',
@@ -52,12 +42,13 @@ const Notification = () => {
             shadowRadius: 3.84,
 
             elevation: 5,
-            margin: 10,
+            margin: 5,
             borderTopStartRadius: 10,
             borderTopRightRadius: 10,
 
             borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10
+            borderBottomRightRadius: 10,
+
           }}
           style={styles.list}
           data={data}
@@ -65,8 +56,8 @@ const Notification = () => {
           keyExtractor={(item, index) => index.toString()}
 
           renderItem={({ item, index }) => <Item.Notify item={item} index={index} lastIndex={data.length - 1} />}
-
         />
+
       </View>
     </View>
   )
@@ -79,8 +70,9 @@ const styles = StyleSheet.create({
     backgroundColor: AppStyles.colors.background,
     alignItems: 'center'
   },
-
-  list: {
+  footer: {
+    paddingTop: 200,
+    backgroundColor: '#FFF',
   }
 });
 

@@ -33,6 +33,26 @@ export const Loader = (props) => (
 
 )
 
+export const LoaderSmall = (props) => (
+    <View style={[styles.body, {marginBottom: 0, marginTop: 10}]}>
+        <ContentLoader
+            speed={1}
+            width={deviceWidth * 0.94}
+            height={70}
+            viewBox="0 0 400 70"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#e3e2e2"
+            {...props}
+        >
+            <Rect x="15" y="8" rx="3" ry="3" width="270" height="10" />
+            <Rect x="15" y="32" rx="3" ry="3" width="100" height="10" />
+            <Rect x="15" y="56" rx="3" ry="3" width="350" height="10" />
+
+        </ContentLoader>
+    </View>
+
+)
+
 export const Order = (props) => {
     const { id, order_number, status, time, firstname, lastname, address, grand_total, created_at, payment_method } = props.item;
 
@@ -109,9 +129,19 @@ export const Order = (props) => {
 };
 
 export const Notify = ({ item, index, lastIndex }) => {
-    const { title, content, isNew } = item;
+    const { order_id, title, content, isNew } = item;
+    const goToDetail = () => {
+        if (title === 'Đơn hàng mới') {
+            NavigationService.navigate(ScreenName.NewOrder, { id: order_id })
+        } else {
+            NavigationService.navigate(ScreenName.OldOrder, { id: order_id })
+        }
+    }
     return (
-        <TouchableOpacity style={[styles.noti_boby, index === 0 ? styles.border_top : (index === lastIndex ? styles.border_bottom : styles.none_border)]}>
+        <TouchableOpacity
+            style={[styles.noti_boby, index === 0 ? styles.border_top : (index === lastIndex ? styles.border_bottom : styles.none_border)]}
+            onPress={goToDetail}
+        >
             <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
                 <Image
                     source={isNew ? images.icons.ring_new : images.icons.ring}
@@ -389,6 +419,8 @@ const styles = StyleSheet.create({
     border_bottom: {
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
+        borderBottomWidth: 0
+        // paddingBottom: 20
     },
     left: {
         width: '60%'

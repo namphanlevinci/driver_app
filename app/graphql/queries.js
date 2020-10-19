@@ -109,3 +109,16 @@ export const APP_STATUS = gql`
     }
   }
 `;
+
+export const NOTIFICATION_LIST = gql`
+  query ($type: String!){
+    notifications(type: $type){
+      list {
+        id
+        title
+        content
+        order_id
+      }
+    }
+  }
+`;

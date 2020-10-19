@@ -65,8 +65,6 @@ export const Complete = createAsyncThunk(
   },
 );
 
-
-
 const statusSlice = createSlice({
   name: 'statusOrder',
   initialState: {
