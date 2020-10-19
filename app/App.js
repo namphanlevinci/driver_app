@@ -2,7 +2,7 @@
  * React Native App
  * Everything starts from the entrypoint
  */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
@@ -22,7 +22,7 @@ import configureAppStore from 'app/redux/store';
 import { Modal } from '@components';
 import { saveTokenDevice } from '@slices/account';
 import { useDispatch, useSelector } from 'react-redux';
-import { showRatingOrder, showNewOrder, hideLoadingItem } from '@slices/app';
+import { showRatingOrder, showNewOrder, hideLoadingItem, infoNotification } from '@slices/app';
 import { deliveryOrderList, recentlyOrderList } from '@slices/order';
 
 import { useFirebaseCloudMessing } from '@firebase';
@@ -86,13 +86,14 @@ export default function App() {
 const NotificationProvider = () => {
   const dispatch = useDispatch();
   const onForegroundMessage = (data) => {
-    console.log('==> notification onForegroundMessage', data);
-
+    // console.log('==> notification onForegroundMessage', data);
+    const info = JSON.parse(data?.data?.order);
+    dispatch(infoNotification(info))
     // alert('ok')
     // const {notification} = data;
     // if(data.newOrder) {
-      dispatch(showNewOrder())
-      dispatch(deliveryOrderList());
+    dispatch(showNewOrder())
+    dispatch(deliveryOrderList());
     // }
     // if(data.newRating) {
     //   dispatch(showRatingOrder())

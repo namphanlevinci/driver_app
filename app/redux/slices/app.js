@@ -28,7 +28,8 @@ const appSlice = createSlice({
         loadingItem: false,
         newOrder: false,
         ratingOrder: false,
-        checkReview: false
+        checkReview: false,
+        info: {}
     },
     reducers: {
         showModal(state) {
@@ -75,7 +76,10 @@ const appSlice = createSlice({
         },
         hideRatingOrder(state) {
             state.ratingOrder = false;
-        }
+        },
+        infoNotification(state, action) {
+            state.info = action.payload;
+        },
     },
     extraReducers: {
         [checkReview.pending]: (state, action) => {
@@ -85,7 +89,7 @@ const appSlice = createSlice({
         [checkReview.fulfilled]: (state, action) => {
 
             const { error, data } = action.payload;
-            
+
             const check = data?.appStatus?.result;
 
             if (check === 1) {
@@ -113,6 +117,7 @@ export const {
     showNewOrder,
     hideNewOrder,
     showRatingOrder,
-    hideRatingOrder
+    hideRatingOrder,
+    infoNotification
 } = actions;
 export default reducer;

@@ -143,7 +143,7 @@ const NewOrder = (props) => {
           ListHeaderComponent={() => <View >
             <Text style={styles.title}>Giao đến</Text>
             <Item.Info firstname={orderInfo?.firstname} lastname={orderInfo?.lastname} address={orderInfo?.address} />
-            <Item.Reviews />
+            <Item.Reviews review={'default'}/>
             <Text style={styles.title}>Tổng thanh toán</Text>
             <Item.Payment grand_total={orderInfo?.grand_total} payment_method={orderInfo?.payment_method} />
             <Text style={styles.title}>Chi tiết đơn hàng</Text>
@@ -174,10 +174,10 @@ const NewOrder = (props) => {
           />
           <Button.SmallRadius
             title={'Bom'}
-            backgroundColor={(orderInfo?.status === 'ready_to_ship' || orderInfo?.status === 'shipping') ? AppStyles.colors.silver : AppStyles.colors.red}
+            backgroundColor={(orderInfo?.status === 'ready_to_ship') ? AppStyles.colors.silver : AppStyles.colors.red}
             textColor={AppStyles.colors.white}
             icon={images.icons.closed}
-            onPress={(orderInfo?.status === 'ready_to_ship' || orderInfo?.status === 'shipping') ? null : showBomModal}
+            onPress={(orderInfo?.status === 'ready_to_ship') ? null : showBomModal}
           />
         </View>
 

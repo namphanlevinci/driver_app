@@ -48,6 +48,8 @@ export const Order = (props) => {
                 return { title: 'Shipping', color: AppStyles.colors.yellow }
             case 'complete':
                 return { title: 'Complete', color: AppStyles.colors.silver }
+            case 'canceled':
+                return { title: 'Canceled', color: AppStyles.colors.silver }
             default:
                 return { title: '', color: AppStyles.colors.silver }
         }
@@ -196,7 +198,7 @@ export const Rating = (props) => {
     const [three, setThree] = useState(false);
     const [four, setFour] = useState(false);
     const [five, setFive] = useState(false);
-    
+
     useEffect(() => {
         switch (props.rating) {
             case 1:
@@ -228,9 +230,9 @@ export const Rating = (props) => {
             default:
                 break;
         }
-      }, []);
+    }, []);
 
-  
+
     return (
         <View style={[styles.body, { marginTop: 10 }, props.styles]}>
             <View style={[styles.row_center, styles.padding]}>

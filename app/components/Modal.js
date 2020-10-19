@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import * as Button from "./Button";
 import * as Item from "./Item";
+import ScreenName from '@screen/ScreenName';
 import { hideModal, hideBom, hideRatingOrder, hideNewOrder, hideLoading } from '../redux/slices/app';
 import { closeModal } from '@slices/account';
-import { images, AppStyles } from '@theme';
+import { images, AppStyles, toCommas } from '@theme';
 import Spinner from 'react-native-spinkit';
 import * as NavigationService from '@navigate/NavigationService';
 
@@ -122,14 +123,20 @@ export const Completed = (props) => {
 export const NewOrder = (props) => {
     const dispatch = useDispatch();
     const isVisible = useSelector((state) => state.app.newOrder);
+    const info = useSelector((state) => state.app.info);
 
     const hide = () => {
         dispatch(hideNewOrder());
     }
+
+    const goToDetail = () => {
+        hide();
+        NavigationService.navigate(ScreenName.NewOrder, { id: info?.id })
+    }
     return (
         <Modal visible={isVisible} transparent animationType={'fade'}>
             <View style={styles.container}>
-                <View style={[styles.confirm, { height: 300 }]}>
+                <View style={[styles.confirm, { height: 320 }]}>
                     <View style={[styles.header, { height: '20%', }]}>
                         <TouchableOpacity
                             style={styles.close}
@@ -143,21 +150,21 @@ export const NewOrder = (props) => {
                     </View>
                     <View style={[styles.footer, { height: '80%' }]}>
                         <View style={styles.new_order}>
-                            <Text style={[styles.content, { marginLeft: 0, marginBottom: 5 }]}>Đơn hàng #0000001</Text>
-                            <Text style={styles.time}>2020-09-23 09:37:25</Text>
+                            <Text style={[styles.content, { marginLeft: 0, marginBottom: 5 }]}>Đơn hàng #{info?.order_number}</Text>
+                            <Text style={styles.time}>{info?.created_at}</Text>
                         </View>
                         <View style={[styles.row, {justifyContent: 'space-between', alignItems: 'stretch', marginVertical: 15}]}>
                             <View style={[styles.col]}>
                                 <Text style={styles.name}>Giao đến:</Text>
-                                <Text style={styles.money}>lan</Text>
-                                <Text style={styles.address}>18 huynh lan khanh phuong 2 tan binh</Text>
+                                <Text style={styles.money}>{info?.firstname} {info?.lastname}</Text>
+                                <Text style={styles.address}>{info?.address}</Text>
                             </View>
                             <View style={styles.line} />
                             <View style={styles.col}>
                                 <Text style={styles.name}>Tổng thanh toán:</Text>
-                                <Text style={styles.money}>500.000đ</Text>
+                                <Text style={styles.money}>{toCommas(Math.ceil(info?.grand_total))}đ</Text>
                                 <View style={[styles.status_pay]}>
-                                    <Text style={styles.status_color}>Thanh toán tiền mặt</Text>
+                                    <Text style={styles.status_color}>{info?.payment_method}</Text>
                                 </View>
                             </View>
                         </View>
@@ -167,7 +174,7 @@ export const NewOrder = (props) => {
                             title={'CHI TIẾT ĐƠN HÀNG'}
                             backgroundColor={AppStyles.colors.red}
                             textColor={AppStyles.colors.white}
-                            onPress={hide}
+                            onPress={goToDetail}
                         />
 
                     </View>
