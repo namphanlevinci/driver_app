@@ -2,30 +2,27 @@
  * React Native App
  * Everything starts from the entrypoint
  */
-import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/es/integration/react';
-import {
-  DefaultTheme,
-  Provider as PaperProvider,
-  configureFonts,
-} from 'react-native-paper';
-import { enableScreens } from 'react-native-screens';
+import { Modal } from '@components';
+import { useFirebaseCloudMessing } from '@firebase';
 import { setI18nConfig } from '@localize';
+import { saveTokenDevice } from '@slices/account';
+import { infoNotification, showNewOrder, showRatingOrder } from '@slices/app';
+import { deliveryOrderList } from '@slices/order';
 import { AppStyles } from '@theme';
-import { ApolloProvider } from 'react-apollo';
-import makeApolloClient from './apolloClient';
-
 import Navigator from 'app/navigation';
 import configureAppStore from 'app/redux/store';
-import { Modal } from '@components';
-import { saveTokenDevice } from '@slices/account';
-import { useDispatch, useSelector } from 'react-redux';
-import { showRatingOrder, showNewOrder, hideLoadingItem, infoNotification } from '@slices/app';
-import { deliveryOrderList, recentlyOrderList } from '@slices/order';
-
-import { useFirebaseCloudMessing } from '@firebase';
+import React from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { ActivityIndicator } from 'react-native';
+import {
+  configureFonts,
+  DefaultTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import { enableScreens } from 'react-native-screens';
+import { Provider, useDispatch } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
+import makeApolloClient from './apolloClient';
 
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -82,33 +79,55 @@ export default function App() {
   );
 }
 
-
 const NotificationProvider = () => {
   const dispatch = useDispatch();
   const onForegroundMessage = (data) => {
-    // console.log('==> notification onForegroundMessage', data);
-    const info = JSON.parse(data?.data?.order);
-    dispatch(infoNotification(info))
-    // alert('ok')
-    // const {notification} = data;
-    // if(data.newOrder) {
-    dispatch(showNewOrder())
-    dispatch(deliveryOrderList());
-    // }
-    // if(data.newRating) {
-    //   dispatch(showRatingOrder())
-    // }
+    console.log('==> notification onForegroundMessage', data);
+
+    const type = data?.data?.notification_type;
+    switch (type) {
+      case '1':
+        const info_order = JSON.parse(data?.data?.order);
+        dispatch(infoNotification(info_order));
+        dispatch(showNewOrder());
+        dispatch(deliveryOrderList());
+        break;
+      case '2':
+        const info_rating = JSON.parse(data?.data?.rating);
+        dispatch(infoNotification(info_rating));
+        dispatch(showRatingOrder());
+        break;
+      default:
+        break;
+    }
+
     // TODO: process message on foreground state
   };
 
   const onBackgroundMessage = (data) => {
     console.log('===> notification onBackgroundMessage', JSON.stringify(data));
-    dispatch(deliveryOrderList());
+
+    const type = data?.data?.notification_type;
+    switch (type) {
+      case '1':
+        const info_order = JSON.parse(data?.data?.order);
+        dispatch(infoNotification(info_order));
+        dispatch(showNewOrder());
+        dispatch(deliveryOrderList());
+        break;
+      case '2':
+        const info_rating = JSON.parse(data?.data?.rating);
+        dispatch(infoNotification(info_rating));
+        dispatch(showRatingOrder());
+        break;
+      default:
+        break;
+    }
     // const {notification} = data;
     // TODO: process message on background state
   };
 
-  const onOpenedApp = ({ data }) => {
+  const onOpenedApp = (data) => {
     console.log('=====> notification onOpenedApp', JSON.stringify(data));
 
     // const {notification} = data;
@@ -126,7 +145,7 @@ const NotificationProvider = () => {
     onMessageError,
   });
 
-  console.log(firebaseToken)
+  console.log(firebaseToken);
   // TODO : save redux app local
   dispatch(saveTokenDevice(firebaseToken));
 

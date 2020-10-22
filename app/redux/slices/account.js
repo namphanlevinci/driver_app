@@ -41,7 +41,8 @@ export const signUp = createAsyncThunk(
   },
 );
 
-export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`,
+export const signOut = createAsyncThunk(
+  `${KEY_CONSTANT}/signOut`,
   async (value, { dispatch }) => {
     dispatch(showLoading());
     const { error, data } = await graphQlClient.mutate({
@@ -56,10 +57,11 @@ export const signOut = createAsyncThunk(`${KEY_CONSTANT}/signOut`,
     }
     dispatch(hideLoading());
     return { error, data };
-  }
+  },
 );
 
-export const acceptShipping = createAsyncThunk(`${KEY_CONSTANT}/acceptShipping`,
+export const acceptShipping = createAsyncThunk(
+  `${KEY_CONSTANT}/acceptShipping`,
   async (input, { dispatch }) => {
     const { error, data } = await graphQlClient.mutate({
       mutation: mutation.ACCEPT_SHPPING,
@@ -70,7 +72,7 @@ export const acceptShipping = createAsyncThunk(`${KEY_CONSTANT}/acceptShipping`,
     console.log('error acceptShipping', error);
 
     return { error, data };
-  }
+  },
 );
 
 const accountSlice = createSlice({
@@ -83,12 +85,14 @@ const accountSlice = createSlice({
     info: {},
     fcm_token: '',
     acceptShipping: true,
-    popupSuccess: false
+    popupSuccess: false,
   },
   reducers: {
-    login(state, action) { state.isLogin = true },
-    loginSuccess(state, action) { },
-    loginFail(state, action) { },
+    login(state, action) {
+      state.isLogin = true;
+    },
+    loginSuccess(state, action) {},
+    loginFail(state, action) {},
     logout(state, action) {
       state.isLogin = false;
     },
@@ -122,7 +126,7 @@ const accountSlice = createSlice({
         state.signInError = null;
         state.isLogin = true;
         state.token = token;
-        state.info = data?.generateStaffToken
+        state.info = data?.generateStaffToken;
       } else {
         state.signInError = error;
         state.isLogin = false;
@@ -141,7 +145,7 @@ const accountSlice = createSlice({
       const { error, data } = action.payload;
       const Success = data?.registerStaff?.result;
 
-      const err = error?.message.join('')
+      const err = error?.message.join('');
       if (err === 'A user with the same user name or email already exists.') {
         state.signUpError = 'Email hoặc tên đăng nhập đã tồn tại';
       }
@@ -153,7 +157,6 @@ const accountSlice = createSlice({
       // state.isLogin = true;
     },
 
-
     [signOut.pending]: (state, action) => {
       // Logger.info(action, 'signIn pending');
     },
@@ -161,7 +164,6 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
       state.isLogin = data?.result;
-
     },
     [signOut.rejected]: (state, action) => {
       // state.isLogin = false;
@@ -173,8 +175,7 @@ const accountSlice = createSlice({
     [acceptShipping.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
-      state.acceptShipping = data?.acceptShipping?.result === 0 ? false : true
-
+      state.acceptShipping = data?.acceptShipping?.result === 0 ? false : true;
     },
     [acceptShipping.rejected]: (state, action) => {
       // state.isLogin = false;
@@ -183,5 +184,13 @@ const accountSlice = createSlice({
 });
 
 const { actions, reducer } = accountSlice;
-export const { login, loginSuccess, loginFail, logout, clearError, saveTokenDevice, closeModal } = actions;
+export const {
+  login,
+  loginSuccess,
+  loginFail,
+  logout,
+  clearError,
+  saveTokenDevice,
+  closeModal,
+} = actions;
 export default reducer;

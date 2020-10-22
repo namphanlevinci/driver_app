@@ -1,71 +1,72 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { startUp, checkReview } from '@slices/app';
-import { images, AppStyles } from '@theme';
+import { checkReview, startUp } from '@slices/app';
+import { AppStyles, images } from '@theme';
+import React, { useEffect, useState } from 'react';
+import { Image, StyleSheet, View, YellowBox } from 'react-native';
 import codePush from 'react-native-code-push';
 import Spinner from 'react-native-spinkit';
+import { useDispatch } from 'react-redux';
 
-const WelcomeScreen = () => {
+YellowBox.ignoreWarnings(['']);
+
+const CodePushWelcomeScreen = () => {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const loadingApp = React.useCallback(() => {
-    setIsVisible(false);
-    delay(1000);
-    const action = startUp();
-    dispatch(action);
-  }, [dispatch]);
-
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-  // React.useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     loadingApp();
-  //   }, 2000);
-
-  //   return () => clearInterval(interval);
-  // }, [loadingApp]);
-
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(checkReview());
-    checkUpdate()
-  }, []);
+  }, [dispatch]);
 
+  useEffect(() => {
+    const loadingApp = () => {
+      setIsVisible(false);
+      delay(1000);
+      const action = startUp();
+      dispatch(action);
+    };
 
-  const checkUpdate = () => {
-    try {
-      codePush.checkForUpdate().then((update) => {
-        if (update) {
-          setIsVisible(true);
-          if (update.failedInstall) { /* đã update */
+    const checkUpdate = () => {
+      try {
+        codePush
+          .checkForUpdate()
+          .then((update) => {
+            if (update) {
+              setIsVisible(true);
+              if (update.failedInstall) {
+                /* đã update */
+                loadingApp();
+              } else {
+                let options = {
+                  installMode: codePush.InstallMode.ON_NEXT_RESTART,
+                  mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
+                };
+
+                codePush.sync(
+                  options,
+                  codePushStatusDidChange,
+                  // codePushDownloadDidProgress
+                );
+              }
+            } else {
+              console.log('updated');
+              loadingApp();
+            }
+          })
+          .catch(() => {
             loadingApp();
-          } else {
-            let options = {
-              installMode: codePush.InstallMode.ON_NEXT_RESTART,
-              mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
-            };
-            codePush.sync(
-              options,
-              codePushStatusDidChange(),
-              codePushDownloadDidProgress()
-            );
-          }
-        } else {
-          console.log('updated')
-          loadingApp();
-        }
-      }).catch(err => {
+          });
+      } catch (err) {
+        console.log('update failed');
         loadingApp();
-      })
-    } catch (err) {
-      console.log('update failed');
-      loadingApp();
-    }
-  }
+      }
+    };
 
+    checkUpdate();
+  }, [dispatch]);
 
   const codePushStatusDidChange = (status) => {
+    console.log(status);
     switch (status) {
       case codePush.SyncStatus.CHECKING_FOR_UPDATE:
         console.log('Checking for updates.');
@@ -84,28 +85,21 @@ const WelcomeScreen = () => {
         codePush.restartApp();
         break;
     }
-  }
-
-  const codePushDownloadDidProgress = (progress) => {
-    let temp = parseFloat(progress.receivedBytes / progress.totalBytes);
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={images.icons.logo_image}
-      />
+      <Image style={styles.logo} source={images.icons.logo_image} />
       <View style={styles.ckecking}>
         <Spinner
           isVisible={isVisible}
-          size={40}
+          size={30}
           type={'ThreeBounce'}
           color={'white'}
         />
       </View>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
@@ -113,18 +107,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: AppStyles.colors.yellow
+    backgroundColor: AppStyles.colors.yellow,
   },
   logo: {
     width: '100%',
     height: '100%',
-
   },
   ckecking: {
     position: 'absolute',
-    bottom: 25
-  }
-})
+    bottom: 25,
+  },
+});
 
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
+const WelcomeScreen = codePush(codePushOptions)(CodePushWelcomeScreen);
 
 export default WelcomeScreen;

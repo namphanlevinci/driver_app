@@ -1,19 +1,25 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList, RefreshControl, StatusBar } from 'react-native';
-import { Header, Modal, Item } from '@components';
-import { images, AppStyles } from '@theme';
+import { Header, Item } from '@components';
 import * as NavigationService from '@navigate/NavigationService';
-import ScreenName from '../ScreenName';
-import { useDispatch, useSelector } from 'react-redux';
+import { hideLoadingItem } from '@slices/app';
 import { deliveryOrderList, recentlyOrderList } from '@slices/order';
-import { showRatingOrder, showNewOrder, hideLoadingItem } from '@slices/app';
-import { notification } from '@slices/notification';
+import { AppStyles } from '@theme';
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import ScreenName from '../ScreenName';
 
 const wait = (timeout) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, timeout);
   });
-}
+};
 
 const HomeScreen = (props) => {
   const { navigation } = props;
@@ -25,74 +31,40 @@ const HomeScreen = (props) => {
   const recentlyOrder = useSelector((state) => state.order.recently);
 
   const navigateNotification = () => {
-    NavigationService.navigate(ScreenName.Notification)
-    // dispatch(showNewOrder());
-  }
-
-  const datanew = [
-    {
-      "address": "18 Huynh Lan Khanh Ho Chi Minh",
-      "created_at": "2020-10-01 08:23:33",
-      "firstname": "Lan",
-      "grand_total": 75000,
-      "id": 26,
-      "lastname": "Pham",
-      "order_number": "000000025",
-      "payment_method": "Thanh toán tiền mặt",
-      "status": "ready_to_ship",
-    }
-  ]
-
-  const dataold = [
-    {
-      "address": "61 Cao Thang Ho Chi Minh",
-      "created_at": "2020-10-01 08:23:33",
-      "firstname": "Luc",
-      "grand_total": 100000,
-      "id": 20,
-      "lastname": "Nguyen",
-      "order_number": "000000050",
-      "payment_method": "Thanh toán tiền mặt",
-      "status": "complete",
-    },
-
-  ]
+    NavigationService.navigate(ScreenName.Notification);
+  };
 
   const opened = () => {
-    navigation.openDrawer()
-  }
+    navigation.openDrawer();
+  };
 
   useEffect(() => {
     dispatch(deliveryOrderList());
-    dispatch(recentlyOrderList({page: page}));
+    dispatch(recentlyOrderList({ page: page }));
     setTimeout(() => {
       dispatch(hideLoadingItem());
-    }, 5000)
-
-  }, []);
+    }, 5000);
+  }, [dispatch, page]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     dispatch(deliveryOrderList());
-    dispatch(recentlyOrderList({page: 1}));
+    dispatch(recentlyOrderList({ page: 1 }));
 
     wait(2000).then(() => setRefreshing(false));
     wait(3000).then(() => dispatch(hideLoadingItem())); // Timeout hide loading
-  }, []);
+  }, [dispatch]);
 
   return (
     <View style={AppStyles.styles.container}>
       <StatusBar barStyle={'light-content'} />
-      <Header.Main
-        notification={navigateNotification}
-        account={opened}
-      />
+      <Header.Main notification={navigateNotification} account={opened} />
       <View style={styles.container}>
         <FlatList
+          // eslint-disable-next-line react-native/no-inline-styles
           contentContainerStyle={{
-            // padding: 5,
             paddingLeft: 15,
-            paddingRight: 15
+            paddingRight: 15,
           }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -100,37 +72,41 @@ const HomeScreen = (props) => {
           data={recentlyOrder}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
-          ListHeaderComponent={() => <View>
-            <View style={styles.space} />
-            <Text style={styles.title}>ĐƠN HÀNG MỚI</Text>
-            {loading && newOrder.length < 1 ?
-              <View style={styles.loading}>
-                <Item.Loader />
-              </View> : null
-            }
-            <FlatList
-              style={styles.list}
-              data={newOrder}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item, index }) => <Item.Order item={item} status={true} />}
-            />
-            <Text style={styles.title}>ĐÃ GIAO GẦN ĐÂY</Text>
-            {loading && recentlyOrder.length < 1 ?
-              <View style={styles.loading}>
-                <Item.Loader />
-              </View> : null
-            }
-            <View style={styles.list} />
-          </View>
-          }
-          renderItem={({ item, index }) => <Item.Order item={item} status={false} />}
+          ListHeaderComponent={() => (
+            <View>
+              <View style={styles.space} />
+              <Text style={styles.title}>ĐƠN HÀNG MỚI</Text>
+              {loading && newOrder.length < 1 ? (
+                <View style={styles.loading}>
+                  <Item.Loader />
+                </View>
+              ) : null}
+              <FlatList
+                style={styles.list}
+                data={newOrder}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => (
+                  <Item.Order item={item} status={true} />
+                )}
+              />
+              <Text style={styles.title}>ĐÃ GIAO GẦN ĐÂY</Text>
+              {loading && recentlyOrder.length < 1 ? (
+                <View style={styles.loading}>
+                  <Item.Loader />
+                </View>
+              ) : null}
+              <View style={styles.list} />
+            </View>
+          )}
+          renderItem={({ item, index }) => (
+            <Item.Order item={item} status={false} />
+          )}
           ListFooterComponent={() => <View style={styles.list} />}
         />
       </View>
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -151,11 +127,11 @@ const styles = StyleSheet.create({
   loading: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 10,
   },
   space: {
-    height: 10
-  }
+    height: 10,
+  },
 });
 
 export default HomeScreen;

@@ -90,17 +90,16 @@ function useFirebaseCloudMessing({
 
     // Register background handler & Quit state messages
     messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-    //   console.log('Message handled in the background!', remoteMessage);
+      //   console.log('Message handled in the background!', remoteMessage);
       if (typeof onBackgroundMessage === 'function') {
         onBackgroundMessage(remoteMessage);
       }
     });
 
     messaging().onMessage(async (remoteMessage) => {
-    //   console.log('Notification onMessage', remoteMessage);
+      //   console.log('Notification onMessage', remoteMessage);
       if (typeof onForegroundMessage === 'function') {
         onForegroundMessage(remoteMessage);
-
       }
     });
 
