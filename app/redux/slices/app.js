@@ -1,5 +1,5 @@
+import { graphQlClient, query } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { mutation, graphQlClient, query } from '@graphql';
 
 const KEY_CONSTANT = 'app';
 
@@ -87,7 +87,7 @@ const appSlice = createSlice({
       state.getListError = null;
     },
     [checkReview.fulfilled]: (state, action) => {
-      const { error, data } = action.payload;
+      const { data } = action.payload;
 
       const check = data?.appStatus?.result;
 

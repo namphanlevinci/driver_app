@@ -1,7 +1,7 @@
+import { graphQlClient, mutation } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { mutation, graphQlClient, query } from '@graphql';
 import { saveJwtToken } from '@services/AsyncStoreExt';
-import { showLoading, hideLoading } from './app';
+import { hideLoading, showLoading } from './app';
 
 const KEY_CONSTANT = 'account';
 
@@ -162,7 +162,7 @@ const accountSlice = createSlice({
     },
     [signOut.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
-      const { error, data } = action.payload;
+      const { data } = action.payload;
       state.isLogin = data?.result;
     },
     [signOut.rejected]: (state, action) => {
@@ -174,7 +174,7 @@ const accountSlice = createSlice({
     },
     [acceptShipping.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
-      const { error, data } = action.payload;
+      const { data } = action.payload;
       state.acceptShipping = data?.acceptShipping?.result === 0 ? false : true;
     },
     [acceptShipping.rejected]: (state, action) => {

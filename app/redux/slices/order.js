@@ -106,7 +106,7 @@ const orderSlice = createSlice({
       state.getListError = null;
     },
     [orderDetail.fulfilled]: (state, action) => {
-      const { error, data } = action.payload;
+      const { data } = action.payload;
       const orderInfo = data?.orderDetail;
       if (orderInfo) {
         state.orderDetail = orderInfo;

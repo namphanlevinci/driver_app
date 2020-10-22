@@ -1,6 +1,6 @@
+import { graphQlClient, query } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { mutation, graphQlClient, query } from '@graphql';
-import { showLoadingItem, hideLoadingItem } from './app';
+import { hideLoadingItem, showLoadingItem } from './app';
 
 const KEY_CONSTANT = 'notification';
 
@@ -36,7 +36,7 @@ const notificationSlice = createSlice({
     },
     [notification.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
-      const { error, data } = action.payload;
+      const { data } = action.payload;
       const list = data?.notifications?.list;
       if (list) {
         state.notificationList = list;
