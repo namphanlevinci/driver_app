@@ -48,18 +48,18 @@ const NewOrder = (props) => {
 
   const setBom = () => {
     dispatch(Bom({ id: id }));
-    wait(1000).then(() => dispatch(orderDetail({ id: id })));
-    wait(2000).then(() => dispatch(deliveryOrderList()));
-    wait(2000).then(() => dispatch(recentlyOrderList({ page: 1 })));
-    wait(3000).then(() => back());
+    // wait(1000).then(() => dispatch(orderDetail({ id: id })));
+    wait(1000).then(() => dispatch(deliveryOrderList()));
+    wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
+    wait(2500).then(() => back());
   };
 
   const setComplete = () => {
     dispatch(Complete({ id: id }));
-    wait(1000).then(() => dispatch(orderDetail({ id: id })));
-    wait(2000).then(() => dispatch(deliveryOrderList()));
-    wait(2000).then(() => dispatch(recentlyOrderList({ page: 1 })));
-    wait(3000).then(() => back());
+    // wait(1000).then(() => dispatch(orderDetail({ id: id })));
+    wait(1000).then(() => dispatch(deliveryOrderList()));
+    wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
+    wait(2500).then(() => back());
   };
 
   const setStatus = () => {

@@ -1,6 +1,6 @@
 import { Header, Item } from '@components';
 import * as NavigationService from '@navigate/NavigationService';
-import { notification } from '@slices/notification';
+import { notification, markReadNotification } from '@slices/notification';
 import { AppStyles } from '@theme';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
@@ -65,7 +65,7 @@ const Notification = () => {
 
             borderBottomLeftRadius: 10,
             borderBottomRightRadius: 10,
-            borderBottomWidth: 5,
+            // borderBottomWidth: 5,
           }}
           style={styles.list}
           data={data}

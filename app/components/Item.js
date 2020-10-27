@@ -1,5 +1,6 @@
 import * as NavigationService from '@navigate/NavigationService';
 import ScreenName from '@screen/ScreenName';
+import { markReadNotification, notification } from '@slices/notification';
 import { AppStyles, images, toCommas } from '@theme';
 import React, { useEffect, useState } from 'react';
 import ContentLoader, { Rect } from 'react-content-loader/native';
@@ -12,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -149,13 +151,24 @@ export const Order = (props) => {
 };
 
 export const Notify = ({ item, index, lastIndex }) => {
-  const { order_id, title, content, isNew } = item;
+  const dispatch = useDispatch();
+  const newOrder = useSelector((state) => state.order.new);
+  const { order_id, id, title, content, isNew } = item;
+
   const goToDetail = () => {
-    if (title === 'Đơn hàng mới') {
+    const findItem = newOrder.find((item) => item.id === order_id);
+    if (findItem !== undefined) {
       NavigationService.navigate(ScreenName.NewOrder, { id: order_id });
     } else {
       NavigationService.navigate(ScreenName.OldOrder, { id: order_id });
     }
+    markAsRead();
+  };
+  const markAsRead = () => {
+    dispatch(markReadNotification({ id: id }));
+    setTimeout(() => {
+      dispatch(notification({ type: 'delivery' }));
+    }, 500);
   };
   return (
     <TouchableOpacity
@@ -169,7 +182,7 @@ export const Notify = ({ item, index, lastIndex }) => {
       ]}
       onPress={goToDetail}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
-        <Image source={isNew ? images.icons.ring_new : images.icons.ring} />
+        <Image source={!isNew ? images.icons.ring_new : images.icons.ring} />
         <View style={styles.text}>
           <Text style={styles.money}>{title}</Text>
           <Text style={styles.address}>{content}</Text>

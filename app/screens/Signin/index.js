@@ -12,7 +12,7 @@ import {
   Text,
   View,
   Platform,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
@@ -26,7 +26,13 @@ const Signin = () => {
   const isReview = useSelector((state) => state.app.checkReview);
 
   const isLogin = () => {
-    dispatch(signIn({ username: username, password: password, fcmToken: device_token }));
+    dispatch(
+      signIn({
+        username: username,
+        password: password,
+        fcmToken: device_token,
+      }),
+    );
   };
 
   const goSignup = () => {
@@ -34,8 +40,8 @@ const Signin = () => {
   };
 
   const removeText = () => {
-    dispatch(clearError())
-  }
+    dispatch(clearError());
+  };
 
   return (
     <KeyboardAvoidingView
@@ -66,7 +72,9 @@ const Signin = () => {
               onChangeText={onChangePass}
               onChange={removeText}
             />
-            <Text style={styles.error}>{error ? 'Mã nhân viên hoặc mật khẩu không đúng!' : ''} </Text>
+            <Text style={styles.error}>
+              {error ? 'Mã nhân viên hoặc mật khẩu không đúng!' : ''}{' '}
+            </Text>
           </View>
         </View>
 
@@ -79,15 +87,14 @@ const Signin = () => {
             onPress={isLogin}
           />
           <View style={styles.space} />
-          {isReview ?
+          {isReview ? (
             <Button.Large
               title={'Đăng kí'}
               backgroundColor={AppStyles.colors.white}
               textColor={AppStyles.colors.red}
               onPress={goSignup}
-            /> : null
-          }
-
+            />
+          ) : null}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -129,8 +136,8 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginTop: 7,
     color: AppStyles.colors.white,
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
 export default Signin;

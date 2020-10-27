@@ -1,5 +1,3 @@
 import useFirebaseCloudMessing from './PushNotification';
 
-export {
-  useFirebaseCloudMessing,
-};
+export { useFirebaseCloudMessing };

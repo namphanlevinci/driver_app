@@ -1,4 +1,4 @@
-import { graphQlClient, query } from '@graphql';
+import { graphQlClient, query, mutation } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { hideLoadingItem, showLoadingItem } from './app';
 
@@ -18,6 +18,21 @@ export const notification = createAsyncThunk(
     console.log('error notification', error);
 
     dispatch(hideLoadingItem());
+    return { error, data };
+  },
+);
+
+export const markReadNotification = createAsyncThunk(
+  `${KEY_CONSTANT}/markReadNotification`,
+  async (input, { dispatch }) => {
+    const { error, data } = await graphQlClient.mutate({
+      mutation: mutation.MARK_READ,
+      variables: input,
+    });
+
+    console.log('data markReadNotification', data);
+    console.log('error markReadNotification', error);
+
     return { error, data };
   },
 );
@@ -43,6 +58,18 @@ const notificationSlice = createSlice({
       }
     },
     [notification.rejected]: (state, action) => {
+      // state.isLogin = true;
+    },
+
+    [markReadNotification.pending]: (state, action) => {
+      console.log('markReadNotification pending', action);
+      state.err = null;
+    },
+    [markReadNotification.fulfilled]: (state, action) => {
+      // Logger.info(action, 'signIn fulfilled');
+      const { data } = action.payload;
+    },
+    [markReadNotification.rejected]: (state, action) => {
       // state.isLogin = true;
     },
   },

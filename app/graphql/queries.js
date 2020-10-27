@@ -30,89 +30,86 @@ export const ORDER_LIST = gql`
 `;
 
 export const ORDER_DETAILS = gql`
-  query ($id: Int!){
+  query($id: Int!) {
     orderDetail(id: $id) {
-        address
-        created_at
-        firstname
-        grand_total
-        phone
-        id
-        lastname
-        order_number
-        payment_method
-        status
-        customer_comment
-        customer_rating
-        items {
+      address
+      created_at
+      firstname
+      grand_total
+      phone
+      id
+      lastname
+      order_number
+      payment_method
+      status
+      customer_comment
+      customer_rating
+      items {
+        name
+        qty
+        price
+        options {
           name
           qty
           price
-          options {
-            name
-            qty
-            price
-          }
         }
+      }
     }
   }
 `;
 
 export const DELIVERY_ORDER = gql`
-query {
-	deliveryOrders{
-		orders {
-			order_number
-			id
-			created_at
-			grand_total
-			status
-			firstname
-			lastname
-			payment_method
-			address
-		}
-	}
-}
+  query {
+    deliveryOrders {
+      orders {
+        order_number
+        id
+        created_at
+        grand_total
+        status
+        firstname
+        lastname
+        payment_method
+        address
+      }
+    }
+  }
 `;
 
 export const RECENTLY_ORDER = gql`
-query ($page: Int!){
-  recentlyOrders(
-    currentPage: $page,
-    pageSize: 10
-    ){
+  query($page: Int!) {
+    recentlyOrders(currentPage: $page, pageSize: 10) {
       orders {
-      order_number
-      id
-      created_at
-      grand_total
-      status
-      firstname
-      lastname
-      payment_method
-      address
-    },
-    page_info {
-      current_page,
-      page_size,
-      total_pages
+        order_number
+        id
+        created_at
+        grand_total
+        status
+        firstname
+        lastname
+        payment_method
+        address
+      }
+      page_info {
+        current_page
+        page_size
+        total_pages
+      }
     }
   }
-}
 `;
 
 export const APP_STATUS = gql`
   query {
-    appStatus{
-    result
+    appStatus {
+      result
     }
   }
 `;
 
 export const NOTIFICATION_LIST = gql`
-  query ($type: String!){
-    notifications(type: $type){
+  query($type: String!) {
+    notifications(type: $type) {
       list {
         id
         title

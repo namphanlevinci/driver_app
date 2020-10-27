@@ -56,7 +56,6 @@ export const Complete = createAsyncThunk(
       variables: input,
     });
 
-
     console.log('data ', data);
     console.log('error ', error);
 
@@ -72,20 +71,16 @@ const statusSlice = createSlice({
     shipping: false,
     arrived: false,
     bom: false,
-    complete: false
+    complete: false,
   },
-  reducers: {
-
-  },
+  reducers: {},
   extraReducers: {
     [Shipping.pending]: (state, action) => {
       console.log('shipping pending', action);
-
     },
     [Shipping.fulfilled]: (state, action) => {
-
       const { error, data } = action.payload;
-      const status = data?.result
+      const status = data?.result;
       if (status) {
         state.shipping = status;
       }
@@ -97,7 +92,7 @@ const statusSlice = createSlice({
 
     [Arrived.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      const status = data?.result
+      const status = data?.result;
       if (status) {
         state.arrived = status;
       }
@@ -109,7 +104,7 @@ const statusSlice = createSlice({
 
     [Bom.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      const status = data?.result
+      const status = data?.result;
       if (status) {
         state.bom = status;
       }
@@ -121,15 +116,14 @@ const statusSlice = createSlice({
 
     [Complete.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      const status = data?.result
+      const status = data?.result;
       if (status) {
         state.complete = status;
       }
     },
-
   },
 });
 
 const { actions, reducer } = statusSlice;
-export const { } = actions;
+export const {} = actions;
 export default reducer;

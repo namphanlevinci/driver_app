@@ -11,7 +11,11 @@ export const SIGN_OUT = gql`
 
 export const SIGN_IN = gql`
   mutation($username: String!, $password: String!, $fcmToken: String!) {
-    generateStaffToken(username: $username, password: $password, fcmToken: $fcmToken) {
+    generateStaffToken(
+      username: $username
+      password: $password
+      fcmToken: $fcmToken
+    ) {
       address
       firstname
       id
@@ -24,14 +28,20 @@ export const SIGN_IN = gql`
 `;
 
 export const SIGN_UP = gql`
-  mutation($firstname: String!, $lastname: String!, $email: String!, $username: String!, $password: String!) {
+  mutation(
+    $firstname: String!
+    $lastname: String!
+    $email: String!
+    $username: String!
+    $password: String!
+  ) {
     registerStaff(
-      firstname: $firstname, 
-      lastname: $lastname, 
-      email: $email,
-      username: $username, 
+      firstname: $firstname
+      lastname: $lastname
+      email: $email
+      username: $username
       password: $password
-      ) {
+    ) {
       result
     }
   }
@@ -77,3 +87,10 @@ export const ACCEPT_SHPPING = gql`
   }
 `;
 
+export const MARK_READ = gql`
+  mutation($id: Int!) {
+    markReadNotification(id: $id) {
+      result
+    }
+  }
+`;
