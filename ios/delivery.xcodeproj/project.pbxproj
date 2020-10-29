@@ -13,8 +13,8 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1856916F2547CD4F004E0F9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1856916E2547CD4F004E0F9F /* GoogleService-Info.plist */; };
-		185691702547CD4F004E0F9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1856916E2547CD4F004E0F9F /* GoogleService-Info.plist */; };
+		18C9E5EB25490B0F002A170B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C9E5EA25490B0F002A170B /* GoogleService-Info.plist */; };
+		18C9E5EC25490B0F002A170B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C9E5EA25490B0F002A170B /* GoogleService-Info.plist */; };
 		1C335018A6384F68B41A00C3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD2391B279A949C09A00B739 /* Roboto-Medium.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -69,8 +69,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = delivery/main.m; sourceTree = "<group>"; };
 		14D8E42006ED443AB2C295D6 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../app/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		16320D309CC64C6E92CD8CA4 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		1856916E2547CD4F004E0F9F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		18DA8EDE2546D028006D540E /* delivery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = delivery.entitlements; path = delivery/delivery.entitlements; sourceTree = "<group>"; };
+		18C9E5EA25490B0F002A170B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		18C9E5F525490F4E002A170B /* delivery.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = delivery.entitlements; path = delivery/delivery.entitlements; sourceTree = "<group>"; };
 		1A51CAE7213A4C07B49BAFE6 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../app/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		1FD98607EB3F47D5890A6D66 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* delivery-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "delivery-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,12 +161,12 @@
 		13B07FAE1A68108700A75B9A /* delivery */ = {
 			isa = PBXGroup;
 			children = (
-				18DA8EDE2546D028006D540E /* delivery.entitlements */,
+				18C9E5F525490F4E002A170B /* delivery.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				1856916E2547CD4F004E0F9F /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				18C9E5EA25490B0F002A170B /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -418,7 +418,7 @@
 				79DEE0C382A247D483C6D939 /* Roboto-BoldItalic.ttf in Resources */,
 				9736CDC1D97942FA97D40059 /* Roboto-Italic.ttf in Resources */,
 				4BC285DAC2434F1E9411B195 /* Roboto-Light.ttf in Resources */,
-				1856916F2547CD4F004E0F9F /* GoogleService-Info.plist in Resources */,
+				18C9E5EB25490B0F002A170B /* GoogleService-Info.plist in Resources */,
 				069CBEDA4A25449E8EC4E11A /* Roboto-LightItalic.ttf in Resources */,
 				1C335018A6384F68B41A00C3 /* Roboto-Medium.ttf in Resources */,
 				C449417E934641FC869A269C /* Roboto-MediumItalic.ttf in Resources */,
@@ -433,7 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
-				185691702547CD4F004E0F9F /* GoogleService-Info.plist in Resources */,
+				18C9E5EC25490B0F002A170B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,7 +784,7 @@
 				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = AP95TBLGP3;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -800,7 +800,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
 				PRODUCT_NAME = delivery;
-				PROVISIONING_PROFILE_SPECIFIER = "jollibee dev __________";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee driver dev";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -813,10 +813,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = delivery/deliveryRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = AP95TBLGP3;
 				INFOPLIST_FILE = delivery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -827,7 +827,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
 				PRODUCT_NAME = delivery;
-				PROVISIONING_PROFILE_SPECIFIER = "adhoc jollibee";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee driver";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

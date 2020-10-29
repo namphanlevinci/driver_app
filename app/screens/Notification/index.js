@@ -1,6 +1,6 @@
 import { Header, Item } from '@components';
 import * as NavigationService from '@navigate/NavigationService';
-import { notification, markReadNotification } from '@slices/notification';
+import { notification } from '@slices/notification';
 import { AppStyles } from '@theme';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';

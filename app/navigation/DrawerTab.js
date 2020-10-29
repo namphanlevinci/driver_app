@@ -24,7 +24,7 @@ function DrawerContent(props) {
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     changeStatus();
-  }
+  };
   const dispatch = useDispatch();
 
   const closed = () => {
@@ -37,17 +37,17 @@ function DrawerContent(props) {
 
   const changeStatus = () => {
     if (status) {
-      dispatch(acceptShipping({ type: 0 }))
+      dispatch(acceptShipping({ type: 0 }));
     } else {
-      dispatch(acceptShipping({ type: 1 }))
+      dispatch(acceptShipping({ type: 1 }));
     }
-  }
+  };
 
   useEffect(() => {
     if (status) {
-      setIsEnabled(true)
+      setIsEnabled(true);
     } else {
-      setIsEnabled(false)
+      setIsEnabled(false);
     }
   }, [status]);
 
@@ -64,7 +64,9 @@ function DrawerContent(props) {
           source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
         />
       </View>
-      <Text style={styles.name}>{info?.firstname} {info?.lastname}</Text>
+      <Text style={styles.name}>
+        {info?.firstname} {info?.lastname}
+      </Text>
       <Text style={styles.id}>ID: {info?.id}</Text>
       <View style={styles.row}>
         <Text style={styles.text}>Tắt/Bật trạng thái nhận đơn hàng</Text>
@@ -79,13 +81,16 @@ function DrawerContent(props) {
           value={isEnabled}
         />
       </View>
-      <View style={[styles.button, { bottom: 50 }]}>
+      <View style={[styles.button, { bottom: 20, alignItems: 'center' }]}>
         <Button.Medium
           title={'Đăng Xuất'}
           backgroundColor={AppStyles.colors.yellow}
           textColor={AppStyles.colors.white}
           onPress={isLogout}
         />
+        <View style={styles.version}>
+          <Text style={styles.code}>App version: 1.0.0</Text>
+        </View>
       </View>
     </View>
   );
@@ -158,7 +163,13 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: 400,
+    bottom: 100,
+  },
+  code: {
+    color: AppStyles.colors.silver,
+  },
+  version: {
+    marginTop: 10,
   },
 });
 

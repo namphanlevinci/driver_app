@@ -89,7 +89,9 @@ const HomeScreen = (props) => {
                   <Item.Order item={item} status={true} />
                 )}
               />
-              <Text style={styles.title}>ĐÃ GIAO GẦN ĐÂY</Text>
+              <Text style={[styles.title, { paddingTop: 3 }]}>
+                ĐÃ GIAO GẦN ĐÂY
+              </Text>
               {loading && recentlyOrder.length < 1 ? (
                 <View style={styles.loading}>
                   <Item.Loader />

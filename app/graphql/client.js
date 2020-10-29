@@ -8,7 +8,9 @@ import Config from 'react-native-config';
 import _ from 'lodash';
 import { getJwtToken } from '@services/AsyncStoreExt';
 
-const httpLink = createHttpLink({ uri: 'http://dev.jollibee.levincitest.com/graphql' });
+const httpLink = createHttpLink({
+  uri: 'http://dev.jollibee.levincitest.com/graphql',
+});
 
 const authLink = setContext(async (req, { headers }) => {
   // get auth token
@@ -37,12 +39,14 @@ const errorLink = onError(
 
       let queryErrors = [];
       let arrErrors = {};
-      graphQLErrors.map(({ debugMessage, message, locations, path, extensions }, index) => {
-        queryErrors.push(debugMessage ?? message);
-      });
+      graphQLErrors.map(
+        ({ debugMessage, message, locations, path, extensions }, index) => {
+          queryErrors.push(debugMessage ?? message);
+        },
+      );
 
       if (queryErrors.length > 0) {
-        response.error = {message: queryErrors};
+        response.error = { message: queryErrors };
       }
       if (!_.isEmpty(arrErrors)) {
         response.error = arrErrors;

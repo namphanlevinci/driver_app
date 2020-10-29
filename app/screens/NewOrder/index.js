@@ -67,14 +67,14 @@ const NewOrder = (props) => {
       case 'ready_to_ship':
         dispatch(Shipping({ id: id }));
         wait(1000).then(() => dispatch(orderDetail({ id: id })));
-        wait(2000).then(() => dispatch(deliveryOrderList()));
-        wait(2000).then(() => dispatch(recentlyOrderList({ page: 1 })));
+        wait(1000).then(() => dispatch(deliveryOrderList()));
+        // wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
         break;
       case 'shipping':
         dispatch(Arrived({ id: id }));
         wait(1000).then(() => dispatch(orderDetail({ id: id })));
-        wait(2000).then(() => dispatch(deliveryOrderList()));
-        wait(2000).then(() => dispatch(recentlyOrderList({ page: 1 })));
+        wait(1000).then(() => dispatch(deliveryOrderList()));
+        // wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
         break;
       case 'arrived':
         show();
