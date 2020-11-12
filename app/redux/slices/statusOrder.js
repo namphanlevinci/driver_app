@@ -1,7 +1,5 @@
+import { graphQlClient, mutation } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { mutation, graphQlClient, query } from '@graphql';
-import { saveJwtToken } from '@services/AsyncStoreExt';
-import { showLoading, hideLoading } from './app';
 
 const KEY_CONSTANT = 'statusOrder';
 

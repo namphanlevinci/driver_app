@@ -22,7 +22,7 @@ export const SIGN_IN = gql`
       lastname
       restaurant
       token
-      accept_shipping
+      accept_order
     }
   }
 `;

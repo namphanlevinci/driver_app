@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
-import { Header, TextInput, Button, Modal } from '@components';
-import { images, AppStyles } from '@theme';
+import { Button, Header, Modal, TextInput } from '@components';
+import { scaleHeight } from '@lib/isIphoneX';
 import * as NavigationService from '@navigate/NavigationService';
-import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
+import { clearError, signUp } from '@slices/account';
+import { AppStyles } from '@theme';
+import React, { useState } from 'react';
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUp, clearError } from '@slices/account';
 
 const Signup = () => {
   const error = useSelector((state) => state.account.signUpError);
@@ -23,51 +29,69 @@ const Signup = () => {
 
   const dispatch = useDispatch();
   const back = () => {
-    NavigationService.goBack()
+    NavigationService.goBack();
   };
 
-  resetErr = () => {
+  const resetErr = () => {
     onChangeerrFirstname('');
     onChangeerrLastname('');
     onChangeerrEmail('');
     onChangeerrUsername('');
     onChangeerrPassword('');
     dispatch(clearError());
-  }
+  };
 
   const validate = () => {
     if (firstname === '') {
-      onChangeerrFirstname('Vui lòng nhập tên')
+      onChangeerrFirstname('Vui lòng nhập tên');
     }
     if (lastname === '') {
-      onChangeerrLastname('Vui lòng nhập họ')
+      onChangeerrLastname('Vui lòng nhập họ');
     }
-    const checkemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    const checkemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!checkemail.test(email)) {
-      onChangeerrEmail('Email không hợp lệ')
+      onChangeerrEmail('Email không hợp lệ');
     }
     if (email === '') {
-      onChangeerrEmail('Vui lòng nhập email')
+      onChangeerrEmail('Vui lòng nhập email');
     }
     if (username === '') {
-      onChangeerrUsername('Vui lòng nhập tên đăng nhập')
+      onChangeerrUsername('Vui lòng nhập tên đăng nhập');
     }
-    const checkpass = /^(?=.*[0-9])(?=.*[a-z])([a-zA-Z0-9]{7,})$/
+    const checkpass = /^(?=.*[0-9])(?=.*[a-z])([a-zA-Z0-9]{7,})$/;
     if (!checkpass.test(password)) {
-      onChangeerrPassword('Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ')
+      onChangeerrPassword('Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ');
     }
     if (password === '') {
-      onChangeerrPassword('Vui lòng nhập mật khẩu')
+      onChangeerrPassword('Vui lòng nhập mật khẩu');
     }
-  }
+  };
 
-  const Signup = () => {
-    validate()
-    if (errfirstname === '' && errlastname === '' && erremail === '' && errusername === '' && errpassword === ''
-      && firstname != '' && lastname != '' && email != '' && username != '' && password != '') {
-      dispatch(signUp({ firstname: firstname, lastname: lastname, email: email, username: username, password: password }));
+  const SignUp = () => {
+    validate();
+    if (
+      errfirstname === '' &&
+      errlastname === '' &&
+      erremail === '' &&
+      errusername === '' &&
+      errpassword === '' &&
+      firstname !== '' &&
+      lastname !== '' &&
+      email !== '' &&
+      username !== '' &&
+      password !== ''
+    ) {
+      dispatch(
+        signUp({
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          username: username,
+          password: password,
+        }),
+      );
     }
-  }
+  };
   return (
     <View style={AppStyles.styles.container}>
       <Header.Back title={'Đăng kí tài khoản'} goback={back} />
@@ -113,7 +137,9 @@ const Signup = () => {
                   onChangeText={onChangeUsername}
                   resetErr={resetErr}
                 />
-                <Text style={styles.err}>{error != '' ? error : errusername}</Text>
+                <Text style={styles.err}>
+                  {error !== '' ? error : errusername}
+                </Text>
               </View>
               <View style={styles.space} />
               <View>
@@ -127,10 +153,11 @@ const Signup = () => {
                 <Text style={styles.err}>{errpassword}</Text>
               </View>
             </View>
-            <Button.Large title={'Đăng kí'}
+            <Button.Large
+              title={'Đăng kí'}
               backgroundColor={AppStyles.colors.red}
               textColor={AppStyles.colors.white}
-              onPress={Signup}
+              onPress={SignUp}
             />
           </View>
           <Modal.Success />
@@ -138,7 +165,7 @@ const Signup = () => {
       </TouchableWithoutFeedback>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -147,13 +174,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   space: {
-    height: scaleHeight(1.5)
+    height: scaleHeight(1.5),
   },
   space2x: {
-    height: scaleHeight(4)
+    height: scaleHeight(4),
   },
   textInput: {
-    marginBottom: scaleHeight(5)
+    marginBottom: scaleHeight(5),
   },
   err: {
     height: 15,
@@ -161,9 +188,8 @@ const styles = StyleSheet.create({
     color: AppStyles.colors.red,
     fontWeight: '400',
     paddingLeft: 5,
-    paddingTop: 2
-  }
+    paddingTop: 2,
+  },
 });
-
 
 export default Signup;
