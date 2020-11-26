@@ -1,5 +1,7 @@
 import { graphQlClient, mutation } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import * as NavigationService from '@navigate/NavigationService';
+import { hideLoading, showLoading } from './app';
 
 const KEY_CONSTANT = 'statusOrder';
 
@@ -34,13 +36,14 @@ export const Arrived = createAsyncThunk(
 export const Bom = createAsyncThunk(
   `${KEY_CONSTANT}/bom`,
   async (input, { dispatch }) => {
-    // dispatch(showLoading());
+    dispatch(showLoading());
     const { error, data } = await graphQlClient.mutate({
       mutation: mutation.BOM,
       variables: input,
     });
 
-    // dispatch(hideLoading());
+    dispatch(hideLoading());
+    NavigationService.goBack();
     return { error, data };
   },
 );
@@ -48,7 +51,7 @@ export const Bom = createAsyncThunk(
 export const Complete = createAsyncThunk(
   `${KEY_CONSTANT}/complete`,
   async (input, { dispatch }) => {
-    // dispatch(showLoading());
+    dispatch(showLoading());
     const { error, data } = await graphQlClient.mutate({
       mutation: mutation.COMPLETE,
       variables: input,
@@ -57,7 +60,8 @@ export const Complete = createAsyncThunk(
     console.log('data ', data);
     console.log('error ', error);
 
-    // dispatch(hideLoading());
+    dispatch(hideLoading());
+    NavigationService.goBack();
     return { error, data };
   },
 );

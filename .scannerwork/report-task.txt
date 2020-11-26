@@ -1,0 +1,6 @@
+projectKey=com.jollibee.driver
+serverUrl=http://localhost:9000
+serverVersion=8.5.0.37579
+dashboardUrl=http://localhost:9000/dashboard?id=com.jollibee.driver
+ceTaskId=AXVzaD3-Gfm2twCQKqil
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXVzaD3-Gfm2twCQKqil

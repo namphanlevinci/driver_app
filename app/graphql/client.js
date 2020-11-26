@@ -7,6 +7,7 @@ import { createHttpLink } from 'apollo-link-http';
 import Config from 'react-native-config';
 import _ from 'lodash';
 import { getJwtToken } from '@services/AsyncStoreExt';
+import * as NavigationService from '@navigate/NavigationService';
 
 const httpLink = createHttpLink({
   uri: 'http://dev.jollibee.levincitest.com/graphql',
@@ -34,6 +35,13 @@ const authLink = setContext(async (req, { headers }) => {
 
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, response, forward }) => {
+    // console.log(graphQLErrors, '*************graphQLErrors*************');
+
+    const unauthorize =
+      graphQLErrors[0]?.extensions?.category === 'graphql-authorization';
+    if (unauthorize) {
+      NavigationService.logout();
+    }
     if (graphQLErrors?.length > 0) {
       // Logger.debug(graphQLErrors, '*************graphQLErrors*************');
 

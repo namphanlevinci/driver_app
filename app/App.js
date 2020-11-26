@@ -23,6 +23,8 @@ import { enableScreens } from 'react-native-screens';
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import makeApolloClient from './apolloClient';
+import GraphErrorHandler from './GraphErrorHandler';
+import { graphQLErrorRef } from '@navigate/NavigationService';
 
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -66,10 +68,12 @@ export default function App() {
     <Provider store={store}>
       <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
         <ApolloProvider client={apolloClient}>
-          <PaperProvider theme={theme}>
-            <Navigator />
-            <NotificationProvider />
-          </PaperProvider>
+          <GraphErrorHandler ref={graphQLErrorRef}>
+            <PaperProvider theme={theme}>
+              <Navigator />
+              <NotificationProvider />
+            </PaperProvider>
+          </GraphErrorHandler>
         </ApolloProvider>
       </PersistGate>
       <Modal.Loading />

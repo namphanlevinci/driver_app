@@ -1,6 +1,6 @@
 import { Header, Item } from '@components';
 import * as NavigationService from '@navigate/NavigationService';
-import { orderDetail } from '@slices/order';
+import { orderDetail, resetOrderDetail } from '@slices/order';
 import { AppStyles } from '@theme';
 import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
@@ -13,6 +13,7 @@ const OldOrder = ({ route, ...props }) => {
 
   const back = () => {
     NavigationService.goBack();
+    dispatch(resetOrderDetail());
   };
 
   useEffect(() => {

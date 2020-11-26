@@ -5,6 +5,7 @@ import {
   deliveryOrderList,
   orderDetail,
   recentlyOrderList,
+  resetOrderDetail,
 } from '@slices/order';
 import { Arrived, Bom, Complete, Shipping } from '@slices/statusOrder';
 import { AppStyles, images } from '@theme';
@@ -25,6 +26,7 @@ const NewOrder = (props) => {
 
   const back = () => {
     NavigationService.goBack();
+    dispatch(resetOrderDetail());
   };
 
   const callNow = () => {
@@ -51,7 +53,7 @@ const NewOrder = (props) => {
     // wait(1000).then(() => dispatch(orderDetail({ id: id })));
     wait(1000).then(() => dispatch(deliveryOrderList()));
     wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
-    wait(2500).then(() => back());
+    // wait(2000).then(() => back());
   };
 
   const setComplete = () => {
@@ -59,7 +61,7 @@ const NewOrder = (props) => {
     // wait(1000).then(() => dispatch(orderDetail({ id: id })));
     wait(1000).then(() => dispatch(deliveryOrderList()));
     wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
-    wait(2500).then(() => back());
+    // wait(2000).then(() => back());
   };
 
   const setStatus = () => {
@@ -118,7 +120,7 @@ const NewOrder = (props) => {
                 lastname={orderInfo?.lastname}
                 address={orderInfo?.address}
               />
-              <Item.Reviews review={'default'} />
+              <Item.Reviews review={orderInfo?.customer_comment} />
               <Text style={styles.title}>Tổng thanh toán</Text>
               <Item.Payment
                 grand_total={orderInfo?.grand_total}

@@ -166,7 +166,7 @@ const accountSlice = createSlice({
       state.isLogin = data?.result;
     },
     [signOut.rejected]: (state, action) => {
-      // state.isLogin = false;
+      state.isLogin = true;
     },
 
     [acceptShipping.pending]: (state, action) => {

@@ -70,7 +70,11 @@ const orderSlice = createSlice({
     recently: [],
     orderDetail: {},
   },
-  reducers: {},
+  reducers: {
+    resetOrderDetail(state, action) {
+      state.orderDetail = {};
+    },
+  },
   extraReducers: {
     [deliveryOrderList.pending]: (state, action) => {
       console.log('deliveryOrderList pending', action);
@@ -116,5 +120,5 @@ const orderSlice = createSlice({
 });
 
 const { actions, reducer } = orderSlice;
-export const {} = actions;
+export const { resetOrderDetail } = actions;
 export default reducer;
