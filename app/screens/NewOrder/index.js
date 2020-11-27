@@ -156,9 +156,10 @@ const NewOrder = (props) => {
             title={'Bom'}
             backgroundColor={
               orderInfo?.status === 'ready_to_ship'
-                ? AppStyles.colors.silver
+                ? AppStyles.colors.redblur
                 : AppStyles.colors.red
             }
+            active={orderInfo?.status === 'ready_to_ship' ? 1 : 0.2}
             textColor={AppStyles.colors.white}
             icon={images.icons.closed}
             onPress={

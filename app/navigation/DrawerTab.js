@@ -59,10 +59,7 @@ function DrawerContent(props) {
         </TouchableOpacity>
       </View>
       <View style={styles.avatar}>
-        <Image
-          style={styles.image}
-          source={{ uri: 'https://www.w3schools.com/howto/img_avatar.png' }}
-        />
+        <Image style={styles.image} source={images.icons.logo} />
       </View>
       <Text style={styles.name}>
         {info?.firstname} {info?.lastname}
@@ -132,11 +129,14 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     // borderColor: AppStyles.colors.silver,
     // borderWidth: 1,
+    backgroundColor: AppStyles.colors.red,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
-    width: 150,
-    height: 150,
-    borderRadius: 150,
+    width: 100,
+    height: 100,
+    // borderRadius: 120,
   },
   name: {
     fontSize: 22,

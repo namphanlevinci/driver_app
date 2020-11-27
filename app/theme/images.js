@@ -18,7 +18,7 @@ const images = {
     QR: require('../assets/icons/QR.png'),
     success: require('../assets/icons/success.png'),
     logo_name: require('../assets/icons/logo_name.png'),
-    logo_image: require('../assets/icons/logo_delivery.png'),
+    logo_image: require('../assets/icons/logo_v2.png'),
     down_icon: require('../assets/icons/down_icon.png'),
     ring: require('../assets/icons/ring.png'),
     ring_new: require('../assets/icons/ring-new.png'),

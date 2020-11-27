@@ -28,11 +28,12 @@ const AppStyles = {
     orange: '#F0810D',
     yellow: '#FFC522',
     red: '#E31837',
-    green: '#38B75A'
+    green: '#38B75A',
+    redblur: '#E3183776',
   },
   fonts: {},
   styles: {
-    container: { flex: 1},
+    container: { flex: 1 },
 
     topBar: {
       backgroundColor: secondaryColor,

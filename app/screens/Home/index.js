@@ -58,7 +58,7 @@ const HomeScreen = (props) => {
   return (
     <View style={AppStyles.styles.container}>
       <StatusBar barStyle={'light-content'} />
-      <Header.Main notification={navigateNotification} account={opened} />
+      <Header.Main notifications={navigateNotification} account={opened} />
       <View style={styles.container}>
         <FlatList
           // eslint-disable-next-line react-native/no-inline-styles

@@ -60,7 +60,7 @@ export const Success = () => {
     NavigationService.goBack();
   };
   return (
-    <Modal visible={isVisible} transparent animationType={'fade'}>
+    <Modal visible={isVisible} transparent animationType={'none'}>
       <View style={styles.container}>
         <View style={styles.success}>
           <Image style={styles.image} source={images.icons.success} />
@@ -91,7 +91,7 @@ export const Completed = (props) => {
   };
 
   return (
-    <Modal visible={isVisible} transparent animationType={'fade'}>
+    <Modal visible={isVisible} transparent animationType={'none'}>
       <View style={styles.container}>
         <View style={styles.confirm}>
           <View style={styles.header}>
@@ -150,7 +150,7 @@ export const NewOrder = (props) => {
     NavigationService.navigate(ScreenName.NewOrder, { id: info?.id });
   };
   return (
-    <Modal visible={isVisible} transparent animationType={'fade'}>
+    <Modal visible={isVisible} transparent animationType={'none'}>
       <View style={styles.container}>
         <View style={[styles.confirm, { height: 320 }]}>
           <View style={[styles.header, { height: '20%' }]}>
@@ -234,7 +234,7 @@ export const RatingOrder = () => {
     dispatch(hideRatingOrder());
   };
   return (
-    <Modal visible={isVisible} transparent animationType={'fade'}>
+    <Modal visible={isVisible} transparent animationType={'none'}>
       <View style={styles.container}>
         <View style={styles.confirm}>
           <View style={styles.header}>
@@ -285,7 +285,7 @@ export const Bom = (props) => {
   };
 
   return (
-    <Modal visible={bom} transparent animationType={'fade'}>
+    <Modal visible={bom} transparent animationType={'none'}>
       <View style={styles.container}>
         <View style={styles.confirm}>
           <View style={styles.header}>
