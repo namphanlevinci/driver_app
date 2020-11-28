@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   ckecking: {
     position: 'absolute',
-    bottom: 15,
+    bottom: 10,
   },
 });
 

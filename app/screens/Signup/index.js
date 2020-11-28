@@ -41,56 +41,62 @@ const Signup = () => {
     dispatch(clearError());
   };
 
-  const validate = () => {
+  const SignUp = async () => {
+    let errFirstname = ''
+    let errLastname = ''
+    let errEmail = ''
+    let errUsername = ''
+    let errPassword = ''
     if (firstname === '') {
-      onChangeerrFirstname('Vui lòng nhập tên');
+      await onChangeerrFirstname('Vui lòng nhập tên');
+      errFirstname = 'Vui lòng nhập tên'
     }
     if (lastname === '') {
-      onChangeerrLastname('Vui lòng nhập họ');
+      await onChangeerrLastname('Vui lòng nhập họ');
+      errLastname = 'Vui lòng nhập họ'
     }
     const checkemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!checkemail.test(email)) {
-      onChangeerrEmail('Email không hợp lệ');
+      await onChangeerrEmail('Email không hợp lệ');
+      errEmail = 'Email không hợp lệ'
     }
     if (email === '') {
-      onChangeerrEmail('Vui lòng nhập email');
+      await onChangeerrEmail('Vui lòng nhập email');
+      errEmail = 'Vui lòng nhập email'
     }
     if (username === '') {
-      onChangeerrUsername('Vui lòng nhập tên đăng nhập');
+      await onChangeerrUsername('Vui lòng nhập mã nhân viên');
+      errUsername = 'Vui lòng nhập mã nhân viên'
     }
-    const checkpass = /^(?=.*[0-9])(?=.*[a-z])([a-zA-Z0-9]{7,})$/;
-    if (!checkpass.test(password)) {
-      onChangeerrPassword('Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ');
+    const medium = /^((?=.*[0-9])(?=.*[a-z])([a-zA-Z0-9]{7,}))|((?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,})$/;
+    if (!medium.test(password)) {
+      await onChangeerrPassword('Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ hoặc số, chữ và kí tự đặc biệt');
+      errPassword = 'Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ hoặc số, chữ và kí tự đặc biệt'
     }
-    if (password === '') {
-      onChangeerrPassword('Vui lòng nhập mật khẩu');
-    }
-  };
 
-  const SignUp = () => {
-    validate();
-    if (
-      errfirstname === '' &&
-      errlastname === '' &&
-      erremail === '' &&
-      errusername === '' &&
-      errpassword === '' &&
-      firstname !== '' &&
-      lastname !== '' &&
-      email !== '' &&
-      username !== '' &&
-      password !== ''
-    ) {
-      dispatch(
-        signUp({
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          username: username,
-          password: password,
-        }),
-      );
+    if (password === '') {
+      await onChangeerrPassword('Vui lòng nhập mật khẩu');
+      errPassword = 'Vui lòng nhập mật khẩu'
     }
+    setTimeout(() => {
+      if (
+        errFirstname === '' &&
+        errLastname === '' &&
+        errEmail === '' &&
+        errUsername === '' &&
+        errPassword === ''
+      ) {
+        dispatch(
+          signUp({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            username: username,
+            password: password,
+          }),
+        );
+      }
+    }, 1000)
   };
   return (
     <View style={AppStyles.styles.container}>
@@ -132,7 +138,7 @@ const Signup = () => {
               <View style={styles.space} />
               <View>
                 <TextInput.Signin
-                  placeholder={'Tên đăng nhập *'}
+                  placeholder={'Mã nhân viên *'}
                   value={username}
                   onChangeText={onChangeUsername}
                   resetErr={resetErr}
@@ -142,7 +148,7 @@ const Signup = () => {
                 </Text>
               </View>
               <View style={styles.space} />
-              <View>
+              <View style={{ width: '80%' }}>
                 <TextInput.Signin
                   placeholder={'Mật khẩu *'}
                   secureTextEntry={true}
@@ -150,7 +156,7 @@ const Signup = () => {
                   onChangeText={onChangePassword}
                   resetErr={resetErr}
                 />
-                <Text style={styles.err}>{errpassword}</Text>
+                <Text style={[styles.err, { height: 30 }]}>{errpassword}</Text>
               </View>
             </View>
             <Button.Large

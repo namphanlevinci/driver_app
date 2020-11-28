@@ -9,7 +9,7 @@ export const Main = (props) => {
   const dispatch = useDispatch();
   const { notifications, account } = props;
   const data = useSelector((state) => state.notification.notificationList);
-  const count = data.length - 1;
+  const count = data.length;
 
   useEffect(() => {
     dispatch(notification({ type: 'delivery' }));
@@ -27,14 +27,16 @@ export const Main = (props) => {
         <>
           <TouchableOpacity onPress={notifications}>
             <TopBar.Action source={images.icons.nav_notify} />
-            <View style={styles.badge}>
-              <Text style={styles.text}>{count}</Text>
-            </View>
+            {count > 0 ?
+              < View style={styles.badge}>
+                <Text style={styles.text}>{count}</Text>
+              </View> : null
+            }
           </TouchableOpacity>
         </>
       }>
       <TopBar.Logo source={images.icons.nav_logo} />
-    </TopBar.Bar>
+    </TopBar.Bar >
   );
 };
 
@@ -136,6 +138,6 @@ const styles = StyleSheet.create({
     color: AppStyles.colors.text,
     fontWeight: 'bold',
     padding: 2,
-    paddingHorizontal: 4,
+    paddingHorizontal: 5,
   },
 });
