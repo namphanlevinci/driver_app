@@ -42,41 +42,44 @@ const Signup = () => {
   };
 
   const SignUp = async () => {
-    let errFirstname = ''
-    let errLastname = ''
-    let errEmail = ''
-    let errUsername = ''
-    let errPassword = ''
+    let errFirstname = '';
+    let errLastname = '';
+    let errEmail = '';
+    let errUsername = '';
+    let errPassword = '';
     if (firstname === '') {
       await onChangeerrFirstname('Vui lòng nhập tên');
-      errFirstname = 'Vui lòng nhập tên'
+      errFirstname = 'Vui lòng nhập tên';
     }
     if (lastname === '') {
       await onChangeerrLastname('Vui lòng nhập họ');
-      errLastname = 'Vui lòng nhập họ'
+      errLastname = 'Vui lòng nhập họ';
     }
     const checkemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!checkemail.test(email)) {
       await onChangeerrEmail('Email không hợp lệ');
-      errEmail = 'Email không hợp lệ'
+      errEmail = 'Email không hợp lệ';
     }
     if (email === '') {
       await onChangeerrEmail('Vui lòng nhập email');
-      errEmail = 'Vui lòng nhập email'
+      errEmail = 'Vui lòng nhập email';
     }
     if (username === '') {
       await onChangeerrUsername('Vui lòng nhập mã nhân viên');
-      errUsername = 'Vui lòng nhập mã nhân viên'
+      errUsername = 'Vui lòng nhập mã nhân viên';
     }
     const medium = /^((?=.*[0-9])(?=.*[a-z])([a-zA-Z0-9]{7,}))|((?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,})$/;
     if (!medium.test(password)) {
-      await onChangeerrPassword('Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ hoặc số, chữ và kí tự đặc biệt');
-      errPassword = 'Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ hoặc số, chữ và kí tự đặc biệt'
+      await onChangeerrPassword(
+        'Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ hoặc số, chữ và kí tự đặc biệt',
+      );
+      errPassword =
+        'Mật khẩu phải có ít nhất 7 kí tự gồm số và chữ hoặc số, chữ và kí tự đặc biệt';
     }
 
     if (password === '') {
       await onChangeerrPassword('Vui lòng nhập mật khẩu');
-      errPassword = 'Vui lòng nhập mật khẩu'
+      errPassword = 'Vui lòng nhập mật khẩu';
     }
     setTimeout(() => {
       if (
@@ -96,7 +99,7 @@ const Signup = () => {
           }),
         );
       }
-    }, 1000)
+    }, 1000);
   };
   return (
     <View style={AppStyles.styles.container}>

@@ -27,16 +27,16 @@ export const Main = (props) => {
         <>
           <TouchableOpacity onPress={notifications}>
             <TopBar.Action source={images.icons.nav_notify} />
-            {count > 0 ?
-              < View style={styles.badge}>
+            {count > 0 ? (
+              <View style={styles.badge}>
                 <Text style={styles.text}>{count}</Text>
-              </View> : null
-            }
+              </View>
+            ) : null}
           </TouchableOpacity>
         </>
       }>
       <TopBar.Logo source={images.icons.nav_logo} />
-    </TopBar.Bar >
+    </TopBar.Bar>
   );
 };
 
