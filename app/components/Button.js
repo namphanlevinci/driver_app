@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   medium: {
     width: 180,
     height: scaleWidth(13),
-    borderRadius: 29,
+    borderRadius: 10,
     backgroundColor: AppStyles.colors.red,
     justifyContent: 'center',
     alignItems: 'center',
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   large: {
     width: scaleWidth(85),
     height: scaleWidth(13),
-    borderRadius: 29,
+    borderRadius: 10,
     backgroundColor: AppStyles.colors.red,
     justifyContent: 'center',
     alignItems: 'center',

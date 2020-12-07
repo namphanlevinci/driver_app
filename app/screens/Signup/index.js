@@ -163,7 +163,7 @@ const Signup = () => {
               </View>
             </View>
             <Button.Large
-              title={'Đăng kí'}
+              title={'ĐĂNG KÝ'}
               backgroundColor={AppStyles.colors.red}
               textColor={AppStyles.colors.white}
               onPress={SignUp}

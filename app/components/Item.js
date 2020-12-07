@@ -14,6 +14,7 @@ import {
   View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -112,7 +113,7 @@ export const Order = (props) => {
     <TouchableOpacity style={styles.body} onPress={() => gotoDetail(id)}>
       <View style={styles.content}>
         <View style={styles.row}>
-          <Text style={styles.order_name}>#{order_number}</Text>
+          <Text style={styles.order_name}>Đơn hàng #{order_number}</Text>
           <View
             style={[
               styles.status_order,
@@ -123,7 +124,7 @@ export const Order = (props) => {
             </Text>
           </View>
         </View>
-        <Text style={styles.time}>{created_at}</Text>
+        <Text style={styles.time}>{moment.utc(created_at).local().format('HH:mm, DD-MM-YYYY')}</Text>
         <View style={styles.row}>
           <View style={styles.col}>
             <Text style={styles.name}>Giao đến:</Text>
@@ -162,7 +163,7 @@ export const Notify = ({ item, index, lastIndex }) => {
     } else {
       NavigationService.navigate(ScreenName.OldOrder, { id: order_id });
     }
-    markAsRead();
+    // markAsRead();
   };
   const markAsRead = () => {
     dispatch(markReadNotification({ id: id }));
@@ -170,6 +171,7 @@ export const Notify = ({ item, index, lastIndex }) => {
       dispatch(notification({ type: 'delivery' }));
     }, 500);
   };
+  console.log(index, lastIndex)
   return (
     <TouchableOpacity
       style={[
@@ -177,8 +179,9 @@ export const Notify = ({ item, index, lastIndex }) => {
         index === 0
           ? styles.border_top
           : index === lastIndex
-          ? styles.border_bottom
-          : styles.none_border,
+            ? styles.border_bottom
+            : styles.none_border,
+        lastIndex === 0 ? styles.border_bottom : styles.none_border
       ]}
       onPress={goToDetail}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
@@ -194,13 +197,14 @@ export const Notify = ({ item, index, lastIndex }) => {
 };
 
 export const Info = (props) => {
-  const { firstname, lastname, address } = props;
+  const { firstname, lastname, address, phone } = props;
   return (
     <View style={[styles.body, { marginTop: 10 }]}>
       <View style={styles.padding}>
         <Text style={styles.money}>
           {firstname} {lastname}{' '}
         </Text>
+        <Text style={styles.money}>{phone}</Text>
         <Text>{address}</Text>
       </View>
     </View>
@@ -331,10 +335,22 @@ export const Rating = ({ rating, ...props }) => {
   );
 };
 
+export const Notes = (props) => {
+  return (
+    <View style={[styles.body]}>
+      <View style={[styles.padding]}>
+        <Text style={styles.money}>Ghi chú của khách hàng</Text>
+        <Text>{props?.review ? props?.review : ''}</Text>
+      </View>
+    </View>
+  );
+};
+
 export const Reviews = (props) => {
   return (
     <View style={[styles.body]}>
-      <View style={[styles.row, styles.padding]}>
+      <View style={[styles.padding]}>
+        <Text style={styles.money}>Nội dung góp ý của khách hàng</Text>
         <Text>{props?.review ? props?.review : ''}</Text>
       </View>
     </View>
@@ -407,7 +423,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   order_name: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: 'bold',
     color: AppStyles.colors.text,
   },
@@ -472,7 +488,7 @@ const styles = StyleSheet.create({
   none_border: {},
 
   border: {
-    width: 25,
+    // width: 25,
     height: 25,
     borderColor: AppStyles.colors.red,
     borderWidth: 1,

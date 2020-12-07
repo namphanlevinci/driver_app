@@ -4,6 +4,7 @@ import * as TopBar from './TopBar';
 import { images, AppStyles } from '@theme';
 import { useSelector, useDispatch } from 'react-redux';
 import { notification } from '@slices/notification';
+import moment from 'moment';
 
 export const Main = (props) => {
   const dispatch = useDispatch();
@@ -91,7 +92,7 @@ export const BackOrder = (props) => {
       }>
       <View style={styles.content}>
         <Text style={styles.title}>Đơn hàng #{title}</Text>
-        <Text style={styles.time}>{time}</Text>
+        <Text style={styles.time}>{moment.utc(time).local().format('HH:mm, DD-MM-YYYY')}</Text>
       </View>
     </TopBar.Bar>
   );

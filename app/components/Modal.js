@@ -23,6 +23,7 @@ import {
 } from '../redux/slices/app';
 import * as Button from './Button';
 import * as Item from './Item';
+import moment from 'moment';
 
 export const Loading = () => {
   const dispatch = useDispatch();
@@ -177,7 +178,7 @@ export const NewOrder = (props) => {
                 style={[styles.content, { marginLeft: 0, marginBottom: 5 }]}>
                 Đơn hàng #{info?.order_number}
               </Text>
-              <Text style={styles.time}>{info?.created_at}</Text>
+              <Text style={styles.time}>{moment.utc(info?.created_at).local().format('HH:mm, DD-MM-YYYY')}</Text>
             </View>
             <View
               style={[

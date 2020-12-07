@@ -25,6 +25,7 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 import makeApolloClient from './apolloClient';
 import GraphErrorHandler from './GraphErrorHandler';
 import { graphQLErrorRef } from '@navigate/NavigationService';
+import { notification } from '@slices/notification';
 
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -87,7 +88,7 @@ const NotificationProvider = () => {
   const dispatch = useDispatch();
   const onForegroundMessage = (data) => {
     console.log('==> notification onForegroundMessage', data);
-
+    dispatch(notification({ type: 'delivery' }));
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -110,7 +111,7 @@ const NotificationProvider = () => {
 
   const onBackgroundMessage = (data) => {
     console.log('===> notification onBackgroundMessage', JSON.stringify(data));
-
+    dispatch(notification({ type: 'delivery' }));
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':

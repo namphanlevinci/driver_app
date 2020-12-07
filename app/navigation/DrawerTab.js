@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { formatId } from '@lib/formatId';
 
 const Drawer = createDrawerNavigator();
 
@@ -64,7 +65,7 @@ function DrawerContent(props) {
       <Text style={styles.name}>
         {info?.firstname} {info?.lastname}
       </Text>
-      <Text style={styles.id}>ID: {info?.id}</Text>
+      <Text style={styles.id}>ID: JB{formatId(info?.id, 8)}</Text>
       <View style={styles.row}>
         <Text style={styles.text}>Tắt/Bật trạng thái nhận đơn hàng</Text>
         <Switch
@@ -79,12 +80,9 @@ function DrawerContent(props) {
         />
       </View>
       <View style={[styles.button, { bottom: 20, alignItems: 'center' }]}>
-        <Button.Medium
-          title={'Đăng Xuất'}
-          backgroundColor={AppStyles.colors.yellow}
-          textColor={AppStyles.colors.white}
-          onPress={isLogout}
-        />
+        <TouchableOpacity style={styles.logout} onPress={isLogout}>
+          <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
+        </TouchableOpacity>
         <View style={styles.version}>
           <Text style={styles.code}>App version: 1.0.0</Text>
         </View>
@@ -171,6 +169,19 @@ const styles = StyleSheet.create({
   version: {
     marginTop: 10,
   },
+  logout: {
+    borderColor: AppStyles.colors.red,
+    borderWidth: 1.5,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  btn_text: {
+    color: AppStyles.colors.red,
+    paddingHorizontal: '20%',
+    paddingVertical: 10,
+    fontWeight: 'bold'
+  }
 });
 
 export default AccountDrawer;

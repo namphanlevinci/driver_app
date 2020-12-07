@@ -10,7 +10,7 @@ import {
 import { Arrived, Bom, Complete, Shipping } from '@slices/statusOrder';
 import { AppStyles, images } from '@theme';
 import React, { useEffect } from 'react';
-import { FlatList, Linking, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Linking, StyleSheet, Text, View, BackHandler } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const wait = (timeout) => {
@@ -99,6 +99,18 @@ const NewOrder = (props) => {
     }
   };
 
+  const backAction = () => {
+    back();
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAction);
+
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
+  }, []);
+
   return (
     <View style={AppStyles.styles.container}>
       <Header.BackOrder
@@ -119,8 +131,9 @@ const NewOrder = (props) => {
                 firstname={orderInfo?.firstname}
                 lastname={orderInfo?.lastname}
                 address={orderInfo?.address}
+                phone={orderInfo?.phone}
               />
-              <Item.Reviews review={orderInfo?.customer_comment} />
+              <Item.Notes review={orderInfo?.customer_comment} />
               <Text style={styles.title}>Tổng thanh toán</Text>
               <Item.Payment
                 grand_total={orderInfo?.grand_total}

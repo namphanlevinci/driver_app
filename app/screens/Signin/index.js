@@ -81,7 +81,7 @@ const Signin = () => {
         <View style={styles.bottom}>
           <Image style={styles.logo} source={images.icons.down_icon} />
           <Button.Large
-            title={'Đăng nhập'}
+            title={'ĐĂNG NHẬP'}
             backgroundColor={AppStyles.colors.red}
             textColor={AppStyles.colors.white}
             onPress={isLogin}
@@ -89,7 +89,7 @@ const Signin = () => {
           <View style={styles.space} />
           {isReview ? (
             <Button.Large
-              title={'Đăng kí'}
+              title={'ĐĂNG KÝ'}
               backgroundColor={AppStyles.colors.white}
               textColor={AppStyles.colors.red}
               onPress={goSignup}
