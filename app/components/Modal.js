@@ -11,6 +11,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Platform
 } from 'react-native';
 import Spinner from 'react-native-spinkit';
 import { useDispatch, useSelector } from 'react-redux';
@@ -178,7 +179,7 @@ export const NewOrder = (props) => {
                 style={[styles.content, { marginLeft: 0, marginBottom: 5 }]}>
                 Đơn hàng #{info?.order_number}
               </Text>
-              <Text style={styles.time}>{moment.utc(info?.created_at).local().format('HH:mm, DD-MM-YYYY')}</Text>
+              <Text style={styles.time}>{moment.utc(info?.created_at).local().format('hh:mm A, DD/MM/YYYY')}</Text>
             </View>
             <View
               style={[
@@ -363,7 +364,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
     color: AppStyles.colors.red,
     marginBottom: 15,
     textAlign: 'center',

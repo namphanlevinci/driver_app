@@ -92,7 +92,7 @@ export const BackOrder = (props) => {
       }>
       <View style={styles.content}>
         <Text style={styles.title}>Đơn hàng #{title}</Text>
-        <Text style={styles.time}>{moment.utc(time).local().format('HH:mm, DD-MM-YYYY')}</Text>
+        <Text style={styles.time}>{moment.utc(time).local().format('hh:mm A, DD/MM/YYYY')}</Text>
       </View>
     </TopBar.Bar>
   );
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     color: AppStyles.colors.white,
   },
   time: {
-    fontSize: 14,
+    fontSize: 12,
     color: AppStyles.colors.white,
   },
   content: {
@@ -131,14 +131,14 @@ const styles = StyleSheet.create({
     backgroundColor: AppStyles.colors.yellow,
     position: 'absolute',
     top: '15%',
-    left: 10,
+    left: 8,
     borderRadius: 10,
   },
   text: {
     fontSize: 10,
     color: AppStyles.colors.text,
     fontWeight: 'bold',
-    padding: 2,
-    paddingHorizontal: 5,
+    paddingVertical: 2,
+    paddingHorizontal: 2,
   },
 });

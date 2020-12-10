@@ -10,6 +10,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  ScrollView
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -103,12 +104,11 @@ const Signup = () => {
   };
   return (
     <View style={AppStyles.styles.container}>
-      <Header.Back title={'Đăng kí tài khoản'} goback={back} />
+      <Header.Back title={'Đăng ký tài khoản'} goback={back} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View>
           <View style={styles.container}>
             <View style={styles.space2x} />
-            <View style={styles.textInput}>
+            <ScrollView style={styles.textInput} showsVerticalScrollIndicator={false}>
               <View>
                 <TextInput.Signin
                   placeholder={'Tên *'}
@@ -161,7 +161,7 @@ const Signup = () => {
                 />
                 <Text style={[styles.err, { height: 30 }]}>{errpassword}</Text>
               </View>
-            </View>
+            </ScrollView>
             <Button.Large
               title={'ĐĂNG KÝ'}
               backgroundColor={AppStyles.colors.red}
@@ -169,9 +169,8 @@ const Signup = () => {
               onPress={SignUp}
             />
           </View>
-          <Modal.Success />
-        </View>
       </TouchableWithoutFeedback>
+      <Modal.Success />
     </View>
   );
 };
@@ -196,7 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: AppStyles.colors.red,
     fontWeight: '400',
-    paddingLeft: 5,
+    paddingLeft: 10,
     paddingTop: 2,
   },
 });

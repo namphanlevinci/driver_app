@@ -11,6 +11,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Platform
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatId } from '@lib/formatId';
@@ -65,7 +66,7 @@ function DrawerContent(props) {
       <Text style={styles.name}>
         {info?.firstname} {info?.lastname}
       </Text>
-      <Text style={styles.id}>ID: JB{formatId(info?.id, 8)}</Text>
+      <Text style={styles.id}>ID: {info?.id}</Text>
       <View style={styles.row}>
         <Text style={styles.text}>Tắt/Bật trạng thái nhận đơn hàng</Text>
         <Switch
@@ -79,7 +80,7 @@ function DrawerContent(props) {
           value={isEnabled}
         />
       </View>
-      <View style={[styles.button, { bottom: 20, alignItems: 'center' }]}>
+      <View style={[styles.button, { bottom: 10, alignItems: 'center' }]}>
         <TouchableOpacity style={styles.logout} onPress={isLogout}>
           <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
         </TouchableOpacity>
@@ -138,12 +139,13 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 22,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
     borderColor: AppStyles.colors.text,
     marginTop: 10,
   },
   id: {
-    fontSize: 15,
+    fontSize: 13,
     fontFamily: 'Roboto-Medium',
     borderColor: AppStyles.colors.silver,
     marginTop: 10,
@@ -165,6 +167,7 @@ const styles = StyleSheet.create({
   },
   code: {
     color: AppStyles.colors.silver,
+    fontSize: 11,
   },
   version: {
     marginTop: 10,
@@ -180,7 +183,8 @@ const styles = StyleSheet.create({
     color: AppStyles.colors.red,
     paddingHorizontal: '20%',
     paddingVertical: 10,
-    fontWeight: 'bold'
+    // fontWeight: 'bold'
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
   }
 });
 

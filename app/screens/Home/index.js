@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Platform
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
@@ -119,9 +120,8 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 21,
-    fontWeight: 'bold',
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
     color: AppStyles.colors.text,
-    // marginLeft: 10,
   },
   list: {
     paddingTop: 10,

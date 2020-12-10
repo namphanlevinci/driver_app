@@ -126,14 +126,15 @@ const styles = StyleSheet.create({
   title: {
     color: AppStyles.colors.white,
     fontSize: 26,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     marginBottom: scaleHeight(3),
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge'
   },
   logo: {
     marginBottom: scaleHeight(3),
   },
   error: {
-    marginLeft: 5,
+    marginLeft: 10,
     marginTop: 7,
     color: AppStyles.colors.white,
     fontSize: 12,

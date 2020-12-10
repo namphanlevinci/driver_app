@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import { scaleWidth, scaleHeight } from '@lib/isIphoneX';
 import { images, AppStyles } from '@theme';
 
@@ -130,8 +130,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     color: AppStyles.colors.text,
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge'
   },
 
   smallRadius: {

@@ -124,7 +124,7 @@ export const Order = (props) => {
             </Text>
           </View>
         </View>
-        <Text style={styles.time}>{moment.utc(created_at).local().format('HH:mm, DD-MM-YYYY')}</Text>
+        <Text style={styles.time}>{moment.utc(created_at).local().format('hh:mm A, DD/MM/YYYY')}</Text>
         <View style={styles.row}>
           <View style={styles.col}>
             <Text style={styles.name}>Giao đến:</Text>
@@ -171,7 +171,7 @@ export const Notify = ({ item, index, lastIndex }) => {
       dispatch(notification({ type: 'delivery' }));
     }, 500);
   };
-  console.log(index, lastIndex)
+
   return (
     <TouchableOpacity
       style={[

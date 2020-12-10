@@ -10,7 +10,7 @@ import {
 import { Arrived, Bom, Complete, Shipping } from '@slices/statusOrder';
 import { AppStyles, images } from '@theme';
 import React, { useEffect } from 'react';
-import { FlatList, Linking, StyleSheet, Text, View, BackHandler } from 'react-native';
+import { FlatList, Linking, StyleSheet, Text, View, BackHandler, Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const wait = (timeout) => {
@@ -203,7 +203,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 21,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
     color: AppStyles.colors.text,
   },
   space: {

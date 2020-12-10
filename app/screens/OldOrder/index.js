@@ -3,7 +3,7 @@ import * as NavigationService from '@navigate/NavigationService';
 import { orderDetail, resetOrderDetail } from '@slices/order';
 import { AppStyles } from '@theme';
 import React, { useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View, BackHandler } from 'react-native';
+import { FlatList, StyleSheet, Text, View, BackHandler, Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const OldOrder = ({ route, ...props }) => {
@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 21,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
     color: AppStyles.colors.text,
   },
   space: {
