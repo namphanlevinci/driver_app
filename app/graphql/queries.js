@@ -115,6 +115,7 @@ export const NOTIFICATION_LIST = gql`
         title
         content
         order_id
+        is_read
       }
     }
   }

@@ -10,8 +10,10 @@ export const Main = (props) => {
   const dispatch = useDispatch();
   const { notifications, account } = props;
   const data = useSelector((state) => state.notification.notificationList);
-  const count = data.length;
+  const data_map = data.slice(0, 20);
 
+  const unread = data_map.filter(item => item.is_read === 0)
+  const count = unread.length
   useEffect(() => {
     dispatch(notification({ type: 'delivery' }));
   }, []);

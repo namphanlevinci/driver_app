@@ -163,13 +163,13 @@ export const Notify = ({ item, index, lastIndex }) => {
     } else {
       NavigationService.navigate(ScreenName.OldOrder, { id: order_id });
     }
-    // markAsRead();
+    markAsRead();
   };
   const markAsRead = () => {
     dispatch(markReadNotification({ id: id }));
     setTimeout(() => {
       dispatch(notification({ type: 'delivery' }));
-    }, 500);
+    }, 1000);
   };
 
   return (
@@ -181,11 +181,11 @@ export const Notify = ({ item, index, lastIndex }) => {
           : index === lastIndex
             ? styles.border_bottom
             : styles.none_border,
-        lastIndex === 0 ? styles.border_bottom : styles.none_border
+         styles.border_bottom
       ]}
       onPress={goToDetail}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
-        <Image source={!isNew ? images.icons.ring_new : images.icons.ring} />
+        <Image source={item.is_read === 0 ? images.icons.ring_new : images.icons.ring} />
         <View style={styles.text}>
           <Text style={styles.money}>{title}</Text>
           <Text style={styles.address}>{content}</Text>
@@ -250,8 +250,8 @@ export const OrderInfo = (props) => {
             data={options}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <Text>
-                {item.name} x{item.qty} (+{toCommas(item.price)}đ)
+              <Text> (+{toCommas(item.price)}đ)
+                {item.name} x{item.qty}
               </Text>
             )}
           />

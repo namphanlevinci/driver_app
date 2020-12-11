@@ -73,7 +73,7 @@ const Notification = () => {
             // borderBottomWidth: 5,
           }}
           style={styles.list}
-          data={data}
+          data={data.slice(0, 20)}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
