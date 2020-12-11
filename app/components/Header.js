@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: AppStyles.colors.text,
     fontWeight: 'bold',
-    paddingVertical: 2,
-    paddingHorizontal: 2,
+    paddingVertical: 1,
+    paddingHorizontal: 3,
   },
 });
