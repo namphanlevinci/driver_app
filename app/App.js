@@ -3,7 +3,7 @@
  * Everything starts from the entrypoint
  */
 import { Modal } from '@components';
-import { useFirebaseCloudMessing } from '@firebase';
+import { useFirebaseCloudMessing, ChatSDK } from '@firebase';
 import { setI18nConfig } from '@localize';
 import { saveTokenDevice } from '@slices/account';
 import { infoNotification, showNewOrder, showRatingOrder } from '@slices/app';
@@ -73,6 +73,7 @@ export default function App() {
             <PaperProvider theme={theme}>
               <Navigator />
               <NotificationProvider />
+              <ChatProvider />
             </PaperProvider>
           </GraphErrorHandler>
         </ApolloProvider>
@@ -82,6 +83,13 @@ export default function App() {
       <Modal.RatingOrder />
     </Provider>
   );
+}
+
+const ChatProvider = () => {
+  const uid = ChatSDK()
+  console.log(uid)
+
+  return null
 }
 
 const NotificationProvider = () => {

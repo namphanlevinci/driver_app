@@ -1,3 +1,4 @@
 import useFirebaseCloudMessing from './PushNotification';
+import ChatSDK from './ChatSDK';
 
-export { useFirebaseCloudMessing };
+export { useFirebaseCloudMessing, ChatSDK };
