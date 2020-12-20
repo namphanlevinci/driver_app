@@ -3,8 +3,9 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import * as TopBar from './TopBar';
 import { images, AppStyles } from '@theme';
 import { useSelector, useDispatch } from 'react-redux';
-import { notification } from '@slices/notification';
+import { notification, markReadAllNotification } from '@slices/notification';
 import moment from 'moment';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export const Main = (props) => {
   const dispatch = useDispatch();
@@ -54,6 +55,36 @@ export const Back = (props) => {
         </TouchableOpacity>
       }
       rightComponents={<TopBar.Space />}>
+      <Text style={styles.title}>{title}</Text>
+    </TopBar.Bar>
+  );
+};
+
+export const Notify = (props) => {
+  const dispatch = useDispatch();
+  const { goback, title } = props;
+
+  const markReadAll = () => {
+    dispatch(markReadAllNotification());
+  }
+
+  return (
+    <TopBar.Bar
+      style={AppStyles.styles.topBar}
+      leftComponents={
+        <TouchableOpacity onPress={goback}>
+          <TopBar.Action source={images.icons.nav_back} />
+        </TouchableOpacity>
+      }
+      rightComponents={
+        <TouchableOpacity onPress={markReadAll}>
+          <Icon
+            name="checkmark-done-outline"
+            color="#FFF"
+            size={25}
+          />
+        </TouchableOpacity>
+      }>
       <Text style={styles.title}>{title}</Text>
     </TopBar.Bar>
   );
@@ -133,14 +164,14 @@ const styles = StyleSheet.create({
     backgroundColor: AppStyles.colors.yellow,
     position: 'absolute',
     top: '15%',
-    left: 8,
+    left: 10,
     borderRadius: 10,
   },
   text: {
-    fontSize: 10,
+    fontSize: 9,
     color: AppStyles.colors.text,
     fontWeight: 'bold',
     paddingVertical: 1,
-    paddingHorizontal: 3,
+    paddingHorizontal: 4,
   },
 });

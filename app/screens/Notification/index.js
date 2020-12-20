@@ -39,7 +39,7 @@ const Notification = () => {
   )
   return (
     <View style={AppStyles.styles.container}>
-      <Header.Back title={'Thông báo'} goback={back} />
+      <Header.Notify title={'Thông báo'} goback={back} />
       <View style={styles.container}>
         {loading && data.length < 1 ? (
           <View style={styles.loading}>

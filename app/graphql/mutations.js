@@ -65,7 +65,7 @@ export const ARRIVED = gql`
 
 export const BOM = gql`
   mutation($id: Int!) {
-    bom(id: $id) {
+    bomRequest(id: $id) {
       result
     }
   }
@@ -90,6 +90,14 @@ export const ACCEPT_SHPPING = gql`
 export const MARK_READ = gql`
   mutation($id: Int!) {
     markReadNotification(id: $id) {
+      result
+    }
+  }
+`;
+
+export const MARK_READ_ALL = gql`
+  mutation {
+    markReadAllNotification {
       result
     }
   }

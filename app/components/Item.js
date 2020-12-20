@@ -167,9 +167,9 @@ export const Notify = ({ item, index, lastIndex }) => {
   };
   const markAsRead = () => {
     dispatch(markReadNotification({ id: id }));
-    setTimeout(() => {
-      dispatch(notification({ type: 'delivery' }));
-    }, 1000);
+    // setTimeout(() => {
+    //   dispatch(notification({ type: 'delivery' }));
+    // }, 1000);
   };
 
   return (
@@ -181,7 +181,7 @@ export const Notify = ({ item, index, lastIndex }) => {
           : index === lastIndex
             ? styles.border_bottom
             : styles.none_border,
-         styles.border_bottom
+        styles.border_bottom
       ]}
       onPress={goToDetail}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
@@ -251,7 +251,7 @@ export const OrderInfo = (props) => {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <Text> (+{toCommas(item.price)}đ)
-                {item.name} x{item.qty}
+                {item.name} {item.qty > 1 ? `x${item.qty}` : ''}
               </Text>
             )}
           />

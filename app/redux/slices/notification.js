@@ -7,7 +7,7 @@ const KEY_CONSTANT = 'notification';
 export const notification = createAsyncThunk(
   `${KEY_CONSTANT}/notificationList`,
   async (input, { dispatch }) => {
-    dispatch(showLoadingItem());
+    // dispatch(showLoadingItem());
 
     const { error, data } = await graphQlClient.query({
       query: query.NOTIFICATION_LIST,
@@ -17,7 +17,7 @@ export const notification = createAsyncThunk(
     console.log('data notification', data);
     console.log('error notification', error);
 
-    dispatch(hideLoadingItem());
+    // dispatch(hideLoadingItem());
     return { error, data };
   },
 );
@@ -32,7 +32,22 @@ export const markReadNotification = createAsyncThunk(
 
     console.log('data markReadNotification', data);
     console.log('error markReadNotification', error);
+    dispatch(notification({ type: 'delivery' }));
+    return { error, data };
+  },
+);
 
+export const markReadAllNotification = createAsyncThunk(
+  `${KEY_CONSTANT}/markReadAllNotification`,
+  async (input, { dispatch }) => {
+    const { error, data } = await graphQlClient.mutate({
+      mutation: mutation.MARK_READ_ALL,
+      variables: input,
+    });
+
+    console.log('data markReadAllNotification', data);
+    console.log('error markReadAllNotification', error);
+    dispatch(notification({ type: 'delivery' }));
     return { error, data };
   },
 );
@@ -69,8 +84,14 @@ const notificationSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { data } = action.payload;
     },
-    [markReadNotification.rejected]: (state, action) => {
-      // state.isLogin = true;
+
+    [markReadAllNotification.pending]: (state, action) => {
+      console.log('markReadAllNotification pending', action);
+      state.err = null;
+    },
+    [markReadAllNotification.fulfilled]: (state, action) => {
+      // Logger.info(action, 'signIn fulfilled');
+      const { data } = action.payload;
     },
   },
 });
