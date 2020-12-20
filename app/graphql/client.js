@@ -39,7 +39,7 @@ const errorLink = onError(
     // console.log(graphQLErrors, '*************graphQLErrors*************');
 
     const unauthorize =
-      graphQLErrors[0]?.extensions?.category === 'graphql-authorization';
+      graphQLErrors.length > 0 ? graphQLErrors[0]?.extensions?.category : '' === 'graphql-authorization';
     if (unauthorize) {
       NavigationService.logout();
     }
