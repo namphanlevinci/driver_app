@@ -163,10 +163,10 @@ const accountSlice = createSlice({
     [signOut.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { data } = action.payload;
-      state.isLogin = data?.result;
+      // state.isLogin = data?.result;
     },
     [signOut.rejected]: (state, action) => {
-      state.isLogin = true;
+      // state.isLogin = true;
     },
 
     [acceptShipping.pending]: (state, action) => {

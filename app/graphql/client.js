@@ -37,9 +37,15 @@ const authLink = setContext(async (req, { headers }) => {
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, response, forward }) => {
     // console.log(graphQLErrors, '*************graphQLErrors*************');
-
+    console.log(graphQLErrors);
+    const isDeploy = graphQLErrors === undefined;
+    if (isDeploy) {
+      alert('Hệ thống đang bảo trì.');
+    }
+    const objErr = isDeploy ? {} : graphQLErrors[graphQLErrors.length - 1];
+    const check = objErr?.extensions?.category;
     const unauthorize =
-      graphQLErrors.length > 0 ? graphQLErrors[0]?.extensions?.category : '' === 'graphql-authorization';
+      (check === undefined ? 'none' : check) === 'graphql-authorization';
     if (unauthorize) {
       NavigationService.logout();
     }

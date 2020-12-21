@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Platform,
 } from 'react-native';
 import {
   Bubble,
@@ -63,7 +64,7 @@ const ModalMessage = () => {
       case 2:
         const obj_2 = {
           _id: id_item,
-          text: 'Đơn hàng đã được giao',
+          text: 'Đơn hàng đang được giao',
           createdAt: new Date(),
           user: {
             _id: 1,
@@ -217,9 +218,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     color: AppStyles.colors.red,
     marginBottom: 15,
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
   },
 
   close: {

@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     // fontWeight: 'bold',
     marginBottom: scaleHeight(3),
-    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge'
+    fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
   },
   logo: {
     marginBottom: scaleHeight(3),
