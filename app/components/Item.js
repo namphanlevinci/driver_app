@@ -2,7 +2,7 @@ import * as NavigationService from '@navigate/NavigationService';
 import ScreenName from '@screen/ScreenName';
 import { markReadNotification, notification } from '@slices/notification';
 import { AppStyles, images, toCommas } from '@theme';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ContentLoader, { Rect } from 'react-content-loader/native';
 import {
   Dimensions,
@@ -12,6 +12,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Animated,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
@@ -68,6 +69,38 @@ export const Order = (props) => {
     created_at,
     payment_method,
   } = props.item;
+  const opacity = useRef(new Animated.Value(1)).current;
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    // increase();
+    setTimeout(() => {
+      // if (opacity._value === 0) {
+      //   increase();
+      // }
+      if (opacity._value === 1) {
+        decrease();
+      }
+    }, 5000);
+  }, []);
+
+  const increase = () => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
+  };
+  const decrease = () => {
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 3000,
+      useNativeDriver: false,
+    }).start();
+  };
+  const onLayout = (e) => {
+    setHeight(e.nativeEvent.layout.height);
+  };
 
   const check_status = (check) => {
     switch (check) {
@@ -80,7 +113,7 @@ export const Order = (props) => {
       case 'shipping':
         return { title: 'Shipping', color: AppStyles.colors.yellow };
       case 'complete':
-        return { title: 'Completed', color: AppStyles.colors.silver };
+        return { title: 'Completed', color: AppStyles.colors.green };
       case 'canceled':
         return { title: 'Canceled', color: AppStyles.colors.silver };
       default:
@@ -110,7 +143,15 @@ export const Order = (props) => {
   };
 
   return (
-    <TouchableOpacity style={styles.body} onPress={() => gotoDetail(id)}>
+    <TouchableOpacity
+      style={[
+        styles.body,
+        status !== 'complete' && status !== 'bom' && status !== 'canceled'
+          ? { borderWidth: opacity, borderColor: 'red' }
+          : {},
+      ]}
+      onPress={() => gotoDetail(id)}
+      onLayout={onLayout}>
       <View style={styles.content}>
         <View style={styles.row}>
           <Text style={styles.order_name}>Đơn hàng #{order_number}</Text>
@@ -124,7 +165,9 @@ export const Order = (props) => {
             </Text>
           </View>
         </View>
-        <Text style={styles.time}>{moment.utc(created_at).local().format('hh:mm A, DD/MM/YYYY')}</Text>
+        <Text style={styles.time}>
+          {moment.utc(created_at).local().format('hh:mm A, DD/MM/YYYY')}
+        </Text>
         <View style={styles.row}>
           <View style={styles.col}>
             <Text style={styles.name}>Giao đến:</Text>
@@ -179,13 +222,17 @@ export const Notify = ({ item, index, lastIndex }) => {
         index === 0
           ? styles.border_top
           : index === lastIndex
-            ? styles.border_bottom
-            : styles.none_border,
-        styles.border_bottom
+          ? styles.border_bottom
+          : styles.none_border,
+        styles.border_bottom,
       ]}
       onPress={goToDetail}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
-        <Image source={item.is_read === 0 ? images.icons.ring_new : images.icons.ring} />
+        <Image
+          source={
+            item.is_read === 0 ? images.icons.ring_new : images.icons.ring
+          }
+        />
         <View style={styles.text}>
           <Text style={styles.money}>{title}</Text>
           <Text style={styles.address}>{content}</Text>
@@ -250,7 +297,9 @@ export const OrderInfo = (props) => {
             data={options}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <Text> (+{toCommas(item.price)}đ)
+              <Text>
+                {' '}
+                (+{toCommas(item.price)}đ)
                 {item.name} {item.qty > 1 ? `x${item.qty}` : ''}
               </Text>
             )}

@@ -146,7 +146,7 @@ const accountSlice = createSlice({
       const Success = data?.registerStaff?.result;
 
       const err = error?.message.join('');
-      if (err === 'A user with the same user name or email already exists.') {
+      if (err === 'Internal server error') {
         state.signUpError = 'Email hoặc tên đăng nhập đã tồn tại';
       }
       if (Success) {
@@ -163,7 +163,7 @@ const accountSlice = createSlice({
     [signOut.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { data } = action.payload;
-      // state.isLogin = data?.result;
+      state.isLogin = data?.result;
     },
     [signOut.rejected]: (state, action) => {
       // state.isLogin = true;

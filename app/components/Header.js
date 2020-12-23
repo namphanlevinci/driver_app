@@ -104,7 +104,7 @@ export const BackOrder = (props) => {
       case 'bom':
         return { title: '   Bom   ', color: AppStyles.colors.silver };
       case 'complete':
-        return { title: 'Completed', color: AppStyles.colors.silver };
+        return { title: 'Completed', color: AppStyles.colors.green };
       default:
         return { title: 'Shipping', color: AppStyles.colors.yellow };
     }

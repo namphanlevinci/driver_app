@@ -128,12 +128,12 @@ const NewOrder = (props) => {
             <View>
               <Text style={styles.title}>Giao đến</Text>
               <Item.Info
-                firstname={orderInfo?.firstname}
-                lastname={orderInfo?.lastname}
-                address={orderInfo?.address}
-                phone={orderInfo?.phone}
+                firstname={orderInfo?.firstname || ''}
+                lastname={orderInfo?.lastname || ''}
+                address={orderInfo?.address || ''}
+                phone={orderInfo?.phone || ''}
               />
-              <Item.Notes review={orderInfo?.customer_comment} />
+              <Item.Notes review={orderInfo?.note || ''} />
               <Text style={styles.title}>Tổng thanh toán</Text>
               <Item.Payment
                 grand_total={orderInfo?.grand_total}

@@ -44,6 +44,7 @@ export const ORDER_DETAILS = gql`
       status
       customer_comment
       customer_rating
+      note
       items {
         name
         qty
