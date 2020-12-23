@@ -99,7 +99,10 @@ export const Order = (props) => {
     }).start();
   };
   const onLayout = (e) => {
-    setHeight(e.nativeEvent.layout.height);
+    // console.log(e.nativeEvent.layout.height)
+    if (e.nativeEvent.layout.height !== 0) {
+      setHeight(e.nativeEvent.layout.height);
+    }
   };
 
   const check_status = (check) => {
@@ -144,14 +147,26 @@ export const Order = (props) => {
 
   return (
     <TouchableOpacity
-      style={[
-        styles.body,
-        status !== 'complete' && status !== 'bom' && status !== 'canceled'
-          ? { borderWidth: opacity, borderColor: 'red' }
-          : {},
-      ]}
+      style={[styles.body]}
       onPress={() => gotoDetail(id)}
       onLayout={onLayout}>
+      {status !== 'bom' && status !== 'complete' && status !== 'canceled' && height !== 0 ? (
+        <Animated.View
+          style={{
+            borderWidth: 2,
+            borderRadius: 5,
+            borderColor: AppStyles.colors.red,
+            opacity: opacity,
+            // padding: scaleWidth(0.5),
+            height: height,
+            width: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+        />
+      ) : null}
+
       <View style={styles.content}>
         <View style={styles.row}>
           <Text style={styles.order_name}>Đơn hàng #{order_number}</Text>

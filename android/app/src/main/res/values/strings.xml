@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Jollibee Driver</string>
-    <!-- <string moduleConfig="true" name="CodePushDeploymentKey">MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje</string> -->
-    <string moduleConfig="true" name="CodePushDeploymentKey">mmGnkQOqXNKyxEBnVeIC9vghNpXt__ZShcyVA</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje</string>
+    <!-- <string moduleConfig="true" name="CodePushDeploymentKey">mmGnkQOqXNKyxEBnVeIC9vghNpXt__ZShcyVA</string> -->
 </resources>
