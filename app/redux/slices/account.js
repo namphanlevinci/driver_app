@@ -116,7 +116,8 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { error, data } = action.payload;
       const token = data?.generateStaffToken?.token;
-      const accept_shipping = data?.generateStaffToken?.accept_shipping;
+      const accept_shipping = data?.generateStaffToken?.accept_order;
+      console.log(accept_shipping)
       if (accept_shipping === 0) {
         state.acceptShipping = false;
       } else {

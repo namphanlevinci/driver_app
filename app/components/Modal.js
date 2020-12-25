@@ -201,7 +201,7 @@ export const NewOrder = (props) => {
               <View style={styles.col}>
                 <Text style={styles.name}>Tổng thanh toán:</Text>
                 <Text style={styles.money}>
-                  {toCommas(Math.ceil(info?.grand_total))}đ
+                  {toCommas(Math.round(info?.grand_total))}đ
                 </Text>
                 <View style={[styles.status_pay]}>
                   <Text style={styles.status_color}>

@@ -54,6 +54,7 @@ const OldOrder = ({ route, ...props }) => {
                 lastname={orderInfo?.lastname}
                 address={orderInfo?.address}
                 phone={orderInfo?.phone}
+                customer_phone={orderInfo?.customer_phone}
               />
               <Text style={styles.title}>Tổng thanh toán</Text>
               <Item.Payment

@@ -150,7 +150,10 @@ export const Order = (props) => {
       style={[styles.body]}
       onPress={() => gotoDetail(id)}
       onLayout={onLayout}>
-      {status !== 'bom' && status !== 'complete' && status !== 'canceled' && height !== 0 ? (
+      {status !== 'bom' &&
+      status !== 'complete' &&
+      status !== 'canceled' &&
+      height !== 0 ? (
         <Animated.View
           style={{
             borderWidth: 2,
@@ -194,7 +197,9 @@ export const Order = (props) => {
           <View style={styles.line} />
           <View style={styles.col}>
             <Text style={styles.name}>Tổng thanh toán:</Text>
-            <Text style={styles.money}>{toCommas(grand_total)}đ</Text>
+            <Text style={styles.money}>
+              {toCommas(Math.round(grand_total))}đ
+            </Text>
             <View
               style={[
                 styles.status_pay,
@@ -259,15 +264,18 @@ export const Notify = ({ item, index, lastIndex }) => {
 };
 
 export const Info = (props) => {
-  const { firstname, lastname, address, phone } = props;
+  const { firstname, lastname, address, phone, customer_phone } = props;
   return (
     <View style={[styles.body, { marginTop: 10 }]}>
       <View style={styles.padding}>
         <Text style={styles.money}>
-          {firstname} {lastname}{' '}
+          {firstname} {lastname}
+          {' - '} {customer_phone}
         </Text>
-        <Text style={styles.money}>{phone}</Text>
-        <Text>{address}</Text>
+        <Text style={[styles.money, { color: AppStyles.colors.deep_green }]}>Giao đến:</Text>
+        <Text style={{ color: AppStyles.colors.deep_green }}>
+          {phone} {'-'} {address}
+        </Text>
       </View>
     </View>
   );
@@ -288,7 +296,9 @@ export const Payment = (props) => {
   return (
     <View style={[styles.body, { marginTop: 10 }]}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
-        <Text style={styles.money}>{toCommas(grand_total)}đ</Text>
+        <Text style={styles.money}>
+          {toCommas(Math.round(grand_total || 0))}đ
+        </Text>
         <View
           style={[
             styles.status_pay,
@@ -315,7 +325,7 @@ export const OrderInfo = (props) => {
               <Text>
                 {' '}
                 (+{toCommas(item.price)}đ)
-                {item.name} {item.qty > 1 ? `x${item.qty}` : ''}
+                {item.name} {`x${item.qty}`}
               </Text>
             )}
           />

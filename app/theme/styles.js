@@ -29,6 +29,7 @@ const AppStyles = {
     yellow: '#FFC522',
     red: '#E31837',
     green: '#38B75A',
+    deep_green: '#319E30',
     redblur: '#E3183776',
   },
   fonts: {},
