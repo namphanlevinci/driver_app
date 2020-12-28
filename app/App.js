@@ -84,7 +84,6 @@ export default function App() {
   );
 }
 
-
 const NotificationProvider = () => {
   const dispatch = useDispatch();
   const onForegroundMessage = (data) => {
