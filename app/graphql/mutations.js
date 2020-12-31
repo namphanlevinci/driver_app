@@ -22,6 +22,7 @@ export const SIGN_IN = gql`
       lastname
       restaurant
       token
+      user_name
       accept_order
     }
   }

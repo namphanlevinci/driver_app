@@ -38,26 +38,28 @@ const authLink = setContext(async (req, { headers }) => {
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, response, forward }) => {
     // console.log(graphQLErrors, '*************graphQLErrors*************');
-    console.log(graphQLErrors);
-    const isDeploy = graphQLErrors === undefined;
-    if (isDeploy) {
-      alert('Hệ thống đang bảo trì.');
-    }
-    const objErr = isDeploy ? {} : graphQLErrors[graphQLErrors.length - 1];
-    const check = objErr?.extensions?.category;
-    const unauthorize =
-      (check === undefined ? 'none' : check) === 'graphql-authorization';
-    if (unauthorize) {
-      NavigationService.logout();
-    }
+  
     if (graphQLErrors?.length > 0) {
       // Logger.debug(graphQLErrors, '*************graphQLErrors*************');
 
       let queryErrors = [];
       let arrErrors = {};
       graphQLErrors.map(
-        ({ debugMessage, message, locations, path, extensions }, index) => {
+        (
+          {
+            debugMessage,
+            message,
+            locations,
+            path,
+            extensions: { category, code },
+          },
+          index,
+        ) => {
           queryErrors.push(debugMessage ?? message);
+          // console.log(category);
+          if (category === 'graphql-authorization') {
+            NavigationService.logout();
+          }
         },
       );
 
@@ -71,6 +73,17 @@ const errorLink = onError(
 
     if (networkError) {
       // Logger.debug('[Network error]:', networkError);
+      const { name, statusCode, result = {} } = networkError;
+      switch (statusCode) {
+        case 503:
+          alert('Hệ thống bảo trì');
+          break;
+        case 500:
+          // alert('Vui lòng kết nối Internet');
+          break;
+        default:
+          break;
+      }
     }
   },
 );

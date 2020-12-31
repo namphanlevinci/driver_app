@@ -117,7 +117,7 @@ const accountSlice = createSlice({
       const { error, data } = action.payload;
       const token = data?.generateStaffToken?.token;
       const accept_shipping = data?.generateStaffToken?.accept_order;
-      console.log(accept_shipping)
+      console.log(accept_shipping);
       if (accept_shipping === 0) {
         state.acceptShipping = false;
       } else {
@@ -147,8 +147,12 @@ const accountSlice = createSlice({
       const Success = data?.registerStaff?.result;
 
       const err = error?.message.join('');
-      if (err === 'Internal server error') {
-        state.signUpError = 'Email hoặc tên đăng nhập đã tồn tại';
+      if (
+        err === 'Internal server error' ||
+        err === 'A user with the same user name or email already exists.' ||
+        err === 'System error.'
+      ) {
+        state.signUpError = 'Email hoặc mã nhân viên đã tồn tại';
       }
       if (Success) {
         state.popupSuccess = Success;

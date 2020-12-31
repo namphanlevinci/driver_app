@@ -66,7 +66,7 @@ function DrawerContent(props) {
       <Text style={styles.name}>
         {info?.firstname} {info?.lastname}
       </Text>
-      <Text style={styles.id}>ID: {info?.id}</Text>
+      <Text style={styles.id}>ID: {info?.user_name}</Text>
       <View style={styles.row}>
         <Text style={styles.text}>Tắt/Bật trạng thái nhận đơn hàng</Text>
         <Switch
@@ -85,7 +85,7 @@ function DrawerContent(props) {
           <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
         </TouchableOpacity>
         <View style={styles.version}>
-          <Text style={styles.code}>App version: 1.0.0</Text>
+          <Text style={styles.code}>App version: 1.0.2</Text>
         </View>
       </View>
     </View>
