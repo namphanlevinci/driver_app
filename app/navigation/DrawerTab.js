@@ -1,7 +1,7 @@
 import { Button } from '@components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HomeScreen, ScreenName } from '@screen';
-import { signOut, logout, acceptShipping } from '@slices/account';
+import { signOut, logout, acceptShipping, shipperInfo } from '@slices/account';
 import { AppStyles, images } from '@theme';
 import React, { useState, useEffect } from 'react';
 import {
@@ -11,7 +11,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Platform
+  Platform,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatId } from '@lib/formatId';
@@ -30,6 +30,7 @@ function DrawerContent(props) {
   const dispatch = useDispatch();
 
   const closed = () => {
+    dispatch(shipperInfo());
     navigation.closeDrawer();
   };
 
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   btn_text: {
     color: AppStyles.colors.red,
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     // fontWeight: 'bold'
     fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
-  }
+  },
 });
 
 export default AccountDrawer;

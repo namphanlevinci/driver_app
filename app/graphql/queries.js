@@ -122,3 +122,18 @@ export const NOTIFICATION_LIST = gql`
     }
   }
 `;
+
+export const GET_SHIPPER_INFO = gql`
+  query {
+    getShipperInfo {
+      accept_order
+      address
+      firstname
+      id
+      lastname
+      restaurant
+      token
+      user_name
+    }
+  }
+`;

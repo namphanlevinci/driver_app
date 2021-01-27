@@ -5,7 +5,7 @@
 import { Modal } from '@components';
 import { useFirebaseCloudMessing, FirebaseProvider } from '@firebase';
 import { setI18nConfig } from '@localize';
-import { saveTokenDevice } from '@slices/account';
+import { saveTokenDevice, shipperInfo } from '@slices/account';
 import { infoNotification, showNewOrder, showRatingOrder } from '@slices/app';
 import { deliveryOrderList } from '@slices/order';
 import { AppStyles } from '@theme';
@@ -91,6 +91,7 @@ const NotificationProvider = () => {
   const onForegroundMessage = (data) => {
     console.log('==> notification onForegroundMessage', data);
     dispatch(notification({ type: 'delivery' }));
+    dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -114,6 +115,7 @@ const NotificationProvider = () => {
   const onBackgroundMessage = (data) => {
     console.log('===> notification onBackgroundMessage', JSON.stringify(data));
     dispatch(notification({ type: 'delivery' }));
+    dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -136,6 +138,7 @@ const NotificationProvider = () => {
 
   const onOpenedApp = (data) => {
     console.log('=====> notification onOpenedApp', JSON.stringify(data));
+    dispatch(shipperInfo());
 
     // const {notification} = data;
     // TODO: process message on onOpenedApp

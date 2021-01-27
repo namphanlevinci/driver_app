@@ -1,4 +1,4 @@
-import { graphQlClient, mutation } from '@graphql';
+import { graphQlClient, mutation, query } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { saveJwtToken } from '@services/AsyncStoreExt';
 import { hideLoading, showLoading } from './app';
@@ -71,6 +71,23 @@ export const acceptShipping = createAsyncThunk(
     console.log('data acceptShipping', data);
     console.log('error acceptShipping', error);
 
+    return { error, data };
+  },
+);
+
+export const shipperInfo = createAsyncThunk(
+  `${KEY_CONSTANT}/getShipperInfo`,
+  async (id, { dispatch }) => {
+    // dispatch(showLoading());
+    const { error, data } = await graphQlClient.query({
+      query: query.GET_SHIPPER_INFO,
+      variables: id,
+    });
+
+    console.log('data shipperInfo', data);
+    console.log('error shipperInfo', error);
+
+    // dispatch(hideLoading());
     return { error, data };
   },
 );
@@ -184,6 +201,19 @@ const accountSlice = createSlice({
     },
     [acceptShipping.rejected]: (state, action) => {
       // state.isLogin = false;
+    },
+
+    [shipperInfo.pending]: (state, action) => {
+      // Logger.info(action, 'signIn pending');
+      console.log('pending', action);
+    },
+    [shipperInfo.fulfilled]: (state, action) => {
+      // Logger.info(action, 'signIn fulfilled');
+      const { data } = action.payload;
+      const accept_order =
+        data?.getShipperInfo?.accept_order || state.acceptShipping;
+      state.info = data?.getShipperInfo;
+      state.acceptShipping = accept_order;
     },
   },
 });
