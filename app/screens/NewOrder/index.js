@@ -10,7 +10,15 @@ import {
 import { Arrived, Bom, Complete, Shipping } from '@slices/statusOrder';
 import { AppStyles, images } from '@theme';
 import React, { useEffect } from 'react';
-import { FlatList, Linking, StyleSheet, Text, View, BackHandler, Platform } from 'react-native';
+import {
+  FlatList,
+  Linking,
+  StyleSheet,
+  Text,
+  View,
+  BackHandler,
+  Platform,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const wait = (timeout) => {
@@ -105,10 +113,10 @@ const NewOrder = (props) => {
   };
 
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction);
+    BackHandler.addEventListener('hardwareBackPress', backAction);
 
     return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction);
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
   }, []);
 
   return (
@@ -192,7 +200,7 @@ const NewOrder = (props) => {
 
       <Modal.Completed onPress={setComplete} />
       <Modal.Bom onPress={setBom} />
-      <ModalMessage />
+      <ModalMessage orderNumber={orderInfo?.order_number} />
     </View>
   );
 };

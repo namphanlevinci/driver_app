@@ -18,8 +18,8 @@ export const deliveryOrderList = createAsyncThunk(
       query: query.DELIVERY_ORDER,
     });
 
-    console.log('data deliveryOrderList', data);
-    console.log('error deliveryOrderList', error);
+    // console.log('data deliveryOrderList', data);
+    // console.log('error deliveryOrderList', error);
 
     dispatch(hideLoadingItem());
     return { error, data };
@@ -36,8 +36,8 @@ export const recentlyOrderList = createAsyncThunk(
       variables: input,
     });
 
-    console.log('data recentlyOrderList', data);
-    console.log('error recentlyOrderList', error);
+    // console.log('data recentlyOrderList', data);
+    // console.log('error recentlyOrderList', error);
 
     // dispatch(hideLoadingItem());
     return { error, data };
@@ -54,8 +54,8 @@ export const orderDetail = createAsyncThunk(
       variables: id,
     });
 
-    console.log('data orderDetail', data);
-    console.log('error orderDetail', error);
+    // console.log('data orderDetail', data);
+    // console.log('error orderDetail', error);
 
     dispatch(hideLoading());
     return { error, data };
@@ -77,7 +77,7 @@ const orderSlice = createSlice({
   },
   extraReducers: {
     [deliveryOrderList.pending]: (state, action) => {
-      console.log('deliveryOrderList pending', action);
+      // console.log('deliveryOrderList pending', action);
       state.getListError = null;
     },
     [deliveryOrderList.fulfilled]: (state, action) => {
@@ -91,7 +91,7 @@ const orderSlice = createSlice({
     },
 
     [recentlyOrderList.pending]: (state, action) => {
-      console.log('recentlyOrderList pending', action);
+      // console.log('recentlyOrderList pending', action);
       state.getListError = null;
     },
     [recentlyOrderList.fulfilled]: (state, action) => {
@@ -106,7 +106,7 @@ const orderSlice = createSlice({
 
     [orderDetail.pending]: (state, action) => {
       // state.orderDetail = {}
-      console.log('orderDetail pending', action);
+      // console.log('orderDetail pending', action);
       state.getListError = null;
     },
     [orderDetail.fulfilled]: (state, action) => {

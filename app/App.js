@@ -3,7 +3,7 @@
  * Everything starts from the entrypoint
  */
 import { Modal } from '@components';
-import { useFirebaseCloudMessing } from '@firebase';
+import { useFirebaseCloudMessing, FirebaseProvider } from '@firebase';
 import { setI18nConfig } from '@localize';
 import { saveTokenDevice } from '@slices/account';
 import { infoNotification, showNewOrder, showRatingOrder } from '@slices/app';
@@ -71,8 +71,10 @@ export default function App() {
         <ApolloProvider client={apolloClient}>
           <GraphErrorHandler ref={graphQLErrorRef}>
             <PaperProvider theme={theme}>
-              <Navigator />
-              <NotificationProvider />
+              <FirebaseProvider>
+                <Navigator />
+                <NotificationProvider />
+              </FirebaseProvider>
             </PaperProvider>
           </GraphErrorHandler>
         </ApolloProvider>

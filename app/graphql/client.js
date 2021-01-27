@@ -12,7 +12,7 @@ import * as NavigationService from '@navigate/NavigationService';
 const httpLink = createHttpLink({
   // uri: 'https://dev.jollibee.levincitest.com/graphql',
   // uri: 'https://jollibee.test88.info/graphql', // STAGING
-  uri: 'https://api.jollibee.com.vn/graphql', // PRODUCT
+  uri: 'https://jollibee.test88.info/graphql', // PRODUCT
 });
 
 const authLink = setContext(async (req, { headers }) => {
@@ -38,7 +38,7 @@ const authLink = setContext(async (req, { headers }) => {
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, response, forward }) => {
     // console.log(graphQLErrors, '*************graphQLErrors*************');
-  
+
     if (graphQLErrors?.length > 0) {
       // Logger.debug(graphQLErrors, '*************graphQLErrors*************');
 
