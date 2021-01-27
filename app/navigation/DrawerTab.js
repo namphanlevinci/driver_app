@@ -1,5 +1,5 @@
 import { Button } from '@components';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, useIsDrawerOpen  } from '@react-navigation/drawer';
 import { HomeScreen, ScreenName } from '@screen';
 import { signOut, logout, acceptShipping, shipperInfo } from '@slices/account';
 import { AppStyles, images } from '@theme';
@@ -23,6 +23,16 @@ function DrawerContent(props) {
   const [isEnabled, setIsEnabled] = useState(false);
   const info = useSelector((state) => state.account.info);
   const status = useSelector((state) => state.account.acceptShipping);
+
+  const isDrawerOpen = useIsDrawerOpen();
+
+  useEffect(() => {
+    if(isDrawerOpen){
+    dispatch(shipperInfo());
+    console.log('okok', isDrawerOpen)
+    }
+  }, [isDrawerOpen]);
+
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     changeStatus();
@@ -30,7 +40,7 @@ function DrawerContent(props) {
   const dispatch = useDispatch();
 
   const closed = () => {
-    dispatch(shipperInfo());
+    
     navigation.closeDrawer();
   };
 

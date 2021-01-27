@@ -120,7 +120,7 @@ const NotificationProvider = () => {
 
     console.log('==> notification onForegroundMessage', data);
     dispatch(notification({ type: 'delivery' }));
-    dispatch(shipperInfo());
+    // dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -144,7 +144,7 @@ const NotificationProvider = () => {
   const onBackgroundMessage = (data) => {
     console.log('===> notification onBackgroundMessage', JSON.stringify(data));
     dispatch(notification({ type: 'delivery' }));
-    dispatch(shipperInfo());
+    // dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -167,7 +167,7 @@ const NotificationProvider = () => {
 
   const onOpenedApp = (data) => {
     console.log('=====> notification onOpenedApp', JSON.stringify(data));
-    dispatch(shipperInfo());
+    // dispatch(shipperInfo());
 
     // const {notification} = data;
     // TODO: process message on onOpenedApp

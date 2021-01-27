@@ -211,9 +211,10 @@ const accountSlice = createSlice({
       // Logger.info(action, 'signIn fulfilled');
       const { data } = action.payload;
       const accept_order =
-        data?.getShipperInfo?.accept_order || state.acceptShipping;
+        data?.getShipperInfo?.accept_order;
+
       state.info = data?.getShipperInfo || state.info
-      state.acceptShipping = accept_order;
+      state.acceptShipping = accept_order === 0 ? false : true
     },
   },
 });

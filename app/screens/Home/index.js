@@ -15,7 +15,6 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
-import { shipperInfo } from '@slices/account';
 
 const wait = (timeout) => {
   return new Promise((resolve) => {
@@ -37,7 +36,6 @@ const HomeScreen = (props) => {
   };
 
   const opened = () => {
-    dispatch(shipperInfo());
     navigation.openDrawer();
   };
 
