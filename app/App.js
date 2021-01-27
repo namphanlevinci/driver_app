@@ -13,7 +13,7 @@ import Navigator from 'app/navigation';
 import configureAppStore from 'app/redux/store';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Platform } from 'react-native';
 import {
   configureFonts,
   DefaultTheme,
@@ -26,6 +26,7 @@ import makeApolloClient from './apolloClient';
 import GraphErrorHandler from './GraphErrorHandler';
 import { graphQLErrorRef } from '@navigate/NavigationService';
 import { notification } from '@slices/notification';
+import PushNotification from 'react-native-push-notification';
 
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -88,7 +89,35 @@ export default function App() {
 
 const NotificationProvider = () => {
   const dispatch = useDispatch();
+
+  PushNotification.createChannel(
+    {
+      channelId: '110123',
+      channelName: 'title',
+      channelDescription: 'body',
+      soundName: 'jollibeesound',
+    },
+    (created) => console.log(`createChannel returned '${created}'`),
+  );
+
   const onForegroundMessage = (data) => {
+    const title = data?.notification?.title ? data?.notification?.title : '';
+    const body = data?.notification?.body ? data?.notification?.body : '';
+
+    PushNotification.localNotification({
+      largeIcon: 'icon',
+      smallIcon: 'notification_icon',
+      color: 'white',
+      vibrate: true,
+      vibration: 300,
+      channelId: 110123,
+      visibility: 'public',
+      title: title,
+      message: body,
+      playSound: true,
+      soundName: Platform.OS === 'ios' ? 'jollibeesound.wav' : 'jollibeesound',
+    });
+
     console.log('==> notification onForegroundMessage', data);
     dispatch(notification({ type: 'delivery' }));
     dispatch(shipperInfo());

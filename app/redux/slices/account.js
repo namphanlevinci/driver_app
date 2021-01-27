@@ -212,7 +212,7 @@ const accountSlice = createSlice({
       const { data } = action.payload;
       const accept_order =
         data?.getShipperInfo?.accept_order || state.acceptShipping;
-      state.info = data?.getShipperInfo;
+      state.info = data?.getShipperInfo || state.info
       state.acceptShipping = accept_order;
     },
   },
