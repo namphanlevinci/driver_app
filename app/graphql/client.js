@@ -10,8 +10,8 @@ import { getJwtToken } from '@services/AsyncStoreExt';
 import * as NavigationService from '@navigate/NavigationService';
 
 const httpLink = createHttpLink({
-  uri: 'https://dev.jollibee.levincitest.com/graphql',
-  // uri: 'https://jollibee.test88.info/graphql', // STAGING
+  // uri: 'https://dev.jollibee.levincitest.com/graphql',
+  uri: 'https://jollibee.test88.info/graphql', // STAGING
   // uri: 'https://jollibee.test88.info/graphql', // PRODUCT
 });
 

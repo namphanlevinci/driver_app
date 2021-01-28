@@ -96,10 +96,10 @@ const ModalMessage = ({ orderNumber }) => {
       return () => subscriber();
     };
 
-    if (conversation && orderNumber) {
+    if (conversation) {
       setupListener();
     }
-  }, [conversation, orderNumber]);
+  }, [conversation]);
 
   const onSend = (listMessages = []) => {
     setMessages((previousMessages) =>
@@ -121,7 +121,7 @@ const ModalMessage = ({ orderNumber }) => {
   };
 
   const sendSuggest = (key) => {
-    const id_item = messages.length < 1 ? 1 : messages.length + 1;
+    const id_item = messages === null ? 1 : messages.length + 1;
     switch (key) {
       case 1:
         const obj_1 = {

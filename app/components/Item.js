@@ -221,10 +221,13 @@ export const Notify = ({ item, index, lastIndex }) => {
 
   const goToDetail = () => {
     const findItem = newOrder.find((item) => item.id === order_id);
+
     if (findItem !== undefined) {
       NavigationService.navigate(ScreenName.NewOrder, { id: order_id });
     } else {
-      NavigationService.navigate(ScreenName.OldOrder, { id: order_id });
+      if (order_id !== null) {
+        NavigationService.navigate(ScreenName.OldOrder, { id: order_id });
+      }
     }
     markAsRead();
   };
@@ -257,7 +260,9 @@ export const Notify = ({ item, index, lastIndex }) => {
           <Text style={styles.money}>{title}</Text>
           <Text style={styles.address}>{content}</Text>
         </View>
-        <Image source={images.icons.arrow_left} style={{ marginLeft: 5 }} />
+        {order_id !== null ? (
+          <Image source={images.icons.arrow_left} style={{ marginLeft: 5 }} />
+        ) : <View style={{ marginLeft: 5 }} />}
       </View>
     </TouchableOpacity>
   );
@@ -272,7 +277,9 @@ export const Info = (props) => {
           {firstname} {lastname}
           {' - '} {customer_phone}
         </Text>
-        <Text style={[styles.money, { color: AppStyles.colors.deep_green }]}>Giao đến:</Text>
+        <Text style={[styles.money, { color: AppStyles.colors.deep_green }]}>
+          Giao đến:
+        </Text>
         <Text style={{ color: AppStyles.colors.deep_green }}>
           {phone} {'-'} {address}
         </Text>

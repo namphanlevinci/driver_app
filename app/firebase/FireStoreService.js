@@ -34,11 +34,11 @@ class FireStoreService {
   }
 
   // tao room (nhieu nguoi join dc) or conversation (2 nguoi)
-  createConversation(conversationId) {
+  async createConversation(conversationId) {
     if (!conversationId) return;
     const conId = conversationId + '';
 
-    firestore().collection(COLLECTIONS.public_message).doc(conId).set({
+    await firestore().collection(COLLECTIONS.public_message).doc(conId).set({
       name: conId,
       id: conId,
     });

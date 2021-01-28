@@ -107,7 +107,7 @@ const NotificationProvider = () => {
     PushNotification.localNotification({
       largeIcon: 'icon',
       smallIcon: 'notification_icon',
-      color: 'white',
+      color: '#F0810D',
       vibrate: true,
       vibration: 300,
       channelId: 110123,
@@ -118,9 +118,10 @@ const NotificationProvider = () => {
       soundName: Platform.OS === 'ios' ? 'jollibeesound.wav' : 'jollibeesound',
     });
 
-    console.log('==> notification onForegroundMessage', data);
+    console.log('==> notification onForegroundMessage', data?.data);
     dispatch(notification({ type: 'delivery' }));
-    // dispatch(shipperInfo());
+    dispatch(deliveryOrderList());
+    dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -144,7 +145,7 @@ const NotificationProvider = () => {
   const onBackgroundMessage = (data) => {
     console.log('===> notification onBackgroundMessage', JSON.stringify(data));
     dispatch(notification({ type: 'delivery' }));
-    // dispatch(shipperInfo());
+    dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -167,7 +168,7 @@ const NotificationProvider = () => {
 
   const onOpenedApp = (data) => {
     console.log('=====> notification onOpenedApp', JSON.stringify(data));
-    // dispatch(shipperInfo());
+    dispatch(shipperInfo());
 
     // const {notification} = data;
     // TODO: process message on onOpenedApp

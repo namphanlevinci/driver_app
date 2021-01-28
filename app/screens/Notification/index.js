@@ -16,6 +16,9 @@ const Notification = () => {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
   const data = useSelector((state) => state.notification.notificationList);
+  // const dateFilter = data.filter(item => item.order_id !== null)
+
+  // console.log(dateFilter)
   const loading = useSelector((state) => state.app.loadingItem);
 
   useEffect(() => {

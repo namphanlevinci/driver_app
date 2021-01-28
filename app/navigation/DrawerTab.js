@@ -1,5 +1,8 @@
 import { Button } from '@components';
-import { createDrawerNavigator, useIsDrawerOpen  } from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  useIsDrawerOpen,
+} from '@react-navigation/drawer';
 import { HomeScreen, ScreenName } from '@screen';
 import { signOut, logout, acceptShipping, shipperInfo } from '@slices/account';
 import { AppStyles, images } from '@theme';
@@ -27,9 +30,8 @@ function DrawerContent(props) {
   const isDrawerOpen = useIsDrawerOpen();
 
   useEffect(() => {
-    if(isDrawerOpen){
-    dispatch(shipperInfo());
-    console.log('okok', isDrawerOpen)
+    if (isDrawerOpen) {
+      dispatch(shipperInfo());
     }
   }, [isDrawerOpen]);
 
@@ -40,7 +42,6 @@ function DrawerContent(props) {
   const dispatch = useDispatch();
 
   const closed = () => {
-    
     navigation.closeDrawer();
   };
 
@@ -96,7 +97,7 @@ function DrawerContent(props) {
           <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
         </TouchableOpacity>
         <View style={styles.version}>
-          <Text style={styles.code}>App version: 1.0.2</Text>
+          <Text style={styles.code}>App version: 1.0.3</Text>
         </View>
       </View>
     </View>

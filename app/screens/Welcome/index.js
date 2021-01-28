@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: AppStyles.colors.yellow,
+    backgroundColor: AppStyles.colors.red,
   },
   logo: {
     width: '100%',
