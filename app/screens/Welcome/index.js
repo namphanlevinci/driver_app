@@ -1,12 +1,12 @@
 import { checkReview, startUp } from '@slices/app';
 import { AppStyles, images } from '@theme';
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, View, YellowBox } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import codePush from 'react-native-code-push';
 import Spinner from 'react-native-spinkit';
 import { useDispatch } from 'react-redux';
 
-YellowBox.ignoreWarnings(['']);
+// YellowBox.ignoreWarnings(['']);
 
 const CodePushWelcomeScreen = () => {
   const [isVisible, setIsVisible] = useState(false);

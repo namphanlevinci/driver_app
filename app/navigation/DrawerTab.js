@@ -97,7 +97,7 @@ function DrawerContent(props) {
           <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
         </TouchableOpacity>
         <View style={styles.version}>
-          <Text style={styles.code}>App version: 1.0.3</Text>
+          <Text style={styles.code}>Phiên bản: 1.0.3</Text>
         </View>
       </View>
     </View>
@@ -180,6 +180,8 @@ const styles = StyleSheet.create({
   code: {
     color: AppStyles.colors.silver,
     fontSize: 11,
+    fontStyle: 'italic',
+    marginBottom: 5,
   },
   version: {
     marginTop: 10,

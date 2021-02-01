@@ -46,7 +46,7 @@ const ModalMessage = ({ orderNumber }) => {
     dispatch(hideMessage());
   };
 
-  const [messages, setMessages] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   // useEffect(() => {
   //   setMessages([]);
@@ -121,7 +121,7 @@ const ModalMessage = ({ orderNumber }) => {
   };
 
   const sendSuggest = (key) => {
-    const id_item = messages === null ? 1 : messages.length + 1;
+    const id_item = messages.length === 0 ? 1 : messages.length + 1;
     switch (key) {
       case 1:
         const obj_1 = {
@@ -167,7 +167,7 @@ const ModalMessage = ({ orderNumber }) => {
             <Text style={styles.text}>Tôi đã đến nơi</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => sendSuggest(2)}>
-            <Text style={styles.text}>Đơn hàng đã được giao</Text>
+            <Text style={styles.text}>Đơn hàng đang được giao</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>

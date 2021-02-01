@@ -262,7 +262,7 @@ export const Notify = ({ item, index, lastIndex }) => {
         </View>
         {order_id !== null ? (
           <Image source={images.icons.arrow_left} style={{ marginLeft: 5 }} />
-        ) : <View style={{ marginLeft: 5 }} />}
+        ) : <View style={{ marginLeft: 15 }} />}
       </View>
     </TouchableOpacity>
   );

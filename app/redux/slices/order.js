@@ -30,7 +30,7 @@ export const deliveryOrderList = createAsyncThunk(
 export const recentlyOrderList = createAsyncThunk(
   `${KEY_CONSTANT}/recentlyOrderList`,
   async (input, { dispatch }) => {
-    // dispatch(showLoadingItem());
+    dispatch(showLoadmore());
     const { error, data } = await graphQlClient.query({
       query: query.RECENTLY_ORDER,
       variables: input,
@@ -39,7 +39,7 @@ export const recentlyOrderList = createAsyncThunk(
     // console.log('data recentlyOrderList', data);
     // console.log('error recentlyOrderList', error);
 
-    // dispatch(hideLoadingItem());
+    dispatch(hideLoadmore());
     return { error, data };
   },
 );
@@ -69,10 +69,19 @@ const orderSlice = createSlice({
     new: [],
     recently: [],
     orderDetail: {},
+    currentPage: 0,
+    total_pages: 0,
+    isLoadmore: false,
   },
   reducers: {
     resetOrderDetail(state, action) {
       state.orderDetail = {};
+    },
+    showLoadmore(state, action) {
+      state.isLoadmore = true;
+    },
+    hideLoadmore(state, action) {
+      state.isLoadmore = false;
     },
   },
   extraReducers: {
@@ -96,12 +105,20 @@ const orderSlice = createSlice({
     },
     [recentlyOrderList.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      const recentlyList = data?.recentlyOrders?.orders;
-      if (recentlyList) {
-        state.recently = recentlyList;
-      } else {
-        state.getListError = error;
-      }
+      // const recentlyList = data?.recentlyOrders?.orders;
+      // if (recentlyList) {
+      //   state.recently = recentlyList;
+      // } else {total_pages
+      //   state.getListError = error;
+      // }
+      state.total_pages =
+        data?.recentlyOrders?.page_info?.total_pages || state.total_pages;
+
+      state.currentPage = action?.meta?.arg?.page || 0;
+      state.recently =
+        state.currentPage === 1
+          ? data?.recentlyOrders?.orders
+          : state.recently.concat(data?.recentlyOrders?.orders);
     },
 
     [orderDetail.pending]: (state, action) => {
@@ -120,5 +137,5 @@ const orderSlice = createSlice({
 });
 
 const { actions, reducer } = orderSlice;
-export const { resetOrderDetail } = actions;
+export const { resetOrderDetail, showLoadmore, hideLoadmore } = actions;
 export default reducer;
