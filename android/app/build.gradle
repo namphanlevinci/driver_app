@@ -137,11 +137,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.delivery"
+        applicationId "com.jollibee.delivery"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0.3"
+        versionName "1.0.0"
         multiDexEnabled true
     }
     splits {
