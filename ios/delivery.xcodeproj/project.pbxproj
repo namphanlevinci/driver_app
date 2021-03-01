@@ -13,12 +13,13 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		187FB40525C29595002C10E0 /* jollibeesound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 187FB40425C29594002C10E0 /* jollibeesound.wav */; };
 		1C335018A6384F68B41A00C3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD2391B279A949C09A00B739 /* Roboto-Medium.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* deliveryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* deliveryTests.m */; };
+		361E7B2925ECA17F0012848F /* JollibeeSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 361E7B2825ECA17F0012848F /* JollibeeSound.wav */; };
+		361E7B2A25ECA17F0012848F /* JollibeeSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 361E7B2825ECA17F0012848F /* JollibeeSound.wav */; };
 		36CBACFC25C10C3A00AF2A07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36CBACFB25C10C3A00AF2A07 /* GoogleService-Info.plist */; };
 		4BC285DAC2434F1E9411B195 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 365B4DAA0751458495036028 /* Roboto-Light.ttf */; };
 		61721FA2FBBE4795A3C3E80B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31DEB570D0E4423C962BDA0A /* Roboto-Regular.ttf */; };
@@ -53,7 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00B5EA903425488085BA59EF /* MergeBlack.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MergeBlack.ttf; path = ../app/assets/fonts/MergeBlack.ttf; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* deliveryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = deliveryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +69,6 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = delivery/main.m; sourceTree = "<group>"; };
 		14D8E42006ED443AB2C295D6 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../app/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		16320D309CC64C6E92CD8CA4 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		187FB40425C29594002C10E0 /* jollibeesound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = jollibeesound.wav; path = ../../jollibeesound.wav; sourceTree = "<group>"; };
 		18C9E5F525490F4E002A170B /* delivery.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = delivery.entitlements; path = delivery/delivery.entitlements; sourceTree = "<group>"; };
 		1A51CAE7213A4C07B49BAFE6 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../app/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		1FD98607EB3F47D5890A6D66 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
@@ -78,6 +77,7 @@
 		3197F1497A53C7DB7632F4A5 /* Pods-delivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-delivery.debug.xcconfig"; path = "Target Support Files/Pods-delivery/Pods-delivery.debug.xcconfig"; sourceTree = "<group>"; };
 		31DEB570D0E4423C962BDA0A /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../app/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		31E34C1685964FB39CDC829D /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		361E7B2825ECA17F0012848F /* JollibeeSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = JollibeeSound.wav; path = delivery/JollibeeSound.wav; sourceTree = "<group>"; };
 		365B4DAA0751458495036028 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../app/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		36CBACFB25C10C3A00AF2A07 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "delivery/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45F76A21DFE68E7620F098B7 /* Pods-delivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-delivery.release.xcconfig"; path = "Target Support Files/Pods-delivery/Pods-delivery.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,11 +162,10 @@
 		13B07FAE1A68108700A75B9A /* delivery */ = {
 			isa = PBXGroup;
 			children = (
+				361E7B2825ECA17F0012848F /* JollibeeSound.wav */,
 				18C9E5F525490F4E002A170B /* delivery.entitlements */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				187FB40425C29594002C10E0 /* jollibeesound.wav */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				36CBACFB25C10C3A00AF2A07 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -414,7 +413,6 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				68C286FD8F5D4177B6C4FD1E /* MergeBlack.ttf in Resources */,
-				187FB40525C29595002C10E0 /* jollibeesound.wav in Resources */,
 				CAE1D5A1C610461F886F0681 /* Roboto-Black.ttf in Resources */,
 				CD75C150CA134903A999892D /* Roboto-BlackItalic.ttf in Resources */,
 				D9522399D81C43709F7FE841 /* Roboto-Bold.ttf in Resources */,
@@ -427,6 +425,7 @@
 				C449417E934641FC869A269C /* Roboto-MediumItalic.ttf in Resources */,
 				61721FA2FBBE4795A3C3E80B /* Roboto-Regular.ttf in Resources */,
 				C530E202D46741A6B994FE16 /* Roboto-Thin.ttf in Resources */,
+				361E7B2925ECA17F0012848F /* JollibeeSound.wav in Resources */,
 				E8CB9C12D5B040C7BC22BCBF /* Roboto-ThinItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +434,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361E7B2A25ECA17F0012848F /* JollibeeSound.wav in Resources */,
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

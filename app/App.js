@@ -95,7 +95,7 @@ const NotificationProvider = () => {
       channelId: '110123',
       channelName: 'title',
       channelDescription: 'body',
-      soundName: 'jollibeesound',
+      soundName: 'jollibeesound.wav',
     },
     (created) => console.log(`createChannel returned '${created}'`),
   );
