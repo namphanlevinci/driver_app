@@ -1,4 +1,4 @@
-package com.delivery;
+package com.jollibee.delivery;
 
 import android.app.Application;
 import android.content.Context;
@@ -71,7 +71,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.delivery.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.jollibee.delivery.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

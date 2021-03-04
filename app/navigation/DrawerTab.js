@@ -97,7 +97,7 @@ function DrawerContent(props) {
           <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
         </TouchableOpacity>
         <View style={styles.version}>
-          <Text style={styles.code}>Phiên bản: 1.0.3</Text>
+          <Text style={styles.code}>Phiên bản: 1.0.0</Text>
         </View>
       </View>
     </View>
