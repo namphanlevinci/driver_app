@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "320365913986-6754eae2u450qe8s0oikpjsvvkc95s7n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.delivery",
+            "certificate_hash": "ef4d4d4fc44f63e392358faa170595fdfecb3818"
+          }
+        },
+        {
           "client_id": "320365913986-hb286qe7ruqj3l95ilc5cdk6tf52l70j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -58,6 +66,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "320365913986-l89fl4pn7gc5lbovlcpe3s20hfpvfu6f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jollibee.delivery",
+            "certificate_hash": "ef4d4d4fc44f63e392358faa170595fdfecb3818"
+          }
+        },
         {
           "client_id": "320365913986-gmrivdio0g8lb9lnskrbleft9942c642.apps.googleusercontent.com",
           "client_type": 3
