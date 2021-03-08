@@ -1,4 +1,6 @@
 <resources>
+<!-- production: mmGnkQOqXNKyxEBnVeIC9vghNpXt__ZShcyVA -->
+<!-- staging: MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje -->
     <string name="app_name">Jollibee Driver</string>
     <!-- <string moduleConfig="true" name="CodePushDeploymentKey">MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje</string> -->
     <string moduleConfig="true" name="CodePushDeploymentKey">mmGnkQOqXNKyxEBnVeIC9vghNpXt__ZShcyVA</string>

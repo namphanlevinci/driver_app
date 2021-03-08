@@ -11,8 +11,8 @@ import * as NavigationService from '@navigate/NavigationService';
 
 const httpLink = createHttpLink({
   // uri: 'https://dev.jollibee.levincitest.com/graphql',
-  // uri: 'https://jollibee.test88.info/graphql', // STAGING
-  uri: 'https://jollibee.test88.info/graphql', // PRODUCT
+  //uri: 'https://jollibee.test88.info/graphql', // STAGING
+  uri: 'https://api.jollibee.com.vn/graphql', // PRODUCT
 });
 
 const authLink = setContext(async (req, { headers }) => {
