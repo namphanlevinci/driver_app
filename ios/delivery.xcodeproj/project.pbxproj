@@ -20,6 +20,25 @@
 		2DCD954D1E0B4F2C00145EB5 /* deliveryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* deliveryTests.m */; };
 		361E7B2925ECA17F0012848F /* JollibeeSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 361E7B2825ECA17F0012848F /* JollibeeSound.wav */; };
 		361E7B2A25ECA17F0012848F /* JollibeeSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 361E7B2825ECA17F0012848F /* JollibeeSound.wav */; };
+		3663B2B825F88F2E00D80537 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		3663B2B925F88F2E00D80537 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3663B2BD25F88F2E00D80537 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		3663B2BE25F88F2E00D80537 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		3663B2BF25F88F2E00D80537 /* MergeBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00B5EA903425488085BA59EF /* MergeBlack.ttf */; };
+		3663B2C025F88F2E00D80537 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A51CAE7213A4C07B49BAFE6 /* Roboto-Black.ttf */; };
+		3663B2C125F88F2E00D80537 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87134E4D647E4E4BB539555A /* Roboto-BlackItalic.ttf */; };
+		3663B2C225F88F2E00D80537 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B2CEBC054CE4CE98628217D /* Roboto-Bold.ttf */; };
+		3663B2C325F88F2E00D80537 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E69EC462DDC14E17B5901198 /* Roboto-BoldItalic.ttf */; };
+		3663B2C425F88F2E00D80537 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14D8E42006ED443AB2C295D6 /* Roboto-Italic.ttf */; };
+		3663B2C525F88F2E00D80537 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 365B4DAA0751458495036028 /* Roboto-Light.ttf */; };
+		3663B2C625F88F2E00D80537 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36CBACFB25C10C3A00AF2A07 /* GoogleService-Info.plist */; };
+		3663B2C725F88F2E00D80537 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46871193418F477B93CA949B /* Roboto-LightItalic.ttf */; };
+		3663B2C825F88F2E00D80537 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD2391B279A949C09A00B739 /* Roboto-Medium.ttf */; };
+		3663B2C925F88F2E00D80537 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C613C548F16D49B597BAD0AE /* Roboto-MediumItalic.ttf */; };
+		3663B2CA25F88F2E00D80537 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31DEB570D0E4423C962BDA0A /* Roboto-Regular.ttf */; };
+		3663B2CB25F88F2E00D80537 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 506F5A05B6D041DFB3C5968D /* Roboto-Thin.ttf */; };
+		3663B2CC25F88F2E00D80537 /* JollibeeSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 361E7B2825ECA17F0012848F /* JollibeeSound.wav */; };
+		3663B2CD25F88F2E00D80537 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A633A20DF314AE1B651A1EE /* Roboto-ThinItalic.ttf */; };
 		36CBACFC25C10C3A00AF2A07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36CBACFB25C10C3A00AF2A07 /* GoogleService-Info.plist */; };
 		4BC285DAC2434F1E9411B195 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 365B4DAA0751458495036028 /* Roboto-Light.ttf */; };
 		61721FA2FBBE4795A3C3E80B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31DEB570D0E4423C962BDA0A /* Roboto-Regular.ttf */; };
@@ -27,13 +46,14 @@
 		79DEE0C382A247D483C6D939 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E69EC462DDC14E17B5901198 /* Roboto-BoldItalic.ttf */; };
 		9736CDC1D97942FA97D40059 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14D8E42006ED443AB2C295D6 /* Roboto-Italic.ttf */; };
 		9E74F30763175AD16F224CFD /* libPods-delivery-deliveryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5F06AF7A79A8F26FE3D064 /* libPods-delivery-deliveryTests.a */; };
+		AC4F9662AD15AAFE0F0D1552 /* libPods-delivery-Stage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80686C0D916D09662EBCE972 /* libPods-delivery-Stage.a */; };
 		C449417E934641FC869A269C /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C613C548F16D49B597BAD0AE /* Roboto-MediumItalic.ttf */; };
 		C530E202D46741A6B994FE16 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 506F5A05B6D041DFB3C5968D /* Roboto-Thin.ttf */; };
 		CAE1D5A1C610461F886F0681 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A51CAE7213A4C07B49BAFE6 /* Roboto-Black.ttf */; };
 		CD75C150CA134903A999892D /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87134E4D647E4E4BB539555A /* Roboto-BlackItalic.ttf */; };
 		D9522399D81C43709F7FE841 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B2CEBC054CE4CE98628217D /* Roboto-Bold.ttf */; };
 		E8CB9C12D5B040C7BC22BCBF /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A633A20DF314AE1B651A1EE /* Roboto-ThinItalic.ttf */; };
-		FBFD5835DB98727CA2409D9D /* libPods-delivery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EF31FBB0FE7C8F9702E316 /* libPods-delivery.a */; };
+		FBFD5835DB98727CA2409D9D /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,14 +99,19 @@
 		31E34C1685964FB39CDC829D /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		361E7B2825ECA17F0012848F /* JollibeeSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = JollibeeSound.wav; path = delivery/JollibeeSound.wav; sourceTree = "<group>"; };
 		365B4DAA0751458495036028 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../app/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		3663B2D425F88F2E00D80537 /* Stage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3663B2DC25F88F4D00D80537 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3663B2DD25F88F4D00D80537 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36CBACFB25C10C3A00AF2A07 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "delivery/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45F76A21DFE68E7620F098B7 /* Pods-delivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-delivery.release.xcconfig"; path = "Target Support Files/Pods-delivery/Pods-delivery.release.xcconfig"; sourceTree = "<group>"; };
 		4610D41D79134DD1A4799EC9 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		46871193418F477B93CA949B /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../app/assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		506F5A05B6D041DFB3C5968D /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../app/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
-		50EF31FBB0FE7C8F9702E316 /* libPods-delivery.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-delivery.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E470A231BB3CB3B0D26635 /* Pods-delivery-Stage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-delivery-Stage.debug.xcconfig"; path = "Target Support Files/Pods-delivery-Stage/Pods-delivery-Stage.debug.xcconfig"; sourceTree = "<group>"; };
 		5A633A20DF314AE1B651A1EE /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../app/assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		5B2CEBC054CE4CE98628217D /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../app/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		7E686472C6DE6CD63EB8D21D /* Pods-delivery-Stage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-delivery-Stage.release.xcconfig"; path = "Target Support Files/Pods-delivery-Stage/Pods-delivery-Stage.release.xcconfig"; sourceTree = "<group>"; };
+		80686C0D916D09662EBCE972 /* libPods-delivery-Stage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-delivery-Stage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8219FE22F1CA416E81C71D12 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		87134E4D647E4E4BB539555A /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../app/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		8CD94D5A50D04CBA9B86FFCA /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -121,7 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBFD5835DB98727CA2409D9D /* libPods-delivery.a in Frameworks */,
+				FBFD5835DB98727CA2409D9D /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +161,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3663B2BA25F88F2E00D80537 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC4F9662AD15AAFE0F0D1552 /* libPods-delivery-Stage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +195,7 @@
 		13B07FAE1A68108700A75B9A /* delivery */ = {
 			isa = PBXGroup;
 			children = (
+				3663B2DB25F88F4D00D80537 /* stage */,
 				361E7B2825ECA17F0012848F /* JollibeeSound.wav */,
 				18C9E5F525490F4E002A170B /* delivery.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -180,10 +214,20 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				50EF31FBB0FE7C8F9702E316 /* libPods-delivery.a */,
 				9C5F06AF7A79A8F26FE3D064 /* libPods-delivery-deliveryTests.a */,
+				80686C0D916D09662EBCE972 /* libPods-delivery-Stage.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3663B2DB25F88F4D00D80537 /* stage */ = {
+			isa = PBXGroup;
+			children = (
+				3663B2DC25F88F4D00D80537 /* GoogleService-Info.plist */,
+				3663B2DD25F88F4D00D80537 /* Info.plist */,
+			);
+			name = stage;
+			path = delivery/stage;
 			sourceTree = "<group>";
 		};
 		63DDA987CAAE35C17BDD3235 /* Pods */ = {
@@ -193,6 +237,8 @@
 				45F76A21DFE68E7620F098B7 /* Pods-delivery.release.xcconfig */,
 				0E83440654447D5C0AA89C12 /* Pods-delivery-deliveryTests.debug.xcconfig */,
 				FAAB37E9A2595365D928AAEF /* Pods-delivery-deliveryTests.release.xcconfig */,
+				55E470A231BB3CB3B0D26635 /* Pods-delivery-Stage.debug.xcconfig */,
+				7E686472C6DE6CD63EB8D21D /* Pods-delivery-Stage.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -263,6 +309,7 @@
 				00E356EE1AD99517003FC87E /* deliveryTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* delivery-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* delivery-tvOSTests.xctest */,
+				3663B2D425F88F2E00D80537 /* Stage.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -349,6 +396,27 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* delivery-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		3663B2B425F88F2E00D80537 /* Stage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3663B2D125F88F2E00D80537 /* Build configuration list for PBXNativeTarget "Stage" */;
+			buildPhases = (
+				3663B2B525F88F2E00D80537 /* [CP] Check Pods Manifest.lock */,
+				3663B2B625F88F2E00D80537 /* Start Packager */,
+				3663B2B725F88F2E00D80537 /* Sources */,
+				3663B2BA25F88F2E00D80537 /* Frameworks */,
+				3663B2BC25F88F2E00D80537 /* Resources */,
+				3663B2CE25F88F2E00D80537 /* Bundle React Native code and images */,
+				3663B2CF25F88F2E00D80537 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stage;
+			productName = delivery;
+			productReference = 3663B2D425F88F2E00D80537 /* Stage.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -375,6 +443,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
+					3663B2B425F88F2E00D80537 = {
+						DevelopmentTeam = AP95TBLGP3;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "delivery" */;
@@ -391,6 +463,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* delivery */,
+				3663B2B425F88F2E00D80537 /* Stage */,
 				00E356ED1AD99517003FC87E /* deliveryTests */,
 				2D02E47A1E0B4A5D006451C7 /* delivery-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* delivery-tvOSTests */,
@@ -446,6 +519,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3663B2BC25F88F2E00D80537 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3663B2BD25F88F2E00D80537 /* Images.xcassets in Resources */,
+				3663B2BE25F88F2E00D80537 /* LaunchScreen.xib in Resources */,
+				3663B2BF25F88F2E00D80537 /* MergeBlack.ttf in Resources */,
+				3663B2C025F88F2E00D80537 /* Roboto-Black.ttf in Resources */,
+				3663B2C125F88F2E00D80537 /* Roboto-BlackItalic.ttf in Resources */,
+				3663B2C225F88F2E00D80537 /* Roboto-Bold.ttf in Resources */,
+				3663B2C325F88F2E00D80537 /* Roboto-BoldItalic.ttf in Resources */,
+				3663B2C425F88F2E00D80537 /* Roboto-Italic.ttf in Resources */,
+				3663B2C525F88F2E00D80537 /* Roboto-Light.ttf in Resources */,
+				3663B2C625F88F2E00D80537 /* GoogleService-Info.plist in Resources */,
+				3663B2C725F88F2E00D80537 /* Roboto-LightItalic.ttf in Resources */,
+				3663B2C825F88F2E00D80537 /* Roboto-Medium.ttf in Resources */,
+				3663B2C925F88F2E00D80537 /* Roboto-MediumItalic.ttf in Resources */,
+				3663B2CA25F88F2E00D80537 /* Roboto-Regular.ttf in Resources */,
+				3663B2CB25F88F2E00D80537 /* Roboto-Thin.ttf in Resources */,
+				3663B2CC25F88F2E00D80537 /* JollibeeSound.wav in Resources */,
+				3663B2CD25F88F2E00D80537 /* Roboto-ThinItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -476,6 +573,113 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		3663B2B525F88F2E00D80537 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-delivery-Stage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3663B2B625F88F2E00D80537 /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3663B2CE25F88F2E00D80537 /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		3663B2CF25F88F2E00D80537 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-delivery-Stage/Pods-delivery-Stage-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-delivery-Stage/Pods-delivery-Stage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		5415A4DF4065AD1EC9446A18 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -710,6 +914,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3663B2B725F88F2E00D80537 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3663B2B825F88F2E00D80537 /* AppDelegate.m in Sources */,
+				3663B2B925F88F2E00D80537 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -790,7 +1003,7 @@
 				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = AP95TBLGP3;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -799,13 +1012,13 @@
 				);
 				INFOPLIST_FILE = delivery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.drivervn;
 				PRODUCT_NAME = delivery;
 				PROVISIONING_PROFILE_SPECIFIER = "Jollibee driver dev";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -823,17 +1036,17 @@
 				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = AP95TBLGP3;
 				INFOPLIST_FILE = delivery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.drivervn;
 				PRODUCT_NAME = delivery;
 				PROVISIONING_PROFILE_SPECIFIER = "Jollibee driver";
 				SWIFT_VERSION = 5.0;
@@ -944,6 +1157,66 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/delivery-tvOS.app/delivery-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		3663B2D225F88F2E00D80537 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55E470A231BB3CB3B0D26635 /* Pods-delivery-Stage.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"FB_SONARKIT_ENABLED=1",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/delivery/stage/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.3;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		3663B2D325F88F2E00D80537 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E686472C6DE6CD63EB8D21D /* Pods-delivery-Stage.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 19;
+				DEVELOPMENT_TEAM = AP95TBLGP3;
+				INFOPLIST_FILE = "$(SRCROOT)/delivery/stage/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.3;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.driver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee driver";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -1095,6 +1368,15 @@
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
 				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3663B2D125F88F2E00D80537 /* Build configuration list for PBXNativeTarget "Stage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3663B2D225F88F2E00D80537 /* Debug */,
+				3663B2D325F88F2E00D80537 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

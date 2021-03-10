@@ -28,4 +28,7 @@ target 'delivery' do
   post_install do |installer|
     flipper_post_install(installer)
   end
+
+  target 'Stage' do
+  end
 end
