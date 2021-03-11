@@ -67,11 +67,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "320365913986-42h6i08u76n9kc0b57jnmem12f2q0e61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jollibee.delivery",
+            "certificate_hash": "3350fc84a997f90f3fd8c7863125af276445d086"
+          }
+        },
+        {
           "client_id": "320365913986-l89fl4pn7gc5lbovlcpe3s20hfpvfu6f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.jollibee.delivery",
             "certificate_hash": "ef4d4d4fc44f63e392358faa170595fdfecb3818"
+          }
+        },
+        {
+          "client_id": "320365913986-snrmeiecff998mfnvtb45iprv383nag1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jollibee.delivery",
+            "certificate_hash": "3fb5c57cab6c8ec08c402a0168ea41fc7c74e022"
           }
         },
         {
