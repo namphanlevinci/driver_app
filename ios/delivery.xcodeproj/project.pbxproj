@@ -430,7 +430,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = AP95TBLGP3;
+						DevelopmentTeam = SS3KAQVX44;
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Manual;
 					};
@@ -1001,10 +1001,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = AP95TBLGP3;
+				DEVELOPMENT_TEAM = SS3KAQVX44;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -1020,7 +1020,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.drivervn;
 				PRODUCT_NAME = delivery;
-				PROVISIONING_PROFILE_SPECIFIER = "Jollibee driver dev";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Appstore Provisioning";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1037,7 +1037,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = AP95TBLGP3;
+				DEVELOPMENT_TEAM = SS3KAQVX44;
 				INFOPLIST_FILE = delivery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
@@ -1048,7 +1048,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.drivervn;
 				PRODUCT_NAME = delivery;
-				PROVISIONING_PROFILE_SPECIFIER = "Jollibee driver";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Appstore Provisioning";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -115,7 +115,7 @@ const NotificationProvider = () => {
       title: title,
       message: body,
       playSound: true,
-      soundName: Platform.OS === 'ios' ? 'jollibeesound.wav' : 'jollibeesound',
+      soundName: 'jollibeesound.wav',
     });
 
     console.log('==> notification onForegroundMessage', data?.data);
