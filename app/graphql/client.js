@@ -10,8 +10,8 @@ import { getJwtToken } from '@services/AsyncStoreExt';
 import * as NavigationService from '@navigate/NavigationService';
 
 const httpLink = createHttpLink({
-  uri: 'https://api.jollibee.com.vn/graphql',
-  // uri: Config.GRAPHQL_ENDPOINT,
+  // uri: 'https://api.jollibee.com.vn/graphql',
+  uri: Config.GRAPHQL_ENDPOINT,
 });
 
 const authLink = setContext(async (req, { headers }) => {

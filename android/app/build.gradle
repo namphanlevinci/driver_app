@@ -78,7 +78,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 
 apply from: '../../node_modules/react-native/react.gradle'
@@ -131,6 +131,7 @@ project.ext.envConfigFiles = [
     debug: '.env.development',
     release: '.env.production',
     staging : '.env.staging',
+    // anothercustombuild: '.env',
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + '/dotenv.gradle'
@@ -138,9 +139,9 @@ apply from: project(':react-native-config').projectDir.getPath() + '/dotenv.grad
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    dexOptions {
-        javaMaxHeapSize '3g'
-    }
+    // dexOptions {
+    //     javaMaxHeapSize '3g'
+    // }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -149,10 +150,11 @@ android {
 
     defaultConfig {
         applicationId 'com.jollibee.delivery'
+        resValue 'string', 'build_config_package', 'com.jollibee.delivery'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 3
-        versionName "1.0.0"
+        versionName '1.0'
         multiDexEnabled true
     }
     splits {
@@ -230,7 +232,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
     implementation 'com.google.firebase:firebase-analytics:17.5.0'

@@ -127,6 +127,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "320365913986-1o9t5rllobc2pvs97osfrjviprucugdj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jollibee.delivery.staging",
+            "certificate_hash": "3fb5c57cab6c8ec08c402a0168ea41fc7c74e022"
+          }
+        },
+        {
+          "client_id": "320365913986-mrg0j2rar4op94v2s37ad2foj3hjdu1b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jollibee.delivery.staging",
+            "certificate_hash": "ef4d4d4fc44f63e392358faa170595fdfecb3818"
+          }
+        },
+        {
           "client_id": "320365913986-okps6vqfkhjfrdlqrsvnc1nc3tmmt22o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
