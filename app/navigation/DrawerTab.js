@@ -1,7 +1,10 @@
 import { Button } from '@components';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  useIsDrawerOpen,
+} from '@react-navigation/drawer';
 import { HomeScreen, ScreenName } from '@screen';
-import { signOut, logout, acceptShipping } from '@slices/account';
+import { signOut, logout, acceptShipping, shipperInfo } from '@slices/account';
 import { AppStyles, images } from '@theme';
 import React, { useState, useEffect } from 'react';
 import {
@@ -11,7 +14,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Platform
+  Platform,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatId } from '@lib/formatId';
@@ -23,6 +26,15 @@ function DrawerContent(props) {
   const [isEnabled, setIsEnabled] = useState(false);
   const info = useSelector((state) => state.account.info);
   const status = useSelector((state) => state.account.acceptShipping);
+
+  const isDrawerOpen = useIsDrawerOpen();
+
+  useEffect(() => {
+    if (isDrawerOpen) {
+      dispatch(shipperInfo());
+    }
+  }, [isDrawerOpen]);
+
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     changeStatus();
@@ -66,7 +78,7 @@ function DrawerContent(props) {
       <Text style={styles.name}>
         {info?.firstname} {info?.lastname}
       </Text>
-      <Text style={styles.id}>ID: {info?.id}</Text>
+      <Text style={styles.id}>ID: {info?.user_name}</Text>
       <View style={styles.row}>
         <Text style={styles.text}>Tắt/Bật trạng thái nhận đơn hàng</Text>
         <Switch
@@ -85,7 +97,7 @@ function DrawerContent(props) {
           <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
         </TouchableOpacity>
         <View style={styles.version}>
-          <Text style={styles.code}>App version: 1.0.0</Text>
+          <Text style={styles.code}>Phiên bản: 1.0.0</Text>
         </View>
       </View>
     </View>
@@ -168,6 +180,8 @@ const styles = StyleSheet.create({
   code: {
     color: AppStyles.colors.silver,
     fontSize: 11,
+    fontStyle: 'italic',
+    marginBottom: 5,
   },
   version: {
     marginTop: 10,
@@ -177,7 +191,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   btn_text: {
     color: AppStyles.colors.red,
@@ -185,7 +199,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     // fontWeight: 'bold'
     fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
-  }
+  },
 });
 
 export default AccountDrawer;

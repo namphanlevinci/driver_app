@@ -20,60 +20,139 @@ import {
 import Modal from 'react-native-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideMessage } from '../redux/slices/app';
+import {
+  FirebaseContext,
+  fireStoreService,
+  COLLECTIONS,
+  DOCUMENTS,
+} from '@firebase';
+import firestore from '@react-native-firebase/firestore';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
+const DEFAULT_USER_ID = 2;
 
-const ModalMessage = () => {
+const ModalMessage = ({ orderNumber }) => {
   const dispatch = useDispatch();
+
+  const { user, signInAnonymously } = React.useContext(FirebaseContext);
+  const [conversation, setConversation] = React.useState(null);
+
   const message = useSelector((state) => state.app.message);
 
   const hide = () => {
+    // setConversation(null);
+    // setMessages(null);
     dispatch(hideMessage());
   };
 
   const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    setMessages([]);
-  }, []);
+  // useEffect(() => {
+  //   setMessages([]);
+  // }, []);
 
-  const onSend = useCallback((messages = []) => {
+  React.useEffect(() => {
+    if (!user) {
+      signInAnonymously();
+    }
+  }, [user, signInAnonymously]);
+
+  const loadConversation = async () => {
+    let convers = await fireStoreService.getConversation(orderNumber);
+    if (!convers?._exists) {
+      convers = await fireStoreService.createConversation(orderNumber);
+    }
+    setConversation(convers);
+  };
+
+  React.useEffect(() => {
+    if (orderNumber && user) {
+      loadConversation();
+    }
+
+    // Stop listening for updates when no longer required
+  }, [user, orderNumber]);
+
+  React.useEffect(() => {
+    const setupListener = () => {
+      const subscriber = firestore()
+        .collection(COLLECTIONS.public_message)
+        .doc(orderNumber + '')
+        .collection(COLLECTIONS.message)
+        .onSnapshot((querySnapshot) => {
+          const list = querySnapshot.docs
+            ?.map((documentSnapshot) => {
+              return Object.assign({}, documentSnapshot.data(), {
+                _id: documentSnapshot.id,
+              });
+            })
+            .sort((a, b) => b.createdAt - a.createdAt);
+
+          setMessages(list);
+        });
+
+      // Stop listening for updates when no longer required
+      return () => subscriber();
+    };
+
+    if (conversation) {
+      setupListener();
+    }
+  }, [conversation]);
+
+  const onSend = (listMessages = []) => {
     setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages),
+      GiftedChat.append(previousMessages, listMessages),
     );
-  }, []);
+
+    listMessages?.forEach((msg) => {
+      fireStoreService.sendMessage(
+        orderNumber,
+        Object.assign({}, msg, {
+          createdAt: new Date().getTime(),
+          user: {
+            name: 'Shipper',
+            _id: DEFAULT_USER_ID,
+          },
+        }),
+      );
+    });
+  };
 
   const sendSuggest = (key) => {
-    const id_item = messages.length < 1 ? 1 : messages.length + 1;
+    const id_item = messages.length === 0 ? 1 : messages.length + 1;
     switch (key) {
       case 1:
         const obj_1 = {
           _id: id_item,
           text: 'Tôi đã đến nơi',
-          createdAt: new Date(),
+          createdAt: new Date().getTime(),
           user: {
-            _id: 1,
-            name: '',
+            _id: DEFAULT_USER_ID,
+            name: 'Shipper',
           },
         };
-        setMessages((previousMessages) =>
-          GiftedChat.append(previousMessages, obj_1),
-        );
+        // setMessages((previousMessages) =>
+        //   GiftedChat.append(previousMessages, obj_1),
+        // );
+        onSend([obj_1]);
+
         break;
       case 2:
         const obj_2 = {
           _id: id_item,
           text: 'Đơn hàng đang được giao',
-          createdAt: new Date(),
+          createdAt: new Date().getTime(),
           user: {
-            _id: 1,
-            name: '',
+            _id: DEFAULT_USER_ID,
+            name: 'Shipper',
           },
         };
-        setMessages((previousMessages) =>
-          GiftedChat.append(previousMessages, obj_2),
-        );
+        // setMessages((previousMessages) =>
+        //   GiftedChat.append(previousMessages, obj_2),
+        // );
+        onSend([obj_2]);
         break;
       default:
         break;
@@ -88,7 +167,7 @@ const ModalMessage = () => {
             <Text style={styles.text}>Tôi đã đến nơi</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => sendSuggest(2)}>
-            <Text style={styles.text}>Đơn hàng đã được giao</Text>
+            <Text style={styles.text}>Đơn hàng đang được giao</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -185,7 +264,7 @@ const ModalMessage = () => {
             renderAvatar={null}
             onSend={(messages) => onSend(messages)}
             user={{
-              _id: 1,
+              _id: DEFAULT_USER_ID,
             }}
             renderChatFooter={renderFooter}
             renderSend={renderSendButton}

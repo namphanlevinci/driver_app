@@ -3,7 +3,14 @@ import * as NavigationService from '@navigate/NavigationService';
 import { notification } from '@slices/notification';
 import { AppStyles } from '@theme';
 import React, { useCallback, useEffect, useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, View, Text, Platform } from 'react-native';
+import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  View,
+  Text,
+  Platform,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const wait = (timeout) => {
@@ -16,6 +23,9 @@ const Notification = () => {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
   const data = useSelector((state) => state.notification.notificationList);
+  // const dateFilter = data.filter(item => item.order_id !== null)
+
+  // console.log(dateFilter)
   const loading = useSelector((state) => state.app.loadingItem);
 
   useEffect(() => {
@@ -33,10 +43,10 @@ const Notification = () => {
     wait(2000).then(() => setRefreshing(false));
   }, [dispatch]);
 
-  const renderHeader = () => (
-    !loading && data.length < 1 ?
-    <Text style={styles.none}>Bạn chưa có thông báo nào</Text> : null
-  )
+  const renderHeader = () =>
+    !loading && data.length < 1 ? (
+      <Text style={styles.none}>Bạn chưa có thông báo nào</Text>
+    ) : null;
   return (
     <View style={AppStyles.styles.container}>
       <Header.Notify title={'Thông báo'} goback={back} />
@@ -105,8 +115,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: AppStyles.colors.text,
     fontFamily: Platform.OS === 'android' ? 'MergeBlack' : 'SVN-Merge',
-    marginTop: 10
-  }
+    marginTop: 10,
+  },
 });
 
 export default Notification;

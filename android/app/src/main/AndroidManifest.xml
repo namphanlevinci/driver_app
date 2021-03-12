@@ -1,28 +1,51 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.delivery">
+  xmlns:tools="http://schemas.android.com/tools" package="com.jollibee.delivery">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
-      android:name=".MainApplication"
-      android:label="@string/app_name"
-      android:icon="@mipmap/icon"
-      android:roundIcon="@mipmap/icon"
-      android:allowBackup="false"
-      android:usesCleartextTraffic="true"
-      android:theme="@style/AppTheme">
-      <activity
-        android:name=".MainActivity"
-        android:label="@string/app_name"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-        android:launchMode="singleTask"
-        android:windowSoftInputMode="adjustResize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-      </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    </application>
+  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/icon" android:roundIcon="@mipmap/icon" android:allowBackup="false" android:usesCleartextTraffic="true" android:theme="@style/AppTheme">
+    <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+    <!-- Push notification -->
+    <meta-data android:name="com.dieam.reactnativepushnotification.notification_channel_name" android:value="YOUR NOTIFICATION CHANNEL NAME"/>
+    <meta-data android:name="com.dieam.reactnativepushnotification.notification_channel_description" android:value="YOUR NOTIFICATION CHANNEL DESCRIPTION"/>
+
+
+    <meta-data android:name="com.dieam.reactnativepushnotification.notification_foreground" android:value="fasle"/>
+    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon" tools:replace="android:resource"/>
+
+    <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/accentColor" tools:replace="android:resource"/>
+
+    <!-- <meta-data tools:replace="android:value" android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/default_notification_channel_id" /> -->
+
+    <meta-data android:name="com.google.firebase.messaging.default_notification_sound" android:resource="@raw/jollibeesound"/>
+
+    <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
+    <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
+    <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+      </intent-filter>
+    </receiver>
+
+    <service android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService" android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+    </service>
+
+    <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/accent" /> -->
+    <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/default_notification_channel_id" /> -->
+    <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+    <meta-data tools:replace="android:value" android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/default_notification_channel_id" />
+  </application>
 
 </manifest>

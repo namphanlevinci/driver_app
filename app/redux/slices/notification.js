@@ -14,8 +14,8 @@ export const notification = createAsyncThunk(
       variables: input,
     });
 
-    console.log('data notification', data);
-    console.log('error notification', error);
+    // console.log('data notification', data);
+    // console.log('error notification', error);
 
     // dispatch(hideLoadingItem());
     return { error, data };
@@ -30,8 +30,8 @@ export const markReadNotification = createAsyncThunk(
       variables: input,
     });
 
-    console.log('data markReadNotification', data);
-    console.log('error markReadNotification', error);
+    // console.log('data markReadNotification', data);
+    // console.log('error markReadNotification', error);
     dispatch(notification({ type: 'delivery' }));
     return { error, data };
   },

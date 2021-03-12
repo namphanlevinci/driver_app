@@ -3,9 +3,9 @@
  * Everything starts from the entrypoint
  */
 import { Modal } from '@components';
-import { useFirebaseCloudMessing } from '@firebase';
+import { useFirebaseCloudMessing, FirebaseProvider } from '@firebase';
 import { setI18nConfig } from '@localize';
-import { saveTokenDevice } from '@slices/account';
+import { saveTokenDevice, shipperInfo } from '@slices/account';
 import { infoNotification, showNewOrder, showRatingOrder } from '@slices/app';
 import { deliveryOrderList } from '@slices/order';
 import { AppStyles } from '@theme';
@@ -13,7 +13,7 @@ import Navigator from 'app/navigation';
 import configureAppStore from 'app/redux/store';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Platform } from 'react-native';
 import {
   configureFonts,
   DefaultTheme,
@@ -26,6 +26,7 @@ import makeApolloClient from './apolloClient';
 import GraphErrorHandler from './GraphErrorHandler';
 import { graphQLErrorRef } from '@navigate/NavigationService';
 import { notification } from '@slices/notification';
+import PushNotification from 'react-native-push-notification';
 
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -71,8 +72,10 @@ export default function App() {
         <ApolloProvider client={apolloClient}>
           <GraphErrorHandler ref={graphQLErrorRef}>
             <PaperProvider theme={theme}>
-              <Navigator />
-              <NotificationProvider />
+              <FirebaseProvider>
+                <Navigator />
+                <NotificationProvider />
+              </FirebaseProvider>
             </PaperProvider>
           </GraphErrorHandler>
         </ApolloProvider>
@@ -84,12 +87,41 @@ export default function App() {
   );
 }
 
-
 const NotificationProvider = () => {
   const dispatch = useDispatch();
+
+  PushNotification.createChannel(
+    {
+      channelId: '110123',
+      channelName: 'title',
+      channelDescription: 'body',
+      soundName: 'jollibeesound.wav',
+    },
+    (created) => console.log(`createChannel returned '${created}'`),
+  );
+
   const onForegroundMessage = (data) => {
-    console.log('==> notification onForegroundMessage', data);
+    const title = data?.notification?.title ? data?.notification?.title : '';
+    const body = data?.notification?.body ? data?.notification?.body : '';
+
+    PushNotification.localNotification({
+      largeIcon: 'icon',
+      smallIcon: 'notification_icon',
+      color: '#F0810D',
+      vibrate: true,
+      vibration: 300,
+      channelId: 110123,
+      visibility: 'public',
+      title: title,
+      message: body,
+      playSound: true,
+      soundName: 'jollibeesound.wav',
+    });
+
+    console.log('==> notification onForegroundMessage', data?.data);
     dispatch(notification({ type: 'delivery' }));
+    dispatch(deliveryOrderList());
+    dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -113,6 +145,7 @@ const NotificationProvider = () => {
   const onBackgroundMessage = (data) => {
     console.log('===> notification onBackgroundMessage', JSON.stringify(data));
     dispatch(notification({ type: 'delivery' }));
+    dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
       case '1':
@@ -135,6 +168,7 @@ const NotificationProvider = () => {
 
   const onOpenedApp = (data) => {
     console.log('=====> notification onOpenedApp', JSON.stringify(data));
+    dispatch(shipperInfo());
 
     // const {notification} = data;
     // TODO: process message on onOpenedApp

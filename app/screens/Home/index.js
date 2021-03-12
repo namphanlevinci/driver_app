@@ -11,7 +11,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Platform
+  Platform,
+  ActivityIndicator,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
@@ -25,11 +26,14 @@ const wait = (timeout) => {
 const HomeScreen = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
   const loading = useSelector((state) => state.app.loadingItem);
   const newOrder = useSelector((state) => state.order.new);
   const recentlyOrder = useSelector((state) => state.order.recently);
+  const currentPage = useSelector((state) => state.order.currentPage);
+  const total_pages = useSelector((state) => state.order.total_pages);
+  const isLoadmore = useSelector((state) => state.order.isLoadmore);
 
   const navigateNotification = () => {
     NavigationService.navigate(ScreenName.Notification);
@@ -41,11 +45,11 @@ const HomeScreen = (props) => {
 
   useEffect(() => {
     dispatch(deliveryOrderList());
-    dispatch(recentlyOrderList({ page: page }));
+    dispatch(recentlyOrderList({ page: 1 }));
     setTimeout(() => {
       dispatch(hideLoadingItem());
     }, 5000);
-  }, [dispatch, page]);
+  }, [dispatch]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -55,6 +59,26 @@ const HomeScreen = (props) => {
     wait(2000).then(() => setRefreshing(false));
     wait(3000).then(() => dispatch(hideLoadingItem())); // Timeout hide loading
   }, [dispatch]);
+
+  let onEndReachedCalledDuringMomentum = true;
+
+  const onLoadMore = () => {
+    if (!onEndReachedCalledDuringMomentum) {
+      if (currentPage < total_pages) {
+        dispatch(recentlyOrderList({ page: currentPage + 1 }));
+      }
+      onEndReachedCalledDuringMomentum = true;
+    }
+  };
+
+  const renderFooter = () =>
+    isLoadmore ? (
+      <ActivityIndicator
+        size="small"
+        color={AppStyles.colors.red}
+        style={{ marginBottom: 10 }}
+      />
+    ) : null;
 
   return (
     <View style={AppStyles.styles.container}>
@@ -73,6 +97,14 @@ const HomeScreen = (props) => {
           data={recentlyOrder}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
+          onEndReached={onLoadMore}
+          onEndReachedThreshold={0.5}
+          removeClippedSubviews={true}
+          initialNumToRender={10}
+          maxToRenderPerBatch={5}
+          onMomentumScrollBegin={() => {
+            onEndReachedCalledDuringMomentum = false;
+          }}
           ListHeaderComponent={() => (
             <View>
               <View style={styles.space} />
@@ -104,7 +136,7 @@ const HomeScreen = (props) => {
           renderItem={({ item, index }) => (
             <Item.Order item={item} status={false} />
           )}
-          ListFooterComponent={() => <View style={styles.list} />}
+          ListFooterComponent={renderFooter}
         />
       </View>
     </View>

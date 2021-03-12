@@ -18,8 +18,8 @@ export const deliveryOrderList = createAsyncThunk(
       query: query.DELIVERY_ORDER,
     });
 
-    console.log('data deliveryOrderList', data);
-    console.log('error deliveryOrderList', error);
+    // console.log('data deliveryOrderList', data);
+    // console.log('error deliveryOrderList', error);
 
     dispatch(hideLoadingItem());
     return { error, data };
@@ -30,16 +30,16 @@ export const deliveryOrderList = createAsyncThunk(
 export const recentlyOrderList = createAsyncThunk(
   `${KEY_CONSTANT}/recentlyOrderList`,
   async (input, { dispatch }) => {
-    // dispatch(showLoadingItem());
+    dispatch(showLoadmore());
     const { error, data } = await graphQlClient.query({
       query: query.RECENTLY_ORDER,
       variables: input,
     });
 
-    console.log('data recentlyOrderList', data);
-    console.log('error recentlyOrderList', error);
+    // console.log('data recentlyOrderList', data);
+    // console.log('error recentlyOrderList', error);
 
-    // dispatch(hideLoadingItem());
+    dispatch(hideLoadmore());
     return { error, data };
   },
 );
@@ -54,8 +54,8 @@ export const orderDetail = createAsyncThunk(
       variables: id,
     });
 
-    console.log('data orderDetail', data);
-    console.log('error orderDetail', error);
+    // console.log('data orderDetail', data);
+    // console.log('error orderDetail', error);
 
     dispatch(hideLoading());
     return { error, data };
@@ -69,15 +69,24 @@ const orderSlice = createSlice({
     new: [],
     recently: [],
     orderDetail: {},
+    currentPage: 0,
+    total_pages: 0,
+    isLoadmore: false,
   },
   reducers: {
     resetOrderDetail(state, action) {
       state.orderDetail = {};
     },
+    showLoadmore(state, action) {
+      state.isLoadmore = true;
+    },
+    hideLoadmore(state, action) {
+      state.isLoadmore = false;
+    },
   },
   extraReducers: {
     [deliveryOrderList.pending]: (state, action) => {
-      console.log('deliveryOrderList pending', action);
+      // console.log('deliveryOrderList pending', action);
       state.getListError = null;
     },
     [deliveryOrderList.fulfilled]: (state, action) => {
@@ -91,22 +100,30 @@ const orderSlice = createSlice({
     },
 
     [recentlyOrderList.pending]: (state, action) => {
-      console.log('recentlyOrderList pending', action);
+      // console.log('recentlyOrderList pending', action);
       state.getListError = null;
     },
     [recentlyOrderList.fulfilled]: (state, action) => {
       const { error, data } = action.payload;
-      const recentlyList = data?.recentlyOrders?.orders;
-      if (recentlyList) {
-        state.recently = recentlyList;
-      } else {
-        state.getListError = error;
-      }
+      // const recentlyList = data?.recentlyOrders?.orders;
+      // if (recentlyList) {
+      //   state.recently = recentlyList;
+      // } else {total_pages
+      //   state.getListError = error;
+      // }
+      state.total_pages =
+        data?.recentlyOrders?.page_info?.total_pages || state.total_pages;
+
+      state.currentPage = action?.meta?.arg?.page || 0;
+      state.recently =
+        state.currentPage === 1
+          ? data?.recentlyOrders?.orders
+          : state.recently.concat(data?.recentlyOrders?.orders);
     },
 
     [orderDetail.pending]: (state, action) => {
       // state.orderDetail = {}
-      console.log('orderDetail pending', action);
+      // console.log('orderDetail pending', action);
       state.getListError = null;
     },
     [orderDetail.fulfilled]: (state, action) => {
@@ -120,5 +137,5 @@ const orderSlice = createSlice({
 });
 
 const { actions, reducer } = orderSlice;
-export const { resetOrderDetail } = actions;
+export const { resetOrderDetail, showLoadmore, hideLoadmore } = actions;
 export default reducer;

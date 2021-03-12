@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">Jollibee Driver</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey">MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje</string>
+    <!-- <string name="app_name">Jollibee Driver</string> -->
+    <!-- <string moduleConfig="true" name="CodePushDeploymentKey">MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje</string> -->
     <!-- <string moduleConfig="true" name="CodePushDeploymentKey">mmGnkQOqXNKyxEBnVeIC9vghNpXt__ZShcyVA</string> -->
+    <string name="default_notification_channel_id">jollibee_vn_driver_channel</string>
+
+    <string name="app_name_release">Jollibee Driver</string>
+    <string name="app_name_development">Development</string>
+    <string name="app_name_staging">Stage</string>
 </resources>

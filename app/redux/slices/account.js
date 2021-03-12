@@ -1,4 +1,4 @@
-import { graphQlClient, mutation } from '@graphql';
+import { graphQlClient, mutation, query } from '@graphql';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { saveJwtToken } from '@services/AsyncStoreExt';
 import { hideLoading, showLoading } from './app';
@@ -75,6 +75,23 @@ export const acceptShipping = createAsyncThunk(
   },
 );
 
+export const shipperInfo = createAsyncThunk(
+  `${KEY_CONSTANT}/getShipperInfo`,
+  async (id, { dispatch }) => {
+    // dispatch(showLoading());
+    const { error, data } = await graphQlClient.query({
+      query: query.GET_SHIPPER_INFO,
+      variables: id,
+    });
+
+    console.log('data shipperInfo', data);
+    console.log('error shipperInfo', error);
+
+    // dispatch(hideLoading());
+    return { error, data };
+  },
+);
+
 const accountSlice = createSlice({
   name: 'account',
   initialState: {
@@ -117,7 +134,7 @@ const accountSlice = createSlice({
       const { error, data } = action.payload;
       const token = data?.generateStaffToken?.token;
       const accept_shipping = data?.generateStaffToken?.accept_order;
-      console.log(accept_shipping)
+      console.log(accept_shipping);
       if (accept_shipping === 0) {
         state.acceptShipping = false;
       } else {
@@ -147,8 +164,12 @@ const accountSlice = createSlice({
       const Success = data?.registerStaff?.result;
 
       const err = error?.message.join('');
-      if (err === 'Internal server error') {
-        state.signUpError = 'Email hoặc tên đăng nhập đã tồn tại';
+      if (
+        err === 'Internal server error' ||
+        err === 'A user with the same user name or email already exists.' ||
+        err === 'System error.'
+      ) {
+        state.signUpError = 'Email hoặc mã nhân viên đã tồn tại';
       }
       if (Success) {
         state.popupSuccess = Success;
@@ -180,6 +201,20 @@ const accountSlice = createSlice({
     },
     [acceptShipping.rejected]: (state, action) => {
       // state.isLogin = false;
+    },
+
+    [shipperInfo.pending]: (state, action) => {
+      // Logger.info(action, 'signIn pending');
+      console.log('pending', action);
+    },
+    [shipperInfo.fulfilled]: (state, action) => {
+      // Logger.info(action, 'signIn fulfilled');
+      const { data } = action.payload;
+      const accept_order =
+        data?.getShipperInfo?.accept_order;
+
+      state.info = data?.getShipperInfo || state.info
+      state.acceptShipping = accept_order === 0 ? false : true
     },
   },
 });

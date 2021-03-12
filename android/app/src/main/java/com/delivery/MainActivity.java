@@ -1,4 +1,4 @@
-package com.delivery;
+package com.jollibee.delivery;
 
 import com.facebook.react.ReactActivity;
 
