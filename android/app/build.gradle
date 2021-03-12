@@ -180,6 +180,7 @@ android {
                 keyPassword MYAPP_UPLOAD_KEY_PASSWORD
             }
         }
+        
     }
     buildTypes {
         debug {
@@ -233,7 +234,6 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
