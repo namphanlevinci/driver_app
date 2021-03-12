@@ -90,15 +90,15 @@ export default function App() {
 const NotificationProvider = () => {
   const dispatch = useDispatch();
 
-  PushNotification.createChannel(
-    {
-      channelId: '110123',
-      channelName: 'title',
-      channelDescription: 'body',
-      soundName: 'jollibeesound.wav',
-    },
-    (created) => console.log(`createChannel returned '${created}'`),
-  );
+  // PushNotification.createChannel(
+  //   {
+  //     channelId: '110123',
+  //     channelName: 'title',
+  //     channelDescription: 'body',
+  //     soundName: 'jollibeesound.wav',
+  //   },
+  //   (created) => console.log(`createChannel returned '${created}'`),
+  // );
 
   const onForegroundMessage = (data) => {
     const title = data?.notification?.title ? data?.notification?.title : '';
@@ -188,6 +188,24 @@ const NotificationProvider = () => {
   console.log(firebaseToken);
   // TODO : save redux app local
   dispatch(saveTokenDevice(firebaseToken));
+
+  React.useEffect(() => {
+    PushNotification.getChannels(function (channels) {
+      // Logger.debug(`Get Channels: ${channels}`, 'NotifyService');
+      // Nếu đã tồn tại chennels rồi thì ko cần tạo nữa
+      if (channels && channels?.length > 0) return;
+
+      PushNotification.createChannel(
+        {
+          channelId: 'jollibee_vn_driver_channel',
+          channelName: 'title',
+          channelDescription: 'body',
+          soundName: 'jollibeesound.wav',
+        },
+        (created) => console.log(`createChannel returned '${created}'`),
+      );
+    });
+  }, []);
 
   return null;
 };

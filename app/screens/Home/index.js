@@ -4,6 +4,7 @@ import { hideLoadingItem } from '@slices/app';
 import { deliveryOrderList, recentlyOrderList } from '@slices/order';
 import { AppStyles } from '@theme';
 import React, { useCallback, useEffect, useState } from 'react';
+import PushNotification from 'react-native-push-notification';
 import {
   FlatList,
   RefreshControl,
