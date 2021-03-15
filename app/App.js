@@ -201,6 +201,9 @@ const NotificationProvider = () => {
           channelName: 'title',
           channelDescription: 'body',
           soundName: 'jollibeesound.wav',
+          playSound: true, // (optional) default: true
+          importance: 4, // (optional) default: 4. Int value of the Android notification importance
+          vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
         },
         (created) => console.log(`createChannel returned '${created}'`),
       );
