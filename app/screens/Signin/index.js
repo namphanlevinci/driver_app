@@ -87,14 +87,14 @@ const Signin = () => {
             onPress={isLogin}
           />
           <View style={styles.space} />
-          {isReview ? (
+          {/* {isReview ? (
             <Button.Large
               title={'ĐĂNG KÝ'}
               backgroundColor={AppStyles.colors.white}
               textColor={AppStyles.colors.red}
               onPress={goSignup}
             />
-          ) : null}
+          ) : null} */}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

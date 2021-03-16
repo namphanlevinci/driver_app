@@ -12,7 +12,7 @@
     "clean": "rm -rf node_modules && rm -rf yarn.lock && watchman watch-del-all",
     "clean:ios": "cd ios && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && rm -rf Podfile.lock",
     "clean:android": "cd android && ./gradlew clean",
-    "build:android": "cd android && ./gradlew assemblerelease",
+    "build:android": "cd android &&  ENVFILE=.env.production && ./gradlew assemblerelease",
     "build:androidbundle": "cd android && ./gradlew bundlerelease",
     "clear:codepush": "appcenter codepush deployment clear -a levinci/Jollibee-driver-android Production",
     "codepush:android": "appcenter codepush release-react -a levinci/Jollibee-driver-android -d Production -t 1.0.0 --description \"Update code\"",
