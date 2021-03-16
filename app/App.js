@@ -27,6 +27,7 @@ import GraphErrorHandler from './GraphErrorHandler';
 import { graphQLErrorRef } from '@navigate/NavigationService';
 import { notification } from '@slices/notification';
 import PushNotification from 'react-native-push-notification';
+import { NotificationProvider } from './NotificationProvider';
 
 const { persistor, store } = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -73,8 +74,9 @@ export default function App() {
           <GraphErrorHandler ref={graphQLErrorRef}>
             <PaperProvider theme={theme}>
               <FirebaseProvider>
-                <Navigator />
-                <NotificationProvider />
+                <NotificationProvider>
+                  <Navigator />
+                </NotificationProvider>
               </FirebaseProvider>
             </PaperProvider>
           </GraphErrorHandler>
@@ -87,6 +89,7 @@ export default function App() {
   );
 }
 
+/*
 const NotificationProvider = () => {
   const dispatch = useDispatch();
 
@@ -110,12 +113,21 @@ const NotificationProvider = () => {
       color: '#F0810D',
       vibrate: true,
       vibration: 300,
-      channelId: 110123,
       visibility: 'public',
       title: title,
       message: body,
       playSound: true,
       soundName: 'jollibeesound.wav',
+      android: {
+        largeIcon: 'icon', // (optional) default: "ic_launcher"
+        smallIcon: 'notification_icon',
+        sound: 'jollibeesound.wav',
+        priority: 'high',
+        visibility: 'public',
+        importance: 'high',
+
+        // Set color of icon (Optional, defaults to white)
+      },
     });
 
     console.log('==> notification onForegroundMessage', data?.data);
@@ -190,22 +202,29 @@ const NotificationProvider = () => {
   dispatch(saveTokenDevice(firebaseToken));
 
   React.useEffect(() => {
-    PushNotification.getChannels(function (channels) {
-      // Logger.debug(`Get Channels: ${channels}`, 'NotifyService');
-      // Nếu đã tồn tại chennels rồi thì ko cần tạo nữa
-      if (channels && channels?.length > 0) return;
+    if (firebaseToken) {
+      PushNotification.getChannels(function (channels) {
+        // Logger.debug(`Get Channels: ${channels}`, 'NotifyService');
+        // Nếu đã tồn tại chennels rồi thì ko cần tạo nữa
+        if (channels && channels?.length > 0) return;
 
-      PushNotification.createChannel(
-        {
-          channelId: 'jollibee_vn_driver_channel',
-          channelName: 'title',
-          channelDescription: 'body',
-          soundName: 'jollibeesound.wav',
-        },
-        (created) => console.log(`createChannel returned '${created}'`),
-      );
-    });
-  }, []);
+        PushNotification.createChannel(
+          {
+            channelId: 'jollibee_vn_driver_channel',
+            channelName: 'Jollibee VN',
+            channelDescription: 'body',
+            soundName: 'jollibeesound.wav',
+            playSound: true, // (optional) default: true
+            importance: 4, // (optional) default: 4. Int value of the Android notification importance
+            vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+          },
+          (created) => console.log(`createChannel returned '${created}'`),
+        );
+      });
+    }
+  }, [firebaseToken]);
 
   return null;
 };
+
+*/

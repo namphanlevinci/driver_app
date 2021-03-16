@@ -16,13 +16,13 @@
     "build:androidbundle": "cd android && ./gradlew bundlerelease",
     "clear:codepush": "appcenter codepush deployment clear -a levinci/Jollibee-driver-android Production",
     "codepush:android": "appcenter codepush release-react -a levinci/Jollibee-driver-android -d Production -t 1.0.0 --description \"Update code\"",
-    "codepush:android:staging": "appcenter codepush release-react -a levinci/Jollibee-driver-android -d Staging -t 1.0.0 --description \"Update code\"",
-
+    "push:android-staging": "appcenter codepush release-react -a levinci/Jollibee-driver-android -d Staging -t 1.0.0 --description \"Update code\"",
     "codepush:ios": "appcenter codepush release-react -a levinci/Jollibee-driver-ios -d Staging -t 1.0.3 --description \"Update code\"",
     "run:ios": "npx react-native run-ios --simulator='iPhone 12 Pro Max'",
     "push-clean:android-staging": "appcenter codepush deployment clear -a levinci/Jollibee-driver-android Staging",
     "run:android-staging": "npx react-native run-android --variant=staging",
-    "build:android-staging": "cd android && ENVFILE=.env.staging ./gradlew assembleRelease"
+    "build:android-staging": "cd android && ENVFILE=.env.staging ./gradlew assembleRelease",
+    "run:ios-staging-on-device": "npx react-native run-ios --scheme='Stage'  --device 'iPhone' "
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
