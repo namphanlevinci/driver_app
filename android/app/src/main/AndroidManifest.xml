@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools" package="com.jollibee.delivery">
 
+  <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/icon" android:roundIcon="@mipmap/icon" android:allowBackup="false" android:usesCleartextTraffic="true" android:theme="@style/AppTheme">
     <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize">
@@ -26,7 +30,7 @@
 
     <meta-data android:name="com.google.firebase.messaging.default_notification_sound" android:resource="@raw/jollibeesound"/>
 
-    <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
+    <!-- <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
     <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
     <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
       <intent-filter>
@@ -40,7 +44,7 @@
       <intent-filter>
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
-    </service>
+    </service> -->
 
     <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/accent" /> -->
     <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/default_notification_channel_id" /> -->

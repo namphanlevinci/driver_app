@@ -143,7 +143,6 @@ export class NotifyService {
   firebaseNotify({ messageId, notification }) {
     const { body, sound, title, ...notify } = notification;
     PushNotification.localNotification({
-      // ...notify,
       largeIcon: 'icon',
       smallIcon: 'notification_icon',
       color: '#F0810D',
@@ -158,7 +157,7 @@ export class NotifyService {
       android: {
         largeIcon: 'icon', // (optional) default: "ic_launcher"
         smallIcon: 'notification_icon',
-        sound: 'jollibeesound.wav',
+        soundName: 'jollibeesound.wav',
         priority: 'high',
         visibility: 'public',
         importance: 'high',
