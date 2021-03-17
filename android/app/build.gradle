@@ -131,6 +131,7 @@ project.ext.envConfigFiles = [
     debug: '.env.development',
     release: '.env.production',
     staging : '.env.staging',
+    stagingrelease : '.env.staging',
 // anothercustombuild: '.env',
 ]
 
@@ -167,10 +168,10 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile file(MYAPP_UPLOAD_STORE_FILE)
+            storePassword MYAPP_UPLOAD_STORE_PASSWORD
+            keyAlias MYAPP_UPLOAD_KEY_ALIAS
+            keyPassword MYAPP_UPLOAD_KEY_PASSWORD
         }
         release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
@@ -190,15 +191,23 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.release
+
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
             resValue 'string', 'CodePushDeploymentKey', 'mmGnkQOqXNKyxEBnVeIC9vghNpXt__ZShcyVA'
             resValue 'string', 'app_name', '@string/app_name_release'
         }
-        staging {
+        // staging {
+        //     initWith release
+        //     applicationIdSuffix '.staging'
+        //     matchingFallbacks =  ['release']
+        //     resValue 'string', 'CodePushDeploymentKey', 'MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje'
+        //     resValue 'string', 'app_name', '@string/app_name_staging'
+        // }
+        stagingrelease {
             initWith release
-            applicationIdSuffix '.staging'
+            applicationIdSuffix '.stagingrelease'
             matchingFallbacks =  ['release']
             resValue 'string', 'CodePushDeploymentKey', 'MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje'
             resValue 'string', 'app_name', '@string/app_name_staging'
@@ -251,7 +260,8 @@ dependencies {
         def hermesPath = '../../node_modules/hermes-engine/android/'
         debugImplementation files(hermesPath + 'hermes-debug.aar')
         releaseImplementation files(hermesPath + 'hermes-release.aar')
-        stagingImplementation files(hermesPath + 'hermes-release.aar')
+        // stagingImplementation files(hermesPath + 'hermes-release.aar')
+        stagingreleaseImplementation files(hermesPath + 'hermes-release.aar')
     } else {
         implementation jscFlavor
     }
