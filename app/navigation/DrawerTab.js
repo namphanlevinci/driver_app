@@ -18,6 +18,8 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatId } from '@lib/formatId';
+import { useOTAVersion } from './getOTAVersion';
+import DeviceInfo from 'react-native-device-info';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,6 +30,7 @@ function DrawerContent(props) {
   const status = useSelector((state) => state.account.acceptShipping);
 
   const isDrawerOpen = useIsDrawerOpen();
+  const { appVersion } = useOTAVersion();
 
   useEffect(() => {
     if (isDrawerOpen) {
@@ -96,8 +99,15 @@ function DrawerContent(props) {
         <TouchableOpacity style={styles.logout} onPress={isLogout}>
           <Text style={styles.btn_text}>ĐĂNG XUẤT</Text>
         </TouchableOpacity>
+
         <View style={styles.version}>
-          <Text style={styles.code}>Phiên bản: 1.0.0</Text>
+          {/**Version */}
+          {!!appVersion && (
+            <Text style={styles.code}>{`Patch ${appVersion} - `}</Text>
+          )}
+          <Text style={styles.code}>
+            {`Version ${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`}
+          </Text>
         </View>
       </View>
     </View>
@@ -185,6 +195,7 @@ const styles = StyleSheet.create({
   },
   version: {
     marginTop: 10,
+    flexDirection: 'row',
   },
   logout: {
     borderColor: AppStyles.colors.red,

@@ -154,7 +154,7 @@ android {
         resValue 'string', 'build_config_package', 'com.jollibee.delivery'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 5
         versionName '1.0'
         multiDexEnabled true
     }
@@ -198,13 +198,13 @@ android {
             resValue 'string', 'CodePushDeploymentKey', 'mmGnkQOqXNKyxEBnVeIC9vghNpXt__ZShcyVA'
             resValue 'string', 'app_name', '@string/app_name_release'
         }
-        // staging {
-        //     initWith release
-        //     applicationIdSuffix '.staging'
-        //     matchingFallbacks =  ['release']
-        //     resValue 'string', 'CodePushDeploymentKey', 'MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje'
-        //     resValue 'string', 'app_name', '@string/app_name_staging'
-        // }
+        staging {
+            initWith debug
+            applicationIdSuffix '.staging'
+            matchingFallbacks =  ['debug']
+            resValue 'string', 'CodePushDeploymentKey', 'MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje'
+            resValue 'string', 'app_name', '@string/app_name_staging'
+        }
         stagingrelease {
             initWith release
             applicationIdSuffix '.stagingrelease'
@@ -260,7 +260,7 @@ dependencies {
         def hermesPath = '../../node_modules/hermes-engine/android/'
         debugImplementation files(hermesPath + 'hermes-debug.aar')
         releaseImplementation files(hermesPath + 'hermes-release.aar')
-        // stagingImplementation files(hermesPath + 'hermes-release.aar')
+        stagingImplementation files(hermesPath + 'hermes-release.aar')
         stagingreleaseImplementation files(hermesPath + 'hermes-release.aar')
     } else {
         implementation jscFlavor

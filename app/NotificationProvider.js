@@ -31,21 +31,21 @@ export const NotificationProvider = ({ children }) => {
     log(resp, 'Foreground Message ');
     notifyService.current?.firebaseNotify(resp);
 
-    const { messageId, notification = {}, data = {}, sentTime } = resp || {};
+    // const { messageId, notification = {}, data = {}, sentTime } = resp || {};
 
     dispatch(notification({ type: 'delivery' }));
     dispatch(deliveryOrderList());
     dispatch(shipperInfo());
-    const type = data?.data?.notification_type;
+    const type = resp?.data?.notification_type;
     switch (type) {
       case '1':
-        const info_order = JSON.parse(data?.data?.order);
+        const info_order = JSON.parse(resp?.data?.order);
         dispatch(infoNotification(info_order));
         dispatch(showNewOrder());
         dispatch(deliveryOrderList());
         break;
       case '2':
-        const info_rating = JSON.parse(data?.data?.rating);
+        const info_rating = JSON.parse(resp?.data?.rating);
         dispatch(infoNotification(info_rating));
         dispatch(showRatingOrder());
         break;
