@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
   Platform,
+  ScrollView,
 } from 'react-native';
 import Spinner from 'react-native-spinkit';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +26,20 @@ import {
 import * as Button from './Button';
 import * as Item from './Item';
 import moment from 'moment';
+
+const ScrollText = ({ label, numberOfLines, containerStyle = {} }) => (
+  <ScrollView
+    showsVerticalScrollIndicator={false}
+    style={containerStyle}
+    //contentContainerStyle={styles.txtContent}
+  >
+    <Text
+      numberOfLines={numberOfLines}
+      style={{ fontSize: 11, textAlign: 'center' }}>
+      {label}
+    </Text>
+  </ScrollView>
+);
 
 export const Loading = () => {
   const dispatch = useDispatch();
@@ -61,6 +76,7 @@ export const Success = () => {
     hide();
     NavigationService.goBack();
   };
+
   return (
     <Modal visible={isVisible} transparent animationType={'none'}>
       <View style={styles.container}>
@@ -149,7 +165,7 @@ export const NewOrder = (props) => {
 
   const goToDetail = () => {
     hide();
-    NavigationService.navigate(ScreenName.NewOrder, { id: info?.id });
+    NavigationService.navigate(ScreenName.Home);
   };
   return (
     <Modal visible={isVisible} transparent animationType={'none'}>
@@ -270,7 +286,10 @@ export const RatingOrder = () => {
               styles={styles.rating}
               rating={info?.customer_rating}
             />
-            <Text style={[styles.text]}>{info?.customer_comment}</Text>
+            <ScrollText
+              containerStyle={styles.txtScrollContainer}
+              label={info?.customer_comment}
+            />
           </View>
         </View>
       </View>
@@ -385,7 +404,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   confirm: {
-    width: scaleWidth(85),
+    width: scaleWidth(90),
     height: 200,
     borderRadius: 10,
     backgroundColor: AppStyles.colors.white,
@@ -467,6 +486,10 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 0,
     // marginTop: -5
+  },
+  txtScrollContainer: { marginTop: -10, flex: 1 },
+  txtContent: {
+    padding: 10,
   },
   text: {
     fontSize: 11,

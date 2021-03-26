@@ -262,7 +262,9 @@ export const Notify = ({ item, index, lastIndex }) => {
         </View>
         {order_id !== null ? (
           <Image source={images.icons.arrow_left} style={{ marginLeft: 5 }} />
-        ) : <View style={{ marginLeft: 15 }} />}
+        ) : (
+          <View style={{ marginLeft: 15 }} />
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -331,8 +333,7 @@ export const OrderInfo = (props) => {
             renderItem={({ item }) => (
               <Text>
                 {' '}
-                (+{toCommas(item.price)}đ)
-                {item.name} {`x${item.qty}`}
+                {item.name} {`(x${item.qty})`} +{toCommas(item.price)}đ
               </Text>
             )}
           />

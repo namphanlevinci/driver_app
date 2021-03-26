@@ -3,12 +3,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import React, { createContext, useState } from 'react';
 // import { checkNotifications } from 'react-native-permissions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveTokenDevice, shipperInfo } from '@slices/account';
 import { infoNotification, showNewOrder, showRatingOrder } from '@slices/app';
 import { deliveryOrderList } from '@slices/order';
 import { notification } from '@slices/notification';
-
+import * as NavigationService from '@navigate/NavigationService';
+import ScreenName from '@screen/ScreenName';
 const log = (obj, message = '') => {
   //   Logger.debug(obj, `./handlers/NotificationProvider  [${message}]`);
   console.log(`${message}`, obj);
@@ -25,8 +26,8 @@ export const NotificationProvider = ({ children }) => {
 
   const [enableNotify, setEnableNotify] = React.useState(false);
   const [token, setFirebaseToken] = useState(null);
-  const [order_detail_status, setOderDetailStatus] = useState(null);
-
+  const isLogIn = useSelector((state) => state.account.isLogin);
+  console.log('isLogIn', isLogIn);
   const onForegroundMessage = async (resp) => {
     log(resp, 'Foreground Message ');
     notifyService.current?.firebaseNotify(resp);
@@ -48,6 +49,9 @@ export const NotificationProvider = ({ children }) => {
         const info_rating = JSON.parse(resp?.data?.rating);
         dispatch(infoNotification(info_rating));
         dispatch(showRatingOrder());
+        break;
+      case '21':
+        NavigationService.navigate(ScreenName.Home);
         break;
       default:
         break;
@@ -232,33 +236,35 @@ export const NotificationProvider = ({ children }) => {
   //   }, [enableNotify]);
 
   React.useEffect(() => {
-    checkPermission();
+    if (isLogIn) {
+      checkPermission();
 
-    // Register background handler & Quit state messages
-    messaging().setBackgroundMessageHandler(onBackgroundMessage);
-    const unsubcribe_foreground = messaging().onMessage(onForegroundMessage);
-    messaging().onNotificationOpenedApp(onOpenedApp);
+      // Register background handler & Quit state messages
+      messaging().setBackgroundMessageHandler(onBackgroundMessage);
+      const unsubcribe_foreground = messaging().onMessage(onForegroundMessage);
+      messaging().onNotificationOpenedApp(onOpenedApp);
 
-    // // Check whether an initial notification is available
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage) => {
-        if (remoteMessage) {
-          // console.log(
-          //   'Notification caused app to open from quit state:',
-          //   remoteMessage.notification,
-          // );
+      // // Check whether an initial notification is available
+      messaging()
+        .getInitialNotification()
+        .then((remoteMessage) => {
+          if (remoteMessage) {
+            // console.log(
+            //   'Notification caused app to open from quit state:',
+            //   remoteMessage.notification,
+            // );
 
-          if (typeof onInit === 'function') {
-            onInit(remoteMessage);
+            if (typeof onInit === 'function') {
+              onInit(remoteMessage);
+            }
           }
-        }
-      });
-    return () => {
-      unsubcribe_foreground();
-    };
+        });
+      return () => {
+        unsubcribe_foreground();
+      };
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLogIn]);
 
   return (
     <NotificationContext.Provider

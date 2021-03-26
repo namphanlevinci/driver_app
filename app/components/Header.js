@@ -13,8 +13,8 @@ export const Main = (props) => {
   const data = useSelector((state) => state.notification.notificationList);
   const data_map = data.slice(0, 20);
 
-  const unread = data_map.filter(item => item.is_read === 0)
-  const count = unread.length
+  const unread = data_map.filter((item) => item.is_read === 0);
+  const count = unread.length;
   useEffect(() => {
     dispatch(notification({ type: 'delivery' }));
   }, []);
@@ -66,7 +66,7 @@ export const Notify = (props) => {
 
   const markReadAll = () => {
     dispatch(markReadAllNotification());
-  }
+  };
 
   return (
     <TopBar.Bar
@@ -78,11 +78,7 @@ export const Notify = (props) => {
       }
       rightComponents={
         <TouchableOpacity onPress={markReadAll}>
-          <Icon
-            name="checkmark-done-outline"
-            color="#FFF"
-            size={25}
-          />
+          <Icon name="checkmark-done-outline" color="#FFF" size={25} />
         </TouchableOpacity>
       }>
       <Text style={styles.title}>{title}</Text>
@@ -92,7 +88,6 @@ export const Notify = (props) => {
 
 export const BackOrder = (props) => {
   const { goback, title, time, status } = props;
-
   const checkStatus = () => {
     switch (status) {
       case 'ready_to_ship':
@@ -125,7 +120,9 @@ export const BackOrder = (props) => {
       }>
       <View style={styles.content}>
         <Text style={styles.title}>Đơn hàng #{title}</Text>
-        <Text style={styles.time}>{moment.utc(time).local().format('hh:mm A, DD/MM/YYYY')}</Text>
+        <Text style={styles.time}>
+          {moment.utc(time).local().format('hh:mm A, DD/MM/YYYY')}
+        </Text>
       </View>
     </TopBar.Bar>
   );
