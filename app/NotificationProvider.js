@@ -236,9 +236,8 @@ export const NotificationProvider = ({ children }) => {
   //   }, [enableNotify]);
 
   React.useEffect(() => {
+    checkPermission();
     if (isLogIn) {
-      checkPermission();
-
       // Register background handler & Quit state messages
       messaging().setBackgroundMessageHandler(onBackgroundMessage);
       const unsubcribe_foreground = messaging().onMessage(onForegroundMessage);
