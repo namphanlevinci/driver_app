@@ -18,7 +18,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
 const deviceWidth = Dimensions.get('window').width;
-
+const getNotes = (note) => {
+  const notes = note?.split('&&') ?? [];
+  const notesNotEmpty = notes?.filter((i) => i !== ' ' && i !== '');
+  return notesNotEmpty?.join('\n');
+};
 export const Loader = (props) => (
   <View style={styles.body}>
     <ContentLoader
@@ -422,7 +426,7 @@ export const Notes = (props) => {
     <View style={[styles.body]}>
       <View style={[styles.padding]}>
         <Text style={styles.money}>Ghi chú của khách hàng</Text>
-        <Text>{props?.review ? props?.review : ''}</Text>
+        <Text>{getNotes(props?.review)}</Text>
       </View>
     </View>
   );
