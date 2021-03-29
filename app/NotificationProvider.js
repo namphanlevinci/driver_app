@@ -10,6 +10,8 @@ import { deliveryOrderList } from '@slices/order';
 import { notification } from '@slices/notification';
 import * as NavigationService from '@navigate/NavigationService';
 import ScreenName from '@screen/ScreenName';
+import { Platform } from 'react-native';
+
 const log = (obj, message = '') => {
   //   Logger.debug(obj, `./handlers/NotificationProvider  [${message}]`);
   console.log(`${message}`, obj);
@@ -110,23 +112,23 @@ export const NotificationProvider = ({ children }) => {
 
   // get firebase token for device
   const getToken = async () => {
-    let fcmToken;
-    if (DEFINE_SAVE_TOKEN) {
-      fcmToken = await AsyncStorage.getItem(FIREBASE_TOKEN_STORE_KEY);
-      if (!fcmToken) {
-        fcmToken = await messaging().getToken();
-        if (fcmToken) {
-          // user has a device token
-          await AsyncStorage.setItem(FIREBASE_TOKEN_STORE_KEY, fcmToken);
-        }
+    try {
+      if (
+        Platform.OS !== 'android' &&
+        !messaging().isDeviceRegisteredForRemoteMessages
+      ) {
+        await messaging().registerDeviceForRemoteMessages();
       }
-    } else {
-      fcmToken = await messaging().getToken();
-    }
 
-    // console.log('token = ', fcmToken);
-    setFirebaseToken(fcmToken);
-    dispatch(saveTokenDevice(fcmToken));
+      let fcmToken = await messaging().getToken();
+      // alert(fcmToken);
+
+      // console.log('token = ', fcmToken);
+      await setFirebaseToken(fcmToken);
+      await dispatch(saveTokenDevice(fcmToken));
+    } catch (e) {
+      // alert(e);
+    }
   };
 
   // request when first launch app
@@ -134,6 +136,11 @@ export const NotificationProvider = ({ children }) => {
     const authStatus = await messaging().requestPermission();
     console.log('==========> requestUserPermission:', authStatus);
     switch (authStatus) {
+      case messaging.AuthorizationStatus.NOT_DETERMINED:
+        await getToken();
+
+        break;
+
       case messaging.AuthorizationStatus.DENIED:
         //The user has denied notification permissions.
         // await requestUserPermission();
@@ -142,7 +149,6 @@ export const NotificationProvider = ({ children }) => {
         }
         log(authStatus, 'requestUserPermission');
         break;
-      case messaging.AuthorizationStatus.NOT_DETERMINED:
       case messaging.AuthorizationStatus.AUTHORIZED:
       case messaging.AuthorizationStatus.PROVISIONAL:
       default:
@@ -160,7 +166,6 @@ export const NotificationProvider = ({ children }) => {
       case messaging.AuthorizationStatus.NOT_DETERMINED:
         //Permission has not yet been requested for your application.
         await requestUserPermission();
-
         break;
       case messaging.AuthorizationStatus.DENIED:
         //The user has denied notification permissions.
@@ -237,39 +242,38 @@ export const NotificationProvider = ({ children }) => {
 
   React.useEffect(() => {
     checkPermission();
-    if (isLogIn) {
-      // Register background handler & Quit state messages
-      messaging().setBackgroundMessageHandler(onBackgroundMessage);
-      const unsubcribe_foreground = messaging().onMessage(onForegroundMessage);
-      messaging().onNotificationOpenedApp(onOpenedApp);
+    // Register background handler & Quit state messages
+    messaging().setBackgroundMessageHandler(onBackgroundMessage);
+    const unsubcribe_foreground = messaging().onMessage(onForegroundMessage);
+    messaging().onNotificationOpenedApp(onOpenedApp);
 
-      // // Check whether an initial notification is available
-      messaging()
-        .getInitialNotification()
-        .then((remoteMessage) => {
-          if (remoteMessage) {
-            // console.log(
-            //   'Notification caused app to open from quit state:',
-            //   remoteMessage.notification,
-            // );
+    // // Check whether an initial notification is available
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage) => {
+        if (remoteMessage) {
+          // console.log(
+          //   'Notification caused app to open from quit state:',
+          //   remoteMessage.notification,
+          // );
 
-            if (typeof onInit === 'function') {
-              onInit(remoteMessage);
-            }
+          if (typeof onInit === 'function') {
+            onInit(remoteMessage);
           }
-        });
-      return () => {
-        unsubcribe_foreground();
-      };
-    }
+        }
+      });
+    return () => {
+      unsubcribe_foreground();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLogIn]);
+  }, []);
 
   return (
     <NotificationContext.Provider
       value={{
         enableNotify,
         fcmToken: token,
+        requestUserPermission,
         // checkNotificationSetting: checkNotificationSetting,
       }}>
       {children}

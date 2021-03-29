@@ -100,7 +100,7 @@ const accountSlice = createSlice({
     signUpError: '',
     token: '',
     info: {},
-    fcm_token: '',
+    fcm_token: null,
     acceptShipping: true,
     popupSuccess: false,
   },
@@ -210,11 +210,10 @@ const accountSlice = createSlice({
     [shipperInfo.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { data } = action.payload;
-      const accept_order =
-        data?.getShipperInfo?.accept_order;
+      const accept_order = data?.getShipperInfo?.accept_order;
 
-      state.info = data?.getShipperInfo || state.info
-      state.acceptShipping = accept_order === 0 ? false : true
+      state.info = data?.getShipperInfo || state.info;
+      state.acceptShipping = accept_order === 0 ? false : true;
     },
   },
 });

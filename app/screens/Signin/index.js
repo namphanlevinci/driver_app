@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ScreenName from '../ScreenName';
+import { NotificationContext } from '../../NotificationProvider';
 
 const Signin = () => {
   const [username, onChangeUser] = useState('');
@@ -25,14 +26,20 @@ const Signin = () => {
   const device_token = useSelector((state) => state.account.fcm_token);
   const isReview = useSelector((state) => state.app.checkReview);
 
+  const { fcmToken } = React.useContext(NotificationContext);
+
   const isLogin = () => {
-    dispatch(
-      signIn({
-        username: username,
-        password: password,
-        fcmToken: device_token,
-      }),
-    );
+    if (fcmToken) {
+      dispatch(
+        signIn({
+          username: username,
+          password: password,
+          fcmToken: fcmToken,
+        }),
+      );
+    } else {
+      // alert(fcmToken);
+    }
   };
 
   const goSignup = () => {
