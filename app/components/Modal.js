@@ -214,7 +214,7 @@ export const NewOrder = (props) => {
               <View style={[styles.col]}>
                 <Text style={styles.name}>Giao đến:</Text>
                 <Text style={styles.money}>
-                  {info?.firstname} {info?.lastname}
+                  {info?.lastname} {info?.firstname}
                 </Text>
                 <Text style={styles.address}>{info?.address}</Text>
               </View>

@@ -194,7 +194,7 @@ export const Order = (props) => {
           <View style={styles.col}>
             <Text style={styles.name}>Giao đến:</Text>
             <Text style={styles.money}>
-              {firstname} {lastname}
+              {lastname} {firstname}
             </Text>
             <Text style={styles.address}>{address}</Text>
           </View>
@@ -280,7 +280,7 @@ export const Info = (props) => {
     <View style={[styles.body, { marginTop: 10 }]}>
       <View style={styles.padding}>
         <Text style={styles.money}>
-          {firstname} {lastname}
+          {lastname} {firstname}
           {' - '} {customer_phone}
         </Text>
         <Text style={[styles.money, { color: AppStyles.colors.deep_green }]}>

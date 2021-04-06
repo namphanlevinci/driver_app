@@ -3,7 +3,14 @@ import * as NavigationService from '@navigate/NavigationService';
 import { orderDetail, resetOrderDetail } from '@slices/order';
 import { AppStyles } from '@theme';
 import React, { useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View, BackHandler, Platform } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  BackHandler,
+  Platform,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const OldOrder = ({ route, ...props }) => {
@@ -27,10 +34,10 @@ const OldOrder = ({ route, ...props }) => {
   };
 
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction);
+    BackHandler.addEventListener('hardwareBackPress', backAction);
 
     return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction);
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
   }, []);
 
   return (

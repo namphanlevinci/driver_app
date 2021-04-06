@@ -13,7 +13,6 @@ const httpLink = createHttpLink({
   // uri: 'https://api.jollibee.com.vn/graphql',
   uri: Config.GRAPHQL_ENDPOINT,
 });
-
 const authLink = setContext(async (req, { headers }) => {
   // get auth token
   const jwt = await getJwtToken();
