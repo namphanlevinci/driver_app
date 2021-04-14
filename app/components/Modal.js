@@ -252,7 +252,6 @@ export const RatingOrder = () => {
   const recentlyOrder = useSelector((state) => state.order.recently);
 
   const id = recentlyOrder?.find((item) => item.id == info?.id)?.order_number;
-
   const hide = () => {
     dispatch(hideRatingOrder());
   };
@@ -280,7 +279,7 @@ export const RatingOrder = () => {
           </View>
           <View style={styles.footer}>
             <Text style={[styles.content, { marginBottom: 0 }]}>
-              Đơn hàng #{id}
+              Đơn hàng #{info?.increment_id}
             </Text>
             <Item.Rating
               styles={styles.rating}

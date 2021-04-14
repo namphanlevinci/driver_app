@@ -10,9 +10,6 @@ export const checkReview = createAsyncThunk(
       query: query.APP_STATUS,
     });
 
-    console.log('data checkReview', data);
-    console.log('error checkReview', error);
-
     return { error, data };
   },
 );
@@ -83,7 +80,6 @@ const appSlice = createSlice({
   },
   extraReducers: {
     [checkReview.pending]: (state, action) => {
-      console.log('checkReview pending', action);
       state.getListError = null;
     },
     [checkReview.fulfilled]: (state, action) => {

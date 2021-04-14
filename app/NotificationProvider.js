@@ -28,8 +28,6 @@ export const NotificationProvider = ({ children }) => {
 
   const [enableNotify, setEnableNotify] = React.useState(false);
   const [token, setFirebaseToken] = useState(null);
-  const isLogIn = useSelector((state) => state.account.isLogin);
-  console.log('isLogIn', isLogIn);
   const onForegroundMessage = async (resp) => {
     log(resp, 'Foreground Message ');
     notifyService.current?.firebaseNotify(resp);

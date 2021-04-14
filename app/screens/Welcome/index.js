@@ -33,7 +33,7 @@ const CodePushWelcomeScreen = () => {
           .then((update) => {
             if (update) {
               setIsVisible(true);
-              if (update.failedInstall) {
+              if (update?.failedInstall) {
                 /* đã update */
                 loadingApp();
               } else {
@@ -49,7 +49,6 @@ const CodePushWelcomeScreen = () => {
                 );
               }
             } else {
-              console.log('updated');
               loadingApp();
             }
           })
@@ -57,7 +56,6 @@ const CodePushWelcomeScreen = () => {
             loadingApp();
           });
       } catch (err) {
-        console.log('update failed');
         loadingApp();
       }
     };
@@ -66,7 +64,6 @@ const CodePushWelcomeScreen = () => {
   }, [dispatch]);
 
   const codePushStatusDidChange = (status) => {
-    console.log(status);
     switch (status) {
       case codePush.SyncStatus.CHECKING_FOR_UPDATE:
         console.log('Checking for updates.');
