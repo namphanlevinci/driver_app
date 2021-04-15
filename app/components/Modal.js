@@ -277,7 +277,7 @@ export const RatingOrder = () => {
               ]}
             />
           </View>
-          <View style={styles.footer}>
+          <View style={styles.reviewCotent}>
             <Text style={[styles.content, { marginBottom: 0 }]}>
               Đơn hàng #{info?.increment_id}
             </Text>
@@ -320,7 +320,7 @@ export const Bom = (props) => {
             <Text
               style={[
                 styles.title,
-                { color: AppStyles.colors.text, marginBottom: 0 },
+                { color: AppStyles.colors.text, marginTop: 10 },
               ]}>
               Xác nhận
             </Text>
@@ -398,13 +398,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: AppStyles.colors.text,
     textAlign: 'center',
-    marginBottom: 15,
     marginLeft: 15,
     marginRight: 15,
   },
   confirm: {
     width: scaleWidth(90),
-    height: 200,
+    height: scaleHeight(29),
     borderRadius: 10,
     backgroundColor: AppStyles.colors.white,
     justifyContent: 'center',
@@ -484,9 +483,8 @@ const styles = StyleSheet.create({
     elevation: 0,
     marginBottom: 0,
     marginTop: 0,
-    // marginTop: -5
   },
-  txtScrollContainer: { marginTop: -10, flex: 1 },
+  txtScrollContainer: { flex: 1 },
   txtContent: {
     padding: 10,
   },
@@ -536,5 +534,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 3,
     marginTop: 5,
+  },
+  reviewCotent: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

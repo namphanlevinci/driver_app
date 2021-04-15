@@ -547,7 +547,7 @@ const styles = StyleSheet.create({
     // padding: 5
   },
   padding: {
-    padding: 15,
+    padding: 10,
   },
   text: {
     marginLeft: 10,
