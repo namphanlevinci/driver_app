@@ -403,7 +403,7 @@ const styles = StyleSheet.create({
   },
   confirm: {
     width: scaleWidth(90),
-    height: scaleHeight(29),
+    height: scaleHeight(30),
     borderRadius: 10,
     backgroundColor: AppStyles.colors.white,
     justifyContent: 'center',

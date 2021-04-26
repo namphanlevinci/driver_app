@@ -547,7 +547,7 @@ const styles = StyleSheet.create({
     // padding: 5
   },
   padding: {
-    padding: 10,
+    padding: 5,
   },
   text: {
     marginLeft: 10,
@@ -589,7 +589,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   size: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
+    resizeMode: 'contain',
   },
 });
