@@ -218,7 +218,7 @@ export const NotificationProvider = ({ children }) => {
       notifyService.current = new NotifyService(onClickedNotifyMessage);
       //   updateFcmToken(token);
     } else {
-      //   updateFcmToken(' ');
+      //     updateFcmToken(' ');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
