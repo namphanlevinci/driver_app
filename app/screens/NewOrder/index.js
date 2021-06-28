@@ -117,6 +117,7 @@ const NewOrder = (props) => {
 
     return () =>
       BackHandler.removeEventListener('hardwareBackPress', backAction);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
