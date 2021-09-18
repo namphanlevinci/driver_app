@@ -15,10 +15,13 @@ export const signIn = createAsyncThunk(
       variables: input,
     });
 
-    const token = data?.generateStaffToken?.token;
-    console.log('data signIn', data);
-    await saveJwtToken(token);
     dispatch(hideLoading());
+
+    const token = data?.generateStaffToken?.token;
+    // console.log('data signIn', data);
+
+    await saveJwtToken(token);
+
     return { error, data };
   },
 );
@@ -32,9 +35,6 @@ export const signUp = createAsyncThunk(
       mutation: mutation.SIGN_UP,
       variables: input,
     });
-
-    console.log('data signUp', data);
-    console.log('error signUp', error);
 
     dispatch(hideLoading());
     return { error, data };

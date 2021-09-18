@@ -329,6 +329,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				F71F51FA362D68277302E26F /* [CP] Copy Pods Resources */,
+				37A4A66C0BE0ECAA6F8EDA10 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -352,6 +353,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				817F8AF459F4058D1A9F6E91 /* [CP] Copy Pods Resources */,
 				E4AF93BE900964EEA1F5A1AD /* [CP-User] [RNFB] Core Configuration */,
+				8379B5F8F81BF10A05EF0404 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -410,6 +412,7 @@
 				3663B2BC25F88F2E00D80537 /* Resources */,
 				3663B2CE25F88F2E00D80537 /* Bundle React Native code and images */,
 				3663B2CF25F88F2E00D80537 /* [CP] Copy Pods Resources */,
+				6693C59D9AB834DB2CD63E34 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -683,6 +686,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-delivery-Stage/Pods-delivery-Stage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		37A4A66C0BE0ECAA6F8EDA10 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-delivery-deliveryTests/Pods-delivery-deliveryTests-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-delivery-deliveryTests/Pods-delivery-deliveryTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5415A4DF4065AD1EC9446A18 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -703,6 +724,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6693C59D9AB834DB2CD63E34 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-delivery-Stage/Pods-delivery-Stage-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-delivery-Stage/Pods-delivery-Stage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		817F8AF459F4058D1A9F6E91 /* [CP] Copy Pods Resources */ = {
@@ -755,6 +794,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-delivery/Pods-delivery-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8379B5F8F81BF10A05EF0404 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-delivery/Pods-delivery-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-delivery/Pods-delivery-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B17B155EAAA2DFBF00F78F37 /* [CP] Check Pods Manifest.lock */ = {
@@ -1005,7 +1062,7 @@
 				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = SS3KAQVX44;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1022,7 +1079,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.drivervn;
 				PRODUCT_NAME = delivery;
-				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Appstore Provisioning";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Ad Hoc";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1038,7 +1095,7 @@
 				CODE_SIGN_ENTITLEMENTS = delivery/delivery.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = SS3KAQVX44;
 				INFOPLIST_FILE = delivery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1050,7 +1107,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.drivervn;
 				PRODUCT_NAME = delivery;
-				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Appstore Provisioning";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Ad Hoc";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
