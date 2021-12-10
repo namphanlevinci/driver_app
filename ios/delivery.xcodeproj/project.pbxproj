@@ -53,7 +53,7 @@
 		D8DEC3A62C0DF3EC54F9D84E /* libPods-delivery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2856EE97C9626E7B7FB7D3A3 /* libPods-delivery.a */; };
 		D9522399D81C43709F7FE841 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B2CEBC054CE4CE98628217D /* Roboto-Bold.ttf */; };
 		E8CB9C12D5B040C7BC22BCBF /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A633A20DF314AE1B651A1EE /* Roboto-ThinItalic.ttf */; };
-		FBFD5835DB98727CA2409D9D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		FBFD5835DB98727CA2409D9D /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBFD5835DB98727CA2409D9D /* BuildFile in Frameworks */,
+				FBFD5835DB98727CA2409D9D /* (null) in Frameworks */,
 				D8DEC3A62C0DF3EC54F9D84E /* libPods-delivery.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1079,7 +1079,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jollibee.drivervn;
 				PRODUCT_NAME = delivery;
-				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Ad Hoc";
+				PROVISIONING_PROFILE_SPECIFIER = "Jollibee Driver Appstore Provisioning";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
