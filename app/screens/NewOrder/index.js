@@ -32,6 +32,8 @@ const NewOrder = (props) => {
   const id = props.route.params.id;
   const orderInfo = useSelector((state) => state.order.orderDetail);
 
+  console.log({ id })
+
   const back = () => {
     NavigationService.goBack();
     dispatch(resetOrderDetail());
@@ -73,23 +75,28 @@ const NewOrder = (props) => {
   };
 
   const setStatus = () => {
+    console.log('76546789879665890',{ id })
     switch (orderInfo?.status) {
       case 'ready_to_ship':
+        console.log('--------------- 1 ----------------')
         dispatch(Shipping({ id: id }));
         wait(1000).then(() => dispatch(orderDetail({ id: id })));
         wait(1000).then(() => dispatch(deliveryOrderList()));
         // wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
         break;
       case 'shipping':
+        console.log('--------------- 2 ----------------')
         dispatch(Arrived({ id: id }));
         wait(1000).then(() => dispatch(orderDetail({ id: id })));
         wait(1000).then(() => dispatch(deliveryOrderList()));
         // wait(1000).then(() => dispatch(recentlyOrderList({ page: 1 })));
         break;
       case 'arrived':
+        console.log('--------------- 3 ----------------')
         show();
         break;
       default:
+        console.log('--------------- 4 ----------------')
         break;
     }
   };

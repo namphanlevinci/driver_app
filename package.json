@@ -15,6 +15,7 @@
     "run:android-production": "ENVFILE=.env.production  react-native run-android",
     "build:android-staging": "cd android && ENVFILE=.env.staging ./gradlew app:assembleRelease",
     "build:android-production": "cd android && ENVFILE=.env.production ./gradlew app:assembleRelease",
+    "build:android-preproduction": "cd android && ENVFILE=.env.preproduction ./gradlew app:assemblePreproductionrelease",
     "push:android-production": "appcenter codepush release-react -a levinci/Jollibee-driver-android -d Production -t 1.0 --description test",
     "push:android-staging": "appcenter codepush release-react -a levinci/Jollibee-driver-android -d Staging -t 1.0 --description test",
     "clean-push:android-production": "appcenter codepush deployment clear -a levinci/Jollibee-driver-android Production",

@@ -7,4 +7,6 @@
     <string name="app_name_release">Jollibee Driver</string>
     <string name="app_name_development">Development</string>
     <string name="app_name_staging">Stage</string>
+    <string name="app_name_preproduction">PreProduction</string>
+    
 </resources>

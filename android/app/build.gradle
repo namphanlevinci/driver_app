@@ -132,6 +132,7 @@ project.ext.envConfigFiles = [
     release: '.env.production',
     staging : '.env.staging',
     stagingrelease : '.env.staging',
+    preproductionrelease : '.env.preproduction',
 // anothercustombuild: '.env',
 ]
 
@@ -211,6 +212,13 @@ android {
             matchingFallbacks =  ['release']
             resValue 'string', 'CodePushDeploymentKey', 'MDTNSE6PdOrIUfyBOq-xpndF5i67kKg_5Wvje'
             resValue 'string', 'app_name', '@string/app_name_staging'
+        }
+        preproductionrelease {
+            initWith release
+            applicationIdSuffix '.preproduction'
+            matchingFallbacks =  ['release']
+            resValue 'string', 'CodePushDeploymentKey', 'Dr0TKhZ4iaAc0k3yG5cTKMtZn0V-2k6ddKp8r'
+            resValue 'string', 'app_name', '@string/app_name_preproduction'
         }
     }
 

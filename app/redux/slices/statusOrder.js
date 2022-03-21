@@ -14,6 +14,8 @@ export const Shipping = createAsyncThunk(
       variables: input,
     });
 
+    console.log({ input , error, data });
+
     // dispatch(hideLoading());
     return { error, data };
   },
