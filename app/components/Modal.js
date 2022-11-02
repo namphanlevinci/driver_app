@@ -196,10 +196,7 @@ export const NewOrder = (props) => {
                 Đơn hàng #{info?.order_number}
               </Text>
               <Text style={styles.time}>
-                {moment
-                  .utc(info?.created_at)
-                  .local()
-                  .format('hh:mm A, DD/MM/YYYY')}
+                {moment(info?.created_at).format('hh:mm A, DD/MM/YYYY')}
               </Text>
             </View>
             <View

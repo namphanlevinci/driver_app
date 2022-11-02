@@ -121,7 +121,7 @@ export const BackOrder = (props) => {
       <View style={styles.content}>
         <Text style={styles.title}>Đơn hàng #{title}</Text>
         <Text style={styles.time}>
-          {moment.utc(time).local().format('hh:mm A, DD/MM/YYYY')}
+          {moment(time).format('hh:mm A, DD/MM/YYYY')}
         </Text>
       </View>
     </TopBar.Bar>

@@ -34,7 +34,8 @@
     "push:ios-staging": "appcenter codepush release-react -a levinci/Jollibee-driver-ios -d Staging -t 1.0.3 --description test",
     "push-clean:ios-production": "appcenter codepush deployment clear -a levinci/Jollibee-driver-ios Production",
     "push-clean:ios-staging": "appcenter codepush deployment clear -a levinci/Jollibee-driver-ios Staging",
-    "force-clean:ios": "cd ios && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && rm -rf Podfile.lock"
+    "force-clean:ios": "cd ios && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && rm -rf Podfile.lock",
+    "bundle:ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios"
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
@@ -62,7 +63,7 @@
     "react": "16.13.1",
     "react-apollo": "^3.1.5",
     "react-content-loader": "^5.1.2",
-    "react-native": "0.63.2",
+    "react-native": "0.64.1",
     "react-native-code-push": "^6.3.0",
     "react-native-config": "luggit/react-native-config#master",
     "react-native-device-info": "^8.0.6",

@@ -188,7 +188,7 @@ export const Order = (props) => {
           </View>
         </View>
         <Text style={styles.time}>
-          {moment.utc(created_at).local().format('hh:mm A, DD/MM/YYYY')}
+          {moment(created_at).format('hh:mm A, DD/MM/YYYY')}
         </Text>
         <View style={styles.row}>
           <View style={styles.col}>
