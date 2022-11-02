@@ -11,8 +11,7 @@ import * as NavigationService from '@navigate/NavigationService';
 
 const httpLink = createHttpLink({
   // uri: 'https://jollibee.test88.info/graphql',
-  // uri: Config.GRAPHQL_ENDPOINT,
-  uri: "https://api.preprod.jollibee.test88.info/graphql"
+  uri: Config.GRAPHQL_ENDPOINT,
 });
 const authLink = setContext(async (req, { headers }) => {
   // get auth token
