@@ -30,7 +30,7 @@
     "run:ios-production": "npx react-native run-ios --simulator='iPhone 12 Pro Max' ",
     "run:ios-staging-on-device": "npx react-native run-ios --scheme='Stage'  --device 'iPhone' ",
     "run:ios-production-on-device": "npx react-native run-ios   --device 'iPhone' ",
-    "push:ios-production": "appcenter codepush release-react -a levinci/Jollibee-driver-ios -d Production -t 1.0 --description fix-bug",
+    "push:ios-production": "appcenter codepush release-react -a levinci/Jollibee-driver-ios -d Production -t 1.1 --description fix-bug",
     "push:ios-staging": "appcenter codepush release-react -a levinci/Jollibee-driver-ios -d Staging -t 1.0.3 --description test",
     "push-clean:ios-production": "appcenter codepush deployment clear -a levinci/Jollibee-driver-ios Production",
     "push-clean:ios-staging": "appcenter codepush deployment clear -a levinci/Jollibee-driver-ios Staging",
