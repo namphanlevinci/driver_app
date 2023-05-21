@@ -597,9 +597,9 @@ PODS:
     - React-jsi (= 0.64.1)
     - React-perflogger (= 0.64.1)
   - React-jsinspector (0.64.1)
-  - react-native-config (1.4.11):
-    - react-native-config/App (= 1.4.11)
-  - react-native-config/App (1.4.11):
+  - react-native-config (1.5.0):
+    - react-native-config/App (= 1.5.0)
+  - react-native-config/App (1.5.0):
     - React-Core
   - react-native-safe-area-context (3.1.7):
     - React
@@ -917,7 +917,7 @@ SPEC CHECKSUMS:
   CodePush: 352a7efabd0a7079a1138a5c6f677baedb0dedf9
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 7b423f9e248eae65987838148c36eec1dbfe0b53
-  FBReactNativeSpec: 21161a2d9a968a2bfb13796cd0ca7433ea67f31f
+  FBReactNativeSpec: 68795e3bc73fdb0741c16eada4117fbe2b751b8d
   Firebase: 09fb40287b6dfc8ee65f726fa0b788719d3f2a07
   FirebaseAuth: d8dba8db90a1705ee2493857047282ca4f6e7598
   FirebaseCore: 99c06e5a1e8d6952e75cb1f0a6d0b23c0f5ccdcf
@@ -956,7 +956,7 @@ SPEC CHECKSUMS:
   React-jsi: 5de8204706bd872b78ea646aee5d2561ca1214b6
   React-jsiexecutor: 124e8f99992490d0d13e0649d950d3e1aae06fe9
   React-jsinspector: 500a59626037be5b3b3d89c5151bc3baa9abf1a9
-  react-native-config: bcafda5b4c51491ee1b0e1d0c4e3905bc7b56c1b
+  react-native-config: 5330c8258265c1e5fdb8c009d2cabd6badd96727
   react-native-safe-area-context: 955ecfce672683b495d9294d2f154a9ad1d9796b
   react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
   React-perflogger: aad6d4b4a267936b3667260d1f649b6f6069a675
@@ -991,4 +991,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4f9d1dcd83053e82dc9e2d24239649eb84b4c29d
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
