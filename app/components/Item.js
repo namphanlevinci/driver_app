@@ -563,6 +563,7 @@ const styles = StyleSheet.create({
   border_bottom: {
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+    borderBottomWidth: 0
     // borderBottomWidth: 10,
   },
   left: {

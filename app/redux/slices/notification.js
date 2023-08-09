@@ -19,7 +19,7 @@ export const notification = createAsyncThunk(
       variables: {
         type,
         currentPage: currentPage ?? 1,
-        pageSize: pageSize ?? 20
+        pageSize: pageSize ?? 10
       }
     });
 
