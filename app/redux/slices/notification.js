@@ -41,7 +41,7 @@ export const markReadNotification = createAsyncThunk(
 
     // console.log('data markReadNotification', data);
     // console.log('error markReadNotification', error);
-    dispatch(notification({ type: 'delivery' }));
+    // dispatch(notification({ type: 'delivery' }));
     return { error, data };
   },
 );
@@ -54,8 +54,6 @@ export const markReadAllNotification = createAsyncThunk(
       variables: input,
     });
 
-    console.log('data markReadAllNotification', data);
-    console.log('error markReadAllNotification', error);
     dispatch(notification({ type: 'delivery' }));
     return { error, data };
   },
@@ -69,9 +67,14 @@ const notificationSlice = createSlice({
     page_size: 20,
     current_page: 1,
     total_pages: 1,
-    loadingNotify: false
+    loadingNotify: false,
+    total_unread: 0
   },
-  reducers: {},
+  reducers: {
+    setNotification(state, action) {
+      state.notificationList = action.payload;
+    },
+  },
   extraReducers: {
     [notification.pending]: (state, action) => {
       console.log('notification pending', action);
@@ -86,7 +89,7 @@ const notificationSlice = createSlice({
       } else {
         state.notificationList = state.notificationList.concat(list);
       }
-      state.count_unread_notify = data?.notifications?.total_unread ?? 0;
+      state.total_unread = data?.notifications?.total_unread ?? 0;
       state.page_size = data?.notifications?.page_info?.page_size ?? 20;
       state.current_page = data?.notifications?.page_info?.current_page ?? 1;
       state.total_pages = data?.notifications?.page_info?.total_pages ?? 1;
@@ -117,5 +120,5 @@ const notificationSlice = createSlice({
 });
 
 const { actions, reducer } = notificationSlice;
-export const { } = actions;
+export const { setNotification } = actions;
 export default reducer;

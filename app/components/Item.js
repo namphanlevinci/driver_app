@@ -218,13 +218,14 @@ export const Order = (props) => {
   );
 };
 
-export const Notify = ({ item, index, lastIndex }) => {
+export const Notify = ({ item, index, lastIndex, onReadNoti = () =>{} }) => {
   const dispatch = useDispatch();
   const newOrder = useSelector((state) => state.order.new);
   const { order_id, id, title, content, isNew } = item;
 
   const goToDetail = () => {
     const findItem = newOrder.find((item) => item.id === order_id);
+    markAsRead();
 
     if (findItem !== undefined) {
       NavigationService.navigate(ScreenName.NewOrder, { id: order_id });
@@ -233,9 +234,9 @@ export const Notify = ({ item, index, lastIndex }) => {
         NavigationService.navigate(ScreenName.OldOrder, { id: order_id });
       }
     }
-    markAsRead();
   };
   const markAsRead = () => {
+    onReadNoti(id);
     dispatch(markReadNotification({ id: id }));
     // setTimeout(() => {
     //   dispatch(notification({ type: 'delivery' }));

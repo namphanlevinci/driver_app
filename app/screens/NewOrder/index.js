@@ -32,8 +32,6 @@ const NewOrder = (props) => {
   const id = props.route.params.id;
   const orderInfo = useSelector((state) => state.order.orderDetail);
 
-  console.log({ id })
-
   const back = () => {
     NavigationService.goBack();
     dispatch(resetOrderDetail());

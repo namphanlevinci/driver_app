@@ -13,6 +13,9 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  setNotification
+} from '@slices/notification';
 
 const wait = (timeout) => {
   return new Promise((resolve) => {
@@ -58,7 +61,6 @@ const Notification = () => {
 
   const loadMore = () => {
     if (currentPage < total_pages) {
-      console.log('load more : ', currentPage + 1)
       setCurrentPage(currentPage + 1);
     }
   };
@@ -68,6 +70,18 @@ const Notification = () => {
       type: 'delivery',
       currentPage
     }));
+  };
+
+  const onReadNoti  = (id) =>{
+    const indexItem = data.findIndex(it => it?.id == id);
+    if (indexItem !== -1) {
+      let temp = [...data];
+      temp[indexItem] = {
+        ...temp[indexItem],
+        is_read : 1
+      }
+      dispatch(setNotification(temp))
+    }
   };
 
   React.useEffect(() => {
@@ -124,6 +138,7 @@ const Notification = () => {
               item={item}
               index={index}
               lastIndex={data.length - 1}
+              onReadNoti={onReadNoti}
             />
           )}
           ListFooterComponent={() =>
