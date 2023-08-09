@@ -14,7 +14,8 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  setNotification
+  setNotification,
+  setUnread
 } from '@slices/notification';
 
 const wait = (timeout) => {
@@ -37,6 +38,11 @@ const Notification = () => {
   const loadingNotify =
     useSelector(
       state => state.notification?.loadingNotify
+    );
+
+  const total_unread =
+    useSelector(
+      state => state.notification?.total_unread
     );
 
   // const dateFilter = data.filter(item => item.order_id !== null)
@@ -72,15 +78,16 @@ const Notification = () => {
     }));
   };
 
-  const onReadNoti  = (id) =>{
+  const onReadNoti = (id) => {
     const indexItem = data.findIndex(it => it?.id == id);
     if (indexItem !== -1) {
       let temp = [...data];
       temp[indexItem] = {
         ...temp[indexItem],
-        is_read : 1
+        is_read: 1
       }
-      dispatch(setNotification(temp))
+      dispatch(setNotification(temp));
+      dispatch(setUnread(total_unread - 1))
     }
   };
 

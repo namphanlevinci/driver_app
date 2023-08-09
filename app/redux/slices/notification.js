@@ -74,6 +74,9 @@ const notificationSlice = createSlice({
     setNotification(state, action) {
       state.notificationList = action.payload;
     },
+    setUnread(state, action) {
+      state.total_unread = action.payload;
+    },
   },
   extraReducers: {
     [notification.pending]: (state, action) => {
@@ -120,5 +123,5 @@ const notificationSlice = createSlice({
 });
 
 const { actions, reducer } = notificationSlice;
-export const { setNotification } = actions;
+export const { setNotification, setUnread } = actions;
 export default reducer;
