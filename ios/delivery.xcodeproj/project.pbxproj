@@ -11,6 +11,10 @@
 		069CBEDA4A25449E8EC4E11A /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46871193418F477B93CA949B /* Roboto-LightItalic.ttf */; };
 		122BAE1D2912702B0054637D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 122BAE1C2912702B0054637D /* GoogleService-Info.plist */; };
 		122EFC3A284A0A3900D01FE0 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 122EFC39284A0A3900D01FE0 /* main.jsbundle */; };
+		12B6521C2A8379680065E7A0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B6521B2A8379680065E7A0 /* File.swift */; };
+		12B6521D2A8379680065E7A0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B6521B2A8379680065E7A0 /* File.swift */; };
+		12B6521E2A8379680065E7A0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B6521B2A8379680065E7A0 /* File.swift */; };
+		12B6521F2A8379680065E7A0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B6521B2A8379680065E7A0 /* File.swift */; };
 		12FDA391291263DE00251EF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		12FDA392291263DE00251EF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		12FDA397291263DE00251EF5 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 122EFC39284A0A3900D01FE0 /* main.jsbundle */; };
@@ -105,6 +109,7 @@
 		0E83440654447D5C0AA89C12 /* Pods-delivery-deliveryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-delivery-deliveryTests.debug.xcconfig"; path = "Target Support Files/Pods-delivery-deliveryTests/Pods-delivery-deliveryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		122BAE1C2912702B0054637D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		122EFC39284A0A3900D01FE0 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		12B6521B2A8379680065E7A0 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		12FDA3B0291263DE00251EF5 /* preproduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = preproduction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12FDA3B1291263DE00251EF5 /* Info */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info; sourceTree = SOURCE_ROOT; };
 		13B07F961A680F5B00A75B9A /* delivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = delivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +261,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				12B6521B2A8379680065E7A0 /* File.swift */,
 			);
 			name = delivery;
 			sourceTree = "<group>";
@@ -509,15 +515,17 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 1430;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					12FDA38D291263DE00251EF5 = {
 						DevelopmentTeam = SS3KAQVX44;
+						LastSwiftMigration = 1430;
 						ProvisioningStyle = Manual;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = SS3KAQVX44;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1430;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -531,6 +539,7 @@
 					};
 					3663B2B425F88F2E00D80537 = {
 						DevelopmentTeam = AP95TBLGP3;
+						LastSwiftMigration = 1430;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -1176,6 +1185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* deliveryTests.m in Sources */,
+				12B6521E2A8379680065E7A0 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,6 +1194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12FDA391291263DE00251EF5 /* AppDelegate.m in Sources */,
+				12B6521F2A8379680065E7A0 /* File.swift in Sources */,
 				12FDA392291263DE00251EF5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1193,6 +1204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				12B6521C2A8379680065E7A0 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1219,6 +1231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3663B2B825F88F2E00D80537 /* AppDelegate.m in Sources */,
+				12B6521D2A8379680065E7A0 /* File.swift in Sources */,
 				3663B2B925F88F2E00D80537 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1255,7 +1268,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E83440654447D5C0AA89C12 /* Pods-delivery-deliveryTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1270,6 +1285,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/delivery.app/delivery";
 			};
 			name = Debug;
@@ -1278,7 +1295,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FAAB37E9A2595365D928AAEF /* Pods-delivery-deliveryTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = deliveryTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1290,6 +1309,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/delivery.app/delivery";
 			};
 			name = Release;
@@ -1307,6 +1327,8 @@
 				DEVELOPMENT_TEAM = SS3KAQVX44;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = SS3KAQVX44;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = i386;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
@@ -1372,6 +1394,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = SS3KAQVX44;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",

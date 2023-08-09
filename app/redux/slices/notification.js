@@ -11,7 +11,11 @@ export const notification = createAsyncThunk(
 
     const { error, data } = await graphQlClient.query({
       query: query.NOTIFICATION_LIST,
-      variables: input,
+      variables: {
+        type: input?.type,
+        pageSize: input?.pageSize ?? 20,
+        currentPage: input?.currentPage ?? 1
+      }
     });
 
     // console.log('data notification', data);
@@ -97,5 +101,5 @@ const notificationSlice = createSlice({
 });
 
 const { actions, reducer } = notificationSlice;
-export const {} = actions;
+export const { } = actions;
 export default reducer;

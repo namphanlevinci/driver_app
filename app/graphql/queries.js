@@ -110,14 +110,20 @@ export const APP_STATUS = gql`
 `;
 
 export const NOTIFICATION_LIST = gql`
-  query($type: String!) {
-    notifications(type: $type) {
+  query ($type: String!, $pageSize: Int!, $currentPage: Int!) {
+    notifications(type: $type, pageSize: $pageSize,  currentPage: $currentPage) {
       list {
         id
         title
         content
         order_id
         is_read
+      }
+      total_unread
+      page_info {
+        page_size
+        current_page
+        total_pages
       }
     }
   }

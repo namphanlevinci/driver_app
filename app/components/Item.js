@@ -251,7 +251,6 @@ export const Notify = ({ item, index, lastIndex }) => {
           : index === lastIndex
           ? styles.border_bottom
           : styles.none_border,
-        styles.border_bottom,
       ]}
       onPress={goToDetail}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
@@ -259,10 +258,11 @@ export const Notify = ({ item, index, lastIndex }) => {
           source={
             item.is_read === 0 ? images.icons.ring_new : images.icons.ring
           }
+          style={{ width: 40, height: 40 }}
         />
         <View style={styles.text}>
-          <Text style={styles.money}>{title}</Text>
-          <Text style={styles.address}>{content}</Text>
+          <Text style={[styles.money,{ fontSize: 16 }]}>{title}</Text>
+          <Text style={[styles.address,{ fontSize: 14 }]}>{content}</Text>
         </View>
         {order_id !== null ? (
           <Image source={images.icons.arrow_left} style={{ marginLeft: 5 }} />
@@ -542,8 +542,10 @@ const styles = StyleSheet.create({
   noti_boby: {
     width: '100%',
     backgroundColor: AppStyles.colors.white,
-    borderBottomColor: AppStyles.colors.background,
-    borderBottomWidth: 2,
+    borderBottomColor: "#eeeeee",
+    borderBottomWidth: 1,
+    paddingVertical: 14,
+    paddingHorizontal: 13
     // padding: 5
   },
   padding: {
