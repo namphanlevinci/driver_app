@@ -54,7 +54,7 @@ export const markReadAllNotification = createAsyncThunk(
       variables: input,
     });
 
-    dispatch(notification({ type: 'delivery' }));
+    // dispatch(notification({ type: 'delivery' }));
     return { error, data };
   },
 );
@@ -118,6 +118,15 @@ const notificationSlice = createSlice({
     [markReadAllNotification.fulfilled]: (state, action) => {
       // Logger.info(action, 'signIn fulfilled');
       const { data } = action.payload;
+      state.total_unread = 0;
+      const temp = [...state.notificationList];
+      for (let i = 0; i < temp.length; i++) {
+        temp[i] = {
+          ...temp[i],
+          is_read: 1
+        }
+      }
+      state.notificationList = temp;
     },
   },
 });

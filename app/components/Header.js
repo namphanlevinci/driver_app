@@ -14,8 +14,6 @@ export const Main = (props) => {
     state => state.notification?.total_unread
   ) ?? 0;;
 
-  console.log({ total_unread })
-
   useEffect(() => {
     dispatch(notification({ type: 'delivery' }));
   }, []);
