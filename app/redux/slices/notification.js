@@ -8,13 +8,18 @@ export const notification = createAsyncThunk(
   `${KEY_CONSTANT}/notificationList`,
   async (input, { dispatch }) => {
     // dispatch(showLoadingItem());
+    const {
+      type,
+      currentPage,
+      pageSize
+    } = input;
 
     const { error, data } = await graphQlClient.query({
       query: query.NOTIFICATION_LIST,
       variables: {
-        type: input?.type,
-        pageSize: input?.pageSize ?? 20,
-        currentPage: input?.currentPage ?? 1
+        type,
+        currentPage: currentPage ?? 1,
+        pageSize: pageSize ?? 20
       }
     });
 
@@ -22,7 +27,7 @@ export const notification = createAsyncThunk(
     // console.log('error notification', error);
 
     // dispatch(hideLoadingItem());
-    return { error, data };
+    return { error, data, currentPage: currentPage ?? 1 };
   },
 );
 
@@ -61,23 +66,34 @@ const notificationSlice = createSlice({
   initialState: {
     err: '',
     notificationList: [],
+    page_size: 20,
+    current_page: 1,
+    total_pages: 1,
+    loadingNotify: false
   },
   reducers: {},
   extraReducers: {
     [notification.pending]: (state, action) => {
       console.log('notification pending', action);
       state.err = null;
+      state.loadingNotify = true;
     },
     [notification.fulfilled]: (state, action) => {
-      // Logger.info(action, 'signIn fulfilled');
-      const { data } = action.payload;
-      const list = data?.notifications?.list;
-      if (list) {
+      const { data, currentPage } = action.payload;
+      const list = data?.notifications?.list ?? [];
+      if (currentPage == 1) {
         state.notificationList = list;
+      } else {
+        state.notificationList = state.notificationList.concat(list);
       }
+      state.count_unread_notify = data?.notifications?.total_unread ?? 0;
+      state.page_size = data?.notifications?.page_info?.page_size ?? 20;
+      state.current_page = data?.notifications?.page_info?.current_page ?? 1;
+      state.total_pages = data?.notifications?.page_info?.total_pages ?? 1;
+      state.loadingNotify = false;
     },
     [notification.rejected]: (state, action) => {
-      // state.isLogin = true;
+      state.loadingNotify = false;
     },
 
     [markReadNotification.pending]: (state, action) => {
