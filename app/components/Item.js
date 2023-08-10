@@ -218,13 +218,14 @@ export const Order = (props) => {
   );
 };
 
-export const Notify = ({ item, index, lastIndex }) => {
+export const Notify = ({ item, index, lastIndex, onReadNoti = () =>{} }) => {
   const dispatch = useDispatch();
   const newOrder = useSelector((state) => state.order.new);
   const { order_id, id, title, content, isNew } = item;
 
   const goToDetail = () => {
     const findItem = newOrder.find((item) => item.id === order_id);
+    markAsRead();
 
     if (findItem !== undefined) {
       NavigationService.navigate(ScreenName.NewOrder, { id: order_id });
@@ -233,9 +234,9 @@ export const Notify = ({ item, index, lastIndex }) => {
         NavigationService.navigate(ScreenName.OldOrder, { id: order_id });
       }
     }
-    markAsRead();
   };
   const markAsRead = () => {
+    onReadNoti(id);
     dispatch(markReadNotification({ id: id }));
     // setTimeout(() => {
     //   dispatch(notification({ type: 'delivery' }));
@@ -251,7 +252,6 @@ export const Notify = ({ item, index, lastIndex }) => {
           : index === lastIndex
           ? styles.border_bottom
           : styles.none_border,
-        styles.border_bottom,
       ]}
       onPress={goToDetail}>
       <View style={[styles.row, styles.padding, { alignItems: 'center' }]}>
@@ -259,10 +259,11 @@ export const Notify = ({ item, index, lastIndex }) => {
           source={
             item.is_read === 0 ? images.icons.ring_new : images.icons.ring
           }
+          style={{ width: 40, height: 40 }}
         />
         <View style={styles.text}>
-          <Text style={styles.money}>{title}</Text>
-          <Text style={styles.address}>{content}</Text>
+          <Text style={[styles.money,{ fontSize: 16 }]}>{title}</Text>
+          <Text style={[styles.address,{ fontSize: 14 }]}>{content}</Text>
         </View>
         {order_id !== null ? (
           <Image source={images.icons.arrow_left} style={{ marginLeft: 5 }} />
@@ -542,8 +543,10 @@ const styles = StyleSheet.create({
   noti_boby: {
     width: '100%',
     backgroundColor: AppStyles.colors.white,
-    borderBottomColor: AppStyles.colors.background,
-    borderBottomWidth: 2,
+    borderBottomColor: "#eeeeee",
+    borderBottomWidth: 1,
+    paddingVertical: 14,
+    paddingHorizontal: 13
     // padding: 5
   },
   padding: {
@@ -561,6 +564,7 @@ const styles = StyleSheet.create({
   border_bottom: {
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+    borderBottomWidth: 0
     // borderBottomWidth: 10,
   },
   left: {

@@ -10,11 +10,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export const Main = (props) => {
   const dispatch = useDispatch();
   const { notifications, account } = props;
-  const data = useSelector((state) => state.notification.notificationList);
-  const data_map = data.slice(0, 20);
+  const total_unread = useSelector(
+    state => state.notification?.total_unread
+  ) ?? 0;;
 
-  const unread = data_map.filter((item) => item.is_read === 0);
-  const count = unread.length;
   useEffect(() => {
     dispatch(notification({ type: 'delivery' }));
   }, []);
@@ -31,9 +30,9 @@ export const Main = (props) => {
         <>
           <TouchableOpacity onPress={notifications}>
             <TopBar.Action source={images.icons.nav_notify} />
-            {count > 0 ? (
+            {total_unread > 0 ? (
               <View style={styles.badge}>
-                <Text style={styles.text}>{count}</Text>
+                <Text style={styles.text}>{total_unread}</Text>
               </View>
             ) : null}
           </TouchableOpacity>
