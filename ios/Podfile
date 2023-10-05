@@ -32,6 +32,4 @@ target 'delivery' do
   target 'Stage' do
   end
 
-  target 'preproduction' do
-  end
 end
