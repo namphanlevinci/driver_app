@@ -1,16 +1,20 @@
-import { NotifyService } from './services/Notifications/index';
-import AsyncStorage from '@react-native-community/async-storage';
+import {NotifyService} from './services/Notifications/index';
 import messaging from '@react-native-firebase/messaging';
-import React, { createContext, useState } from 'react';
-import { checkNotifications } from 'react-native-permissions';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveTokenDevice, shipperInfo } from './redux/slices/account';
-import { infoNotification, showNewOrder, showRatingOrder } from './redux/slices/app';
-import { deliveryOrderList } from './redux/slices/order';
-import { notification } from './redux/slices/notification';
+import React, {createContext, useState} from 'react';
+import {checkNotifications} from 'react-native-permissions';
+import {useDispatch, useSelector} from 'react-redux';
+import {saveTokenDevice, shipperInfo} from './redux/slices/account';
+import {
+  infoNotification,
+  showNewOrder,
+  showRatingOrder,
+} from './redux/slices/app';
+import {deliveryOrderList} from './redux/slices/order';
+import {notification} from './redux/slices/notification';
 import * as NavigationService from './navigation/NavigationService';
 import ScreenName from './screens/ScreenName';
-import { Platform } from 'react-native';
+import {Platform} from 'react-native';
+import {AppStateContext} from './AppStateProvider';
 
 const log = (obj, message = '') => {
   //   Logger.debug(obj, `./handlers/NotificationProvider  [${message}]`);
@@ -22,19 +26,21 @@ export const NotificationContext = createContext({});
 const FIREBASE_TOKEN_STORE_KEY = 'fcmToken';
 const DEFINE_SAVE_TOKEN = false;
 
-export const NotificationProvider = ({ children }) => {
+export const NotificationProvider = ({children}) => {
   const dispatch = useDispatch();
   const notifyService = React.useRef(null);
 
   const [enableNotify, setEnableNotify] = React.useState(false);
   const [token, setFirebaseToken] = useState(null);
-  const onForegroundMessage = async (resp) => {
+  const {appState} = React.useContext(AppStateContext);
+
+  const onForegroundMessage = async resp => {
     log(resp, 'Foreground Message ');
     notifyService.current?.firebaseNotify(resp);
 
     // const { messageId, notification = {}, data = {}, sentTime } = resp || {};
 
-    dispatch(notification({ type: 'delivery' }));
+    dispatch(notification({type: 'delivery'}));
     dispatch(deliveryOrderList());
     dispatch(shipperInfo());
     const type = resp?.data?.notification_type;
@@ -58,8 +64,8 @@ export const NotificationProvider = ({ children }) => {
     }
   };
 
-  const onBackgroundMessage = async (data) => {
-    dispatch(notification({ type: 'delivery' }));
+  const onBackgroundMessage = async data => {
+    dispatch(notification({type: 'delivery'}));
     dispatch(shipperInfo());
     const type = data?.data?.notification_type;
     switch (type) {
@@ -79,7 +85,7 @@ export const NotificationProvider = ({ children }) => {
     }
   };
 
-  const onOpenedApp = async (data) => {
+  const onOpenedApp = async data => {
     log(data, 'On Opened App Data');
     /**
      * TRƯỜNG HỢP APP IN OPENING
@@ -89,11 +95,11 @@ export const NotificationProvider = ({ children }) => {
     dispatch(shipperInfo());
   };
 
-  const onInit = (data) => {
+  const onInit = data => {
     // Logger.debug('onInit', data);
   };
 
-  const onMessageError = (data) => {
+  const onMessageError = data => {
     // Logger.debug('onMessageError', data);
   };
 
@@ -181,9 +187,9 @@ export const NotificationProvider = ({ children }) => {
     }
   };
 
-  const checkNotificationSetting = async (callBack) => {
+  const checkNotificationSetting = async callBack => {
     try {
-      checkNotifications().then(({ status, settings }) => {
+      checkNotifications().then(({status, settings}) => {
         log(status, 'Notification Check Permission');
         setEnableNotify(status === 'granted');
         if (callBack && typeof callBack === 'function') {
@@ -230,13 +236,13 @@ export const NotificationProvider = ({ children }) => {
    *  - người dùng ra setting bật và quay lại app
    * 2.
    */
-    React.useEffect(() => {
-      if (enableNotify && !token) {
-        getToken();
-      }
+  React.useEffect(() => {
+    if (enableNotify && !token) {
+      getToken();
+    }
 
-      checkNotificationSetting();
-    }, [enableNotify]);
+    checkNotificationSetting();
+  }, [enableNotify, appState]);
 
   React.useEffect(() => {
     checkPermission();
@@ -248,7 +254,7 @@ export const NotificationProvider = ({ children }) => {
     // // Check whether an initial notification is available
     messaging()
       .getInitialNotification()
-      .then((remoteMessage) => {
+      .then(remoteMessage => {
         if (remoteMessage) {
           // console.log(
           //   'Notification caused app to open from quit state:',

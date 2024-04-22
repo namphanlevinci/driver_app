@@ -32,6 +32,7 @@ import {graphQLErrorRef} from './navigation/NavigationService';
 import {notification} from './redux/slices/notification';
 import PushNotification from 'react-native-push-notification';
 import {NotificationProvider} from './NotificationProvider';
+import AppStateProvider from './AppStateProvider';
 
 const {persistor, store} = configureAppStore();
 const apolloClient = makeApolloClient();
@@ -77,11 +78,13 @@ export default function App() {
         <ApolloProvider client={apolloClient}>
           <GraphErrorHandler ref={graphQLErrorRef}>
             <PaperProvider theme={theme}>
-              <FirebaseProvider>
-                <NotificationProvider>
-                  <Navigator />
-                </NotificationProvider>
-              </FirebaseProvider>
+              <AppStateProvider>
+                <FirebaseProvider>
+                  <NotificationProvider>
+                    <Navigator />
+                  </NotificationProvider>
+                </FirebaseProvider>
+              </AppStateProvider>
             </PaperProvider>
           </GraphErrorHandler>
         </ApolloProvider>
