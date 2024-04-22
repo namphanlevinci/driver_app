@@ -1,4 +1,4 @@
-package com.driverapp
+package com.jollibee.delivery
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
