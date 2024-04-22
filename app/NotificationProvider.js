@@ -2,7 +2,7 @@ import { NotifyService } from './services/Notifications/index';
 import AsyncStorage from '@react-native-community/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import React, { createContext, useState } from 'react';
-// import { checkNotifications } from 'react-native-permissions';
+import { checkNotifications } from 'react-native-permissions';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveTokenDevice, shipperInfo } from './redux/slices/account';
 import { infoNotification, showNewOrder, showRatingOrder } from './redux/slices/app';
@@ -181,24 +181,24 @@ export const NotificationProvider = ({ children }) => {
     }
   };
 
-  // const checkNotificationSetting = async (callBack) => {
-  //   try {
-  //     checkNotifications().then(({ status, settings }) => {
-  //       log(status, 'Notification Check Permission');
-  //       setEnableNotify(status === 'granted');
-  //       if (callBack && typeof callBack === 'function') {
-  //         callBack(status);
-  //       }
-  //       // if (status === 'blocked') {
-  //       //   requestNotifications(['alert', 'sound']).then((notify) => {
-  //       //     Logger.debug(notify, '=======> checkPermissionNotify notify');
-  //       //   });
-  //       // }
-  //     });
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
+  const checkNotificationSetting = async (callBack) => {
+    try {
+      checkNotifications().then(({ status, settings }) => {
+        log(status, 'Notification Check Permission');
+        setEnableNotify(status === 'granted');
+        if (callBack && typeof callBack === 'function') {
+          callBack(status);
+        }
+        // if (status === 'blocked') {
+        //   requestNotifications(['alert', 'sound']).then((notify) => {
+        //     Logger.debug(notify, '=======> checkPermissionNotify notify');
+        //   });
+        // }
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const onClickedNotifyMessage = () => {
     if (token) {
@@ -230,13 +230,13 @@ export const NotificationProvider = ({ children }) => {
    *  - người dùng ra setting bật và quay lại app
    * 2.
    */
-  //   React.useEffect(() => {
-  //     if (enableNotify && !token) {
-  //       getToken();
-  //     }
+    React.useEffect(() => {
+      if (enableNotify && !token) {
+        getToken();
+      }
 
-  //     checkNotificationSetting();
-  //   }, [enableNotify]);
+      checkNotificationSetting();
+    }, [enableNotify]);
 
   React.useEffect(() => {
     checkPermission();
@@ -272,7 +272,7 @@ export const NotificationProvider = ({ children }) => {
         enableNotify,
         fcmToken: token,
         requestUserPermission,
-        // checkNotificationSetting: checkNotificationSetting,
+        checkNotificationSetting: checkNotificationSetting,
       }}>
       {children}
     </NotificationContext.Provider>

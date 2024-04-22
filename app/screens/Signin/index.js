@@ -1,9 +1,9 @@
-import { Button, TextInput } from '../../components';
-import { scaleHeight } from '../../lib/isIphoneX';
+import {Button, TextInput} from '../../components';
+import {scaleHeight} from '../../lib/isIphoneX';
 import * as NavigationService from '../../navigation/NavigationService';
-import { signIn, clearError } from '../../redux/slices/account';
-import { AppStyles, images } from '../../theme';
-import React, { useState } from 'react';
+import {signIn, clearError} from '../../redux/slices/account';
+import {AppStyles, images} from '../../theme';
+import React, {useState} from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -14,19 +14,23 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ScreenName from '../ScreenName';
-import { NotificationContext } from '../../NotificationProvider';
+import {NotificationContext} from '../../NotificationProvider';
+import ModalOpenNotify from './ModalOpenNotify';
 
 const Signin = () => {
   const [username, onChangeUser] = useState('');
   const [password, onChangePass] = useState('');
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.account.signInError);
-  const device_token = useSelector((state) => state.account.fcm_token);
-  const isReview = useSelector((state) => state.app.checkReview);
+  const error = useSelector(state => state.account.signInError);
+  const device_token = useSelector(state => state.account.fcm_token);
+  const isReview = useSelector(state => state.app.checkReview);
 
-  const { fcmToken } = React.useContext(NotificationContext);
+  const {fcmToken, enableNotify, checkNotificationSetting} =
+    React.useContext(NotificationContext);
+
+  console.log({enableNotify});
 
   const isLogin = () => {
     if (fcmToken) {
@@ -104,6 +108,7 @@ const Signin = () => {
           ) : null} */}
         </View>
       </ScrollView>
+      {!enableNotify && <ModalOpenNotify />}
     </KeyboardAvoidingView>
   );
 };
