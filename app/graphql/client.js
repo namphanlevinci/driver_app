@@ -4,7 +4,7 @@ import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
 import { createHttpLink } from 'apollo-link-http';
-import Config from 'react-native-config';
+// import Config from 'react-native-config';
 import _ from 'lodash';
 import { getJwtToken } from '../services/AsyncStoreExt';
 import * as NavigationService from '../navigation/NavigationService';
