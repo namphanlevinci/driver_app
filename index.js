@@ -33,7 +33,7 @@ const agentConfiguration = {
 
   // Optional:Enable or disable reporting successful HTTP requests to the MobileRequest event type.
   networkRequestEnabled: true,
-
+ 
   // Optional:Enable or disable reporting network and HTTP request errors to the MobileRequestError event type.
   networkErrorRequestEnabled: true,
 
