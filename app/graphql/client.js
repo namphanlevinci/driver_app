@@ -1,19 +1,19 @@
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
-import { ApolloLink } from 'apollo-link';
-import { setContext } from 'apollo-link-context';
-import { onError } from 'apollo-link-error';
-import { createHttpLink } from 'apollo-link-http';
+import {InMemoryCache} from 'apollo-cache-inmemory';
+import {ApolloClient} from 'apollo-client';
+import {ApolloLink} from 'apollo-link';
+import {setContext} from 'apollo-link-context';
+import {onError} from 'apollo-link-error';
+import {createHttpLink} from 'apollo-link-http';
 // import Config from 'react-native-config';
 import _ from 'lodash';
-import { getJwtToken } from '../services/AsyncStoreExt';
+import {getJwtToken} from '../services/AsyncStoreExt';
 import * as NavigationService from '../navigation/NavigationService';
 
 const httpLink = createHttpLink({
   // uri: 'https://jollibee.test88.info/graphql',
-  uri: "https://api.jollibee.com.vn/graphql",
+  uri: 'https://api.preprod.jollibee.test88.info/graphql',
 });
-const authLink = setContext(async (req, { headers }) => {
+const authLink = setContext(async (req, {headers}) => {
   // get auth token
   const jwt = await getJwtToken();
   let myHeaders = headers;
@@ -34,7 +34,7 @@ const authLink = setContext(async (req, { headers }) => {
 });
 
 const errorLink = onError(
-  ({ graphQLErrors, networkError, operation, response, forward }) => {
+  ({graphQLErrors, networkError, operation, response, forward}) => {
     // console.log(graphQLErrors, '*************graphQLErrors*************');
 
     if (graphQLErrors?.length > 0) {
@@ -49,7 +49,7 @@ const errorLink = onError(
             message,
             locations,
             path,
-            extensions: { category, code },
+            extensions: {category, code},
           },
           index,
         ) => {
@@ -62,7 +62,7 @@ const errorLink = onError(
       );
 
       if (queryErrors.length > 0) {
-        response.error = { message: queryErrors };
+        response.error = {message: queryErrors};
       }
       if (!_.isEmpty(arrErrors)) {
         response.error = arrErrors;
@@ -71,7 +71,7 @@ const errorLink = onError(
 
     if (networkError) {
       // Logger.debug('[Network error]:', networkError);
-      const { name, statusCode, result = {} } = networkError;
+      const {name, statusCode, result = {}} = networkError;
       switch (statusCode) {
         case 503:
           alert('Hệ thống bảo trì');
@@ -104,6 +104,6 @@ const defaultOptions = {
   },
 };
 
-const graphQlClient = new ApolloClient({ link, cache, defaultOptions });
+const graphQlClient = new ApolloClient({link, cache, defaultOptions});
 
 export default graphQlClient;
